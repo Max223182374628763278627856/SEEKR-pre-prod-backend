@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEEKR — Onboarding / Installation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #080810;
+  color: #e8e0c8;
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+}
+
+/* ── Layout ── */
+.left-col {
+  width: 360px;
+  flex-shrink: 0;
+  background: #0d0d18;
+  border-right: 1px solid rgba(212,175,55,0.1);
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+}
+.right-col {
+  flex: 1;
+  padding: 48px;
+  overflow-y: auto;
+}
+
+/* ── Logo ── */
+.logo {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: #D4AF37;
+  margin-bottom: 48px;
+}
+.logo span { color: #e8e0c8; }
+
+/* ── Étapes ── */
+.steps-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(232,224,200,0.3);
+  margin-bottom: 24px;
+}
+
+.step-item {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 8px;
+  position: relative;
+}
+.step-item::after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 32px;
+  width: 2px;
+  height: calc(100% - 8px);
+  background: rgba(212,175,55,0.1);
+}
+.step-item:last-child::after { display: none; }
+
+.step-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.step-dot.done {
+  background: rgba(74,222,128,0.12);
+  color: #4ade80;
+  border: 1.5px solid rgba(74,222,128,0.3);
+}
+.step-dot.active {
+  background: #D4AF37;
+  color: #0d0d12;
+}
+.step-dot.pending {
+  background: rgba(232,224,200,0.05);
+  color: rgba(232,224,200,0.3);
+  border: 1.5px solid rgba(232,224,200,0.1);
+}
+.step-content { padding: 4px 0 20px; }
+.step-label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.step-label.done { color: rgba(232,224,200,0.5); }
+.step-label.active { color: #f0eacc; }
+.step-label.pending { color: rgba(232,224,200,0.3); }
+.step-desc {
+  font-size: 11px;
+  color: rgba(232,224,200,0.3);
+  line-height: 1.5;
+}
+
+.left-bottom {
+  margin-top: auto;
+  padding-top: 32px;
+  border-top: 1px solid rgba(212,175,55,0.1);
+}
+.help-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(232,224,200,0.4);
+  cursor: pointer;
+}
+.help-link:hover { color: #D4AF37; }
+
+/* ── Contenu principal (étape 2 active) ── */
+.step-header { margin-bottom: 32px; }
+.step-number-tag {
+  display: inline-block;
+  background: rgba(212,175,55,0.12);
+  color: #D4AF37;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+.step-main-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #f0eacc;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+.step-main-desc {
+  font-size: 14px;
+  color: rgba(232,224,200,0.5);
+  line-height: 1.65;
+  max-width: 520px;
+}
+
+/* ── Entrée URL ── */
+.url-input-block { margin-bottom: 32px; }
+.input-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(232,224,200,0.6);
+  margin-bottom: 8px;
+  letter-spacing: 0.03em;
+}
+.url-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #0d0d18;
+  border: 1.5px solid rgba(212,175,55,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.url-input-row:focus-within { border-color: #D4AF37; }
+.url-prefix {
+  padding: 12px 14px;
+  font-size: 13px;
+  color: rgba(232,224,200,0.3);
+  background: rgba(212,175,55,0.05);
+  border-right: 1px solid rgba(212,175,55,0.1);
+  white-space: nowrap;
+}
+.url-input-fake {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #f0eacc;
+}
+.url-verify-btn {
+  padding: 10px 18px;
+  background: rgba(212,175,55,0.12);
+  color: #D4AF37;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  border-left: 1px solid rgba(212,175,55,0.15);
+}
+
+/* ── Options crawl ── */
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.option-card {
+  background: #0d0d18;
+  border: 1.5px solid rgba(212,175,55,0.1);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.option-card.selected {
+  border-color: #D4AF37;
+  background: rgba(212,175,55,0.06);
+}
+.option-card:hover { border-color: rgba(212,175,55,0.3); }
+.option-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.option-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+.option-radio {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(212,175,55,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.option-radio.checked {
+  border-color: #D4AF37;
+  background: rgba(212,175,55,0.1);
+}
+.option-radio.checked::after {
+  content: '';
+  width: 8px; height: 8px;
+  background: #D4AF37;
+  border-radius: 50%;
+}
+.option-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f0eacc;
+  margin-bottom: 4px;
+}
+.option-desc {
+  font-size: 11px;
+  color: rgba(232,224,200,0.4);
+  line-height: 1.5;
+}
+.option-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 6px;
+}
+.badge-recommended {
+  background: rgba(212,175,55,0.12);
+  color: #D4AF37;
+}
+.badge-plan {
+  background: rgba(99,102,241,0.12);
+  color: #818cf8;
+}
+
+/* ── Progress bar crawl ── */
+.crawl-progress-block {
+  background: #0d0d18;
+  border: 1px solid rgba(212,175,55,0.12);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+.crawl-progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.crawl-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #D4AF37;
+}
+.crawl-pulse {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #D4AF37;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+.crawl-pages-count {
+  font-size: 12px;
+  color: rgba(232,224,200,0.4);
+}
+.progress-track {
+  height: 6px;
+  background: rgba(212,175,55,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.progress-fill {
+  height: 100%;
+  width: 62%;
+  background: linear-gradient(90deg, #D4AF37, #f0c847);
+  border-radius: 3px;
+  animation: progress-anim 2s ease-in-out infinite alternate;
+}
+@keyframes progress-anim {
+  from { width: 60%; }
+  to { width: 65%; }
+}
+.crawl-log {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.log-line {
+  font-size: 11px;
+  font-family: 'Courier New', monospace;
+  color: rgba(232,224,200,0.35);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.log-line .ok { color: #4ade80; }
+.log-line .current { color: #D4AF37; }
+
+/* ── Actions ── */
+.action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid rgba(212,175,55,0.08);
+  margin-top: 8px;
+}
+.btn-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: rgba(232,224,200,0.4);
+  cursor: pointer;
+}
+.btn-next {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #D4AF37;
+  color: #0d0d12;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ── Miniatures des autres étapes ── */
+.steps-overview {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 36px;
+}
+.overview-card {
+  background: #0d0d18;
+  border: 1px solid rgba(212,175,55,0.08);
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+  position: relative;
+}
+.overview-card.active-step {
+  border-color: rgba(212,175,55,0.35);
+}
+.overview-card.done-step {
+  opacity: 0.6;
+}
+.overview-num {
+  font-size: 20px;
+  font-weight: 800;
+  color: rgba(212,175,55,0.3);
+  margin-bottom: 4px;
+}
+.overview-card.active-step .overview-num { color: #D4AF37; }
+.overview-name { font-size: 11px; color: rgba(232,224,200,0.5); }
+.overview-check {
+  position: absolute;
+  top: 8px; right: 8px;
+  font-size: 12px;
+  color: #4ade80;
+}
+</style>
+</head>
+<body>
+
+<!-- ── Left col : stepper ── -->
+<div class="left-col">
+  <div class="logo">SEEKR<span>.</span></div>
+
+  <div class="steps-title">Étapes d'installation</div>
+
+  <div class="step-item">
+    <div class="step-dot done">✓</div>
+    <div class="step-content">
+      <div class="step-label done">Créer votre compte</div>
+      <div class="step-desc">Abonnement activé</div>
+    </div>
+  </div>
+
+  <div class="step-item">
+    <div class="step-dot active">2</div>
+    <div class="step-content">
+      <div class="step-label active">Ajouter votre site</div>
+      <div class="step-desc">URL + premier crawl</div>
+    </div>
+  </div>
+
+  <div class="step-item">
+    <div class="step-dot pending">3</div>
+    <div class="step-content">
+      <div class="step-label pending">Installer le widget</div>
+      <div class="step-desc">1 ligne de code sur votre site</div>
+    </div>
+  </div>
+
+  <div class="step-item">
+    <div class="step-dot pending">4</div>
+    <div class="step-content">
+      <div class="step-label pending">Voir les résultats</div>
+      <div class="step-desc">Rapport SEO + agent actif</div>
+    </div>
+  </div>
+
+  <div class="left-bottom">
+    <div class="help-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Besoin d'aide ? Documentation
+    </div>
+  </div>
+</div>
+
+<!-- ── Right col : contenu étape 2 ── -->
+<div class="right-col">
+
+  <!-- Vue d'ensemble étapes (breadcrumb visuel) -->
+  <div class="steps-overview">
+    <div class="overview-card done-step">
+      <div class="overview-check">✓</div>
+      <div class="overview-num">01</div>
+      <div class="overview-name">Compte créé</div>
+    </div>
+    <div class="overview-card active-step">
+      <div class="overview-num">02</div>
+      <div class="overview-name">Votre site</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-num">03</div>
+      <div class="overview-name">Widget</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-num">04</div>
+      <div class="overview-name">Go live</div>
+    </div>
+  </div>
+
+  <!-- Header étape -->
+  <div class="step-header">
+    <div class="step-number-tag">Étape 2 sur 4</div>
+    <h1 class="step-main-title">Analysons votre site</h1>
+    <p class="step-main-desc">Entrez l'URL de votre site. SEEKR va le crawler, indexer toutes vos pages et lancer l'audit SEO automatiquement. Ça prend 2–5 minutes.</p>
+  </div>
+
+  <!-- Input URL -->
+  <div class="url-input-block">
+    <div class="input-label">URL de votre site</div>
+    <div class="url-input-row">
+      <div class="url-prefix">https://</div>
+      <div class="url-input-fake">maison-lefevre.fr</div>
+      <div class="url-verify-btn">Vérifier →</div>
+    </div>
+  </div>
+
+  <!-- Options crawl -->
+  <div class="input-label" style="margin-bottom:12px;">Options d'analyse</div>
+  <div class="options-grid">
+    <div class="option-card selected">
+      <div class="option-top">
+        <div class="option-icon" style="background:rgba(212,175,55,0.1);">🌐</div>
+        <div class="option-radio checked"></div>
+      </div>
+      <div class="option-name">Crawl standard</div>
+      <div class="option-desc">HTTP rapide, jusqu'à 50 pages. Pour les sites statiques.</div>
+      <span class="option-badge badge-recommended">Recommandé</span>
+    </div>
+    <div class="option-card">
+      <div class="option-top">
+        <div class="option-icon" style="background:rgba(99,102,241,0.1);">🤖</div>
+        <div class="option-radio"></div>
+      </div>
+      <div class="option-name">Crawl Puppeteer</div>
+      <div class="option-desc">Rendu JS complet. Pour React, Vue, sites dynamiques.</div>
+      <span class="option-badge badge-plan">Plan PME+</span>
+    </div>
+    <div class="option-card selected" style="border-color:#D4AF37;background:rgba(212,175,55,0.06);">
+      <div class="option-top">
+        <div class="option-icon" style="background:rgba(74,222,128,0.1);">📊</div>
+        <div class="option-radio checked"></div>
+      </div>
+      <div class="option-name">Audit SEO inclus</div>
+      <div class="option-desc">Mot mystère, E-E-A-T, longueur cible 550–600 mots.</div>
+      <span class="option-badge badge-recommended">Actif</span>
+    </div>
+    <div class="option-card">
+      <div class="option-top">
+        <div class="option-icon" style="background:rgba(248,113,113,0.1);">🔗</div>
+        <div class="option-radio"></div>
+      </div>
+      <div class="option-name">Analyse backlinks</div>
+      <div class="option-desc">Audit off-page, domaines référents, autorité.</div>
+      <span class="option-badge badge-plan">Plan Agency</span>
+    </div>
+  </div>
+
+  <!-- Crawl en cours -->
+  <div class="crawl-progress-block">
+    <div class="crawl-progress-header">
+      <div class="crawl-status-badge">
+        <div class="crawl-pulse"></div>
+        Crawl en cours…
+      </div>
+      <div class="crawl-pages-count">15 / 24 pages indexées</div>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill"></div>
+    </div>
+    <div class="crawl-log">
+      <div class="log-line"><span class="ok">✓</span> /fenêtres-aluminium — 312 mots indexés</div>
+      <div class="log-line"><span class="ok">✓</span> /portes-entree — 648 mots indexés</div>
+      <div class="log-line"><span class="ok">✓</span> /escaliers — 561 mots indexés</div>
+      <div class="log-line"><span class="current">→</span> /realisations — analyse en cours…</div>
+      <div class="log-line" style="opacity:0.4;">⋯ /contact · /blog · /faq — en attente</div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="action-bar">
+    <div class="btn-back">← Retour</div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:12px;color:rgba(232,224,200,0.35);">Le crawl se termine automatiquement</span>
+      <div class="btn-next" style="opacity:0.5;cursor:not-allowed;">
+        Étape suivante →
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

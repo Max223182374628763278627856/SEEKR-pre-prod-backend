@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RGPD et moteur de recherche IA : ce que la loi impose en 2026 | SEEKR Blog</title>
+<meta name="description" content="Quelles données un moteur de recherche IA peut-il collecter ? Que dit le RGPD sur le tracking des recherches visiteurs ? Guide complet basé sur les textes CNIL officiels.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://seekr-search.fr/blog/rgpd-moteur-recherche/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://seekr-search.fr/blog/rgpd-moteur-recherche/">
+<meta property="og:title" content="RGPD et moteur de recherche IA : ce que la loi impose en 2026">
+<meta property="og:description" content="Consentement, hébergement des données, hachage des IP. Ce que la CNIL exige pour un moteur de recherche IA conforme RGPD.">
+<meta property="og:image" content="https://seekr-search.fr/og-seekr.png">
+<meta property="og:locale" content="fr_FR">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "RGPD et moteur de recherche IA : ce que la loi impose en 2026",
+  "description": "Guide complet sur la conformité RGPD pour les moteurs de recherche IA intégrés à un site web, basé sur les recommandations officielles de la CNIL.",
+  "datePublished": "2026-04-08",
+  "dateModified": "2026-04-08",
+  "author": { "@type": "Organization", "name": "SEEKR", "url": "https://seekr-search.fr" },
+  "publisher": { "@type": "Organization", "name": "SEEKR", "url": "https://seekr-search.fr" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://seekr-search.fr/blog/rgpd-moteur-recherche/" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://seekr-search.fr/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://seekr-search.fr/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "RGPD moteur de recherche", "item": "https://seekr-search.fr/blog/rgpd-moteur-recherche/" }
+    ]
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --gold: #D4AF37; --gold-light: #E8C84A; --black: #080808; --black2: #0f0f0f; --black3: #141414; --white: #F5F5F0; --gray: #888; --gray2: #555; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+nav { position: sticky; top: 0; left: 0; right: 0; z-index: 100; background: rgba(8,8,8,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(212,175,55,0.15); padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-family: 'Anton', sans-serif; font-size: 22px; letter-spacing: 0.12em; color: var(--gold); }
+.nav-logo span { color: var(--white); }
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { font-size: 13px; letter-spacing: 0.08em; color: var(--gray); transition: color 0.2s; white-space: nowrap; }
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+.nav-cta { background: var(--gold); color: var(--black) !important; padding: 9px 20px; border-radius: 4px; font-size: 13px !important; font-weight: 600; }
+.nav-cta:hover { background: var(--gold-light) !important; }
+.nav-login { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--gray) !important; border: 1px solid rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 4px; cursor: pointer; background: none; font-family: 'Inter', sans-serif; white-space: nowrap; }
+.nav-login:hover { border-color: var(--gold); color: var(--gold) !important; }
+.nav-login svg { width: 14px; height: 14px; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; }
+.nav-mobile { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(8,8,8,0.98); border-bottom: 1px solid rgba(212,175,55,0.15); padding: 16px 24px; flex-direction: column; gap: 4px; z-index: 99; }
+.nav-mobile.open { display: flex; }
+.nav-mobile a { display: block; padding: 12px 0; font-size: 15px; color: var(--gray); border-bottom: 1px solid rgba(255,255,255,0.05); letter-spacing: 0.06em; }
+.nav-mobile a:hover { color: var(--gold); }
+.nav-mobile .nav-cta-mobile { display: block; text-align: center; background: var(--gold); color: var(--black) !important; padding: 14px; border-radius: 4px; font-weight: 600; margin-top: 8px; border-bottom: none; }
+@media(max-width: 860px) { .nav-links { display: none; } .nav-hamburger { display: flex; } }
+.breadcrumb { padding: 88px 24px 0; max-width: 780px; margin: 0 auto; display: none; align-items: center; gap: 8px; font-size: 13px; color: var(--gray2); }
+.breadcrumb a { color: var(--gray); }
+.breadcrumb a:hover { color: var(--gold); }
+.article-header { padding: 40px 24px 56px; max-width: 780px; margin: 0 auto; }
+.article-cat { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.article-title { font-family: 'Anton', sans-serif; font-size: clamp(28px, 5vw, 52px); letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.1; margin-bottom: 20px; }
+.article-meta { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--gray2); margin-bottom: 32px; flex-wrap: wrap; }
+.article-intro { font-size: 18px; color: var(--gray); line-height: 1.75; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.article-body { max-width: 780px; margin: 0 auto; padding: 0 24px 80px; }
+.article-body h2 { font-family: 'Anton', sans-serif; font-size: clamp(20px, 3vw, 28px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); margin: 48px 0 20px; }
+.article-body h3 { font-size: 17px; font-weight: 600; color: var(--white); margin: 32px 0 14px; }
+.article-body p { font-size: 15px; color: var(--gray); line-height: 1.85; margin-bottom: 20px; }
+.article-body p strong { color: var(--white); font-weight: 500; }
+.article-body ul, .article-body ol { margin: 0 0 20px 20px; }
+.article-body li { font-size: 15px; color: var(--gray); line-height: 1.8; margin-bottom: 8px; }
+.article-body li strong { color: var(--white); font-weight: 500; }
+.article-body a { color: var(--gold); text-decoration: underline; }
+.law-box { background: var(--black2); border: 1px solid rgba(212,175,55,0.15); border-radius: 8px; padding: 20px 24px; margin: 28px 0; }
+.law-box .law-ref { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.law-box blockquote { font-size: 14px; color: var(--gray); line-height: 1.7; font-style: italic; border-left: 2px solid var(--gold); padding-left: 16px; margin: 0; }
+.law-box .law-source { font-size: 11px; color: var(--gray2); margin-top: 10px; }
+.checklist { list-style: none; margin: 0 0 20px; padding: 0; }
+.checklist li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: var(--gray); line-height: 1.7; margin-bottom: 12px; padding: 12px 16px; background: var(--black2); border-radius: 6px; }
+.checklist li .check-icon { flex-shrink: 0; font-size: 16px; margin-top: 1px; }
+.checklist li strong { color: var(--white); font-weight: 500; }
+.warning-box { background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.15); border-left: 3px solid #ef4444; border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-size: 14px; color: var(--gray); line-height: 1.7; }
+.warning-box strong { color: #fca5a5; font-weight: 500; }
+.tip-box { background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.15); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-size: 14px; color: var(--gray); line-height: 1.7; }
+.tip-box strong { color: var(--white); font-weight: 500; }
+.cta-article { background: linear-gradient(135deg, #141200 0%, var(--black3) 100%); border: 1px solid rgba(212,175,55,0.3); border-radius: 10px; padding: 36px; margin: 48px 0; text-align: center; }
+.cta-article h3 { font-family: 'Anton', sans-serif; font-size: 24px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+.cta-article p { font-size: 14px; color: var(--gray); margin-bottom: 24px; }
+.btn-gold { display: inline-block; background: var(--gold); color: var(--black); padding: 14px 32px; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; }
+.btn-gold:hover { background: var(--gold-light); }
+.related { background: var(--black2); border-top: 1px solid rgba(255,255,255,0.05); padding: 64px 24px; }
+.related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1100px; margin: 32px auto 0; }
+.related-card { background: var(--black3); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 24px; transition: border-color 0.2s; }
+.related-card:hover { border-color: rgba(212,175,55,0.3); }
+.related-cat { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.related-title { font-family: 'Anton', sans-serif; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; line-height: 1.3; }
+.related-link { font-size: 13px; color: var(--gold); }
+.section-label { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; text-align: center; }
+.section-title { font-family: 'Anton', sans-serif; font-size: clamp(24px, 3.5vw, 36px); letter-spacing: 0.04em; text-transform: uppercase; text-align: center; line-height: 1.1; }
+footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.05); padding: 48px 24px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+.footer-logo { font-family: 'Anton', sans-serif; font-size: 18px; letter-spacing: 0.12em; color: var(--gold); }
+.footer-copy { font-size: 13px; color: var(--gray2); }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: var(--gray2); transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+@media(max-width: 600px) { .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">SEEKR<span>.</span></a>
+  <div class="nav-links">
+    <a href="/fonctionnalites/">Fonctionnalités</a><a href="/tarifs/">Tarifs</a><a href="/integration/">Intégration</a>
+    <a href="/blog/" class="active">Blog</a>
+    <button class="nav-login" id="openLogin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Connexion</span></button>
+    <a href="/tarifs/" class="nav-cta">Démarrer</a>
+  </div>
+  <button class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="/fonctionnalites/">Fonctionnalités</a><a href="/tarifs/">Tarifs</a><a href="/integration/">Intégration</a><a href="/blog/">Blog</a>
+  <a href="/tarifs/" class="nav-cta-mobile">Démarrer →</a>
+</div>
+
+<nav class="breadcrumb"><a href="/">Accueil</a><span>›</span><a href="/blog/">Blog</a><span>›</span><span>RGPD et moteur de recherche</span></nav>
+
+<header class="article-header">
+  <div class="article-cat">RGPD & Conformité</div>
+  <h1 class="article-title">RGPD et moteur de recherche IA : ce que la loi impose en 2026</h1>
+  <div class="article-meta"><span>📅 8 avril 2026</span><span>⏱ 9 min de lecture</span><span>✍️ Équipe SEEKR</span></div>
+  <p class="article-intro">Intégrer un moteur de recherche IA sur votre site implique de collecter des données sur les comportements de vos visiteurs. Quelles sont vos obligations légales en France ? Que dit réellement la CNIL sur ce sujet ? Cet article s'appuie exclusivement sur les textes officiels de la CNIL et le RGPD.</p>
+</header>
+
+<article class="article-body">
+
+  <h2>Ce que collecte réellement un moteur de recherche interne</h2>
+
+  <p>Avant d'aborder la conformité, il faut comprendre ce qu'un moteur de recherche interne collecte concrètement :</p>
+  <ul>
+    <li>Les <strong>requêtes saisies</strong> par les visiteurs (texte en clair)</li>
+    <li>L'<strong>adresse IP</strong> du visiteur (donnée personnelle au sens du RGPD)</li>
+    <li>Les <strong>résultats cliqués</strong> (comportement de navigation)</li>
+    <li>L'<strong>horodatage</strong> de chaque recherche</li>
+    <li>Parfois, un <strong>identifiant de session</strong> pour relier plusieurs recherches</li>
+  </ul>
+  <p>Certaines de ces données — notamment l'adresse IP — sont des <strong>données à caractère personnel</strong> au sens de l'article 4 du RGPD. Leur traitement est donc soumis au cadre réglementaire européen.</p>
+
+  <h2>Ce que dit la CNIL sur les traceurs et le consentement</h2>
+
+  <p>La CNIL a publié ses lignes directrices sur les cookies et traceurs le 17 septembre 2020, mises à jour depuis. Ces textes font référence en France pour tout traitement de données via un site web.</p>
+
+  <div class="law-box">
+    <div class="law-ref">CNIL — Lignes directrices cookies et traceurs</div>
+    <blockquote>Le consentement doit être libre, spécifique, éclairé et univoque. L'utilisateur doit être en mesure de le retirer, à tout moment, avec la même simplicité qu'il l'a accordé.</blockquote>
+    <div class="law-source">Source : cnil.fr — Articles 4(11) et 7 du RGPD</div>
+  </div>
+
+  <p>La CNIL distingue deux types de traceurs :</p>
+
+  <h3>1. Les traceurs strictement nécessaires — pas besoin de consentement</h3>
+  <p>Selon la CNIL, les traceurs <strong>"strictement nécessaires à la fourniture d'un service de communication en ligne expressément demandé par l'utilisateur"</strong> ne nécessitent pas de consentement préalable. Un moteur de recherche interne — qui répond directement à une action de l'utilisateur — peut entrer dans cette catégorie pour sa fonctionnalité de base.</p>
+
+  <h3>2. Les traceurs analytiques — consentement requis</h3>
+  <p>En revanche, si le moteur de recherche collecte des données pour <strong>analyser le comportement</strong> des visiteurs (requêtes populaires, taux de clic, sessions), ces données relèvent des traceurs analytiques. Elles nécessitent un consentement ou, dans certains cas, peuvent bénéficier d'une exemption si elles sont strictement anonymisées et non partagées avec des tiers.</p>
+
+  <div class="tip-box">
+    <strong>Point clé CNIL :</strong> La CNIL précise que même les traceurs qui ne nécessitent pas de consentement "restent néanmoins soumis aux principes du RGPD" concernant la minimisation des données et la limitation de la durée de conservation. (Source : cnil.fr/fr/cookies-et-autres-traceurs/regles)
+  </div>
+
+  <h2>L'adresse IP : une donnée personnelle à traiter avec soin</h2>
+
+  <p>L'adresse IP est explicitement reconnue comme une donnée à caractère personnel par la Cour de Justice de l'Union Européenne et par la CNIL. Son stockage brut dans les logs d'un moteur de recherche interne est donc soumis au RGPD.</p>
+
+  <p>Les bonnes pratiques recommandées pour la conformité :</p>
+
+  <ul class="checklist">
+    <li><span class="check-icon">✓</span><div><strong>Hachage de l'IP</strong> — Transformer l'adresse IP en une empreinte cryptographique irréversible (SHA-256 + sel unique) avant tout stockage. Le hash ne permet pas de retrouver l'IP originale.</div></li>
+    <li><span class="check-icon">✓</span><div><strong>Troncature de l'IP</strong> — Supprimer le dernier octet de l'adresse IPv4 avant stockage (ex: 192.168.1.x au lieu de 192.168.1.42).</div></li>
+    <li><span class="check-icon">✓</span><div><strong>Limitation de durée</strong> — Ne pas conserver les données de recherche plus de 13 mois (durée maximale recommandée par la CNIL pour les données analytiques).</div></li>
+    <li><span class="check-icon">✓</span><div><strong>Hébergement en Europe</strong> — Stocker les données sur des serveurs situés dans l'Union Européenne pour éviter les transferts hors UE non encadrés.</div></li>
+  </ul>
+
+  <h2>Hébergement des données : pourquoi la localisation compte</h2>
+
+  <p>Le RGPD encadre strictement les transferts de données personnelles hors de l'Union Européenne (Chapitre V). Si votre moteur de recherche envoie des données vers des serveurs américains, vous devez vous assurer que des garanties appropriées sont en place.</p>
+
+  <p>Depuis l'invalidation du Privacy Shield en 2020 par la Cour de Justice de l'Union Européenne (arrêt Schrems II), les transferts vers les États-Unis sont soumis à des conditions strictes. L'adoption du Data Privacy Framework en 2023 a partiellement rétabli un cadre, mais il reste contesté juridiquement.</p>
+
+  <div class="warning-box">
+    <strong>⚠️ Risque concret :</strong> La CNIL a sanctionné plusieurs entreprises françaises pour des transferts illicites de données vers des serveurs américains, notamment via des outils analytics. De novembre 2020 à janvier 2024, la CNIL a infligé des amendes allant de 5 000€ à 90 millions d'euros pour non-conformité avec les règles sur les cookies. (Source : Baker McKenzie / cnil.fr)
+  </div>
+
+  <h2>La bannière de consentement : ce qui est obligatoire</h2>
+
+  <p>Si votre moteur de recherche collecte des données analytiques, votre bannière de consentement doit respecter les exigences CNIL suivantes :</p>
+
+  <ul class="checklist">
+    <li><span class="check-icon">✓</span><div><strong>Bouton "Tout refuser" au même niveau</strong> que "Tout accepter" — la CNIL exige un choix réellement équivalent. (Source : CNIL 2024)</div></li>
+    <li><span class="check-icon">✓</span><div><strong>Pas de consentement par défilement</strong> — continuer à naviguer sur le site ne vaut pas consentement depuis les lignes directrices CNIL de 2020.</div></li>
+    <li><span class="check-icon">✓</span><div><strong>Révocation simple</strong> — l'utilisateur doit pouvoir retirer son consentement "avec la même simplicité" qu'il l'a accordé.</div></li>
+    <li><span class="check-icon">✓</span><div><strong>Information claire</strong> sur la finalité de chaque traceur avant toute collecte.</div></li>
+  </ul>
+
+  <h2>Checklist de conformité RGPD pour un moteur de recherche interne</h2>
+
+  <p>Voici les points à vérifier avant de déployer ou de conserver un moteur de recherche interne sur votre site français :</p>
+
+  <ul class="checklist">
+    <li><span class="check-icon">🇪🇺</span><div><strong>Hébergement en UE</strong> — Les données de recherche sont stockées sur des serveurs en Union Européenne.</div></li>
+    <li><span class="check-icon">🔒</span><div><strong>IP anonymisée</strong> — Les adresses IP sont hachées ou tronquées avant stockage, jamais conservées en clair.</div></li>
+    <li><span class="check-icon">📋</span><div><strong>Consentement géré</strong> — Une bannière conforme CNIL est présente, avec "Tout refuser" accessible aussi facilement que "Tout accepter".</div></li>
+    <li><span class="check-icon">⏱</span><div><strong>Durée de conservation limitée</strong> — Les données analytiques ne sont pas conservées plus de 13 mois.</div></li>
+    <li><span class="check-icon">📄</span><div><strong>Politique de confidentialité mise à jour</strong> — Elle mentionne explicitement la collecte de données de recherche interne et sa finalité.</div></li>
+    <li><span class="check-icon">🚫</span><div><strong>Pas de transfert vers des tiers non autorisés</strong> — Les données de recherche ne sont pas partagées avec des régies publicitaires ou des outils analytics tiers sans consentement.</div></li>
+  </ul>
+
+  <div class="cta-article">
+    <h3>SEEKR : conforme RGPD par conception</h3>
+    <p>SEEKR est hébergé à Francfort (UE), hache les IP en SHA-256 avant tout stockage, intègre une bannière de consentement CNIL native et ne partage aucune donnée avec des tiers. Conformité intégrée dès la première ligne de code.</p>
+    <a href="/fonctionnalites/#rgpd" class="btn-gold">Voir notre conformité RGPD →</a>
+  </div>
+
+</article>
+
+<section class="related">
+  <div class="container">
+    <div class="section-label">Continuer la lecture</div>
+    <h2 class="section-title">Articles liés</h2>
+    <div class="related-grid">
+      <a href="/blog/roi-recherche-interne/" class="related-card">
+        <div class="related-cat">SEO & Conversion</div>
+        <div class="related-title">Le ROI d'une bonne recherche interne</div>
+        <div class="related-link">Lire l'article →</div>
+      </a>
+      <a href="/blog/gps-semantique-explication/" class="related-card">
+        <div class="related-cat">Technologie IA</div>
+        <div class="related-title">GPS Sémantique : comment ça marche</div>
+        <div class="related-link">Lire l'article →</div>
+      </a>
+      <a href="/fonctionnalites/#rgpd" class="related-card">
+        <div class="related-cat">Fonctionnalité</div>
+        <div class="related-title">Conformité RGPD de SEEKR</div>
+        <div class="related-link">Voir la fonctionnalité →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo">SEEKR.</a>
+    <div class="footer-copy">© 2026 SEEKR — Moteur de Recherche IA Souverain</div>
+    <div class="footer-links">
+      <a href="/fonctionnalites/">Fonctionnalités</a><a href="/tarifs/">Tarifs</a><a href="/integration/">Intégration</a><a href="/blog/">Blog</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="mailto:contact@seekr-search.fr">Contact</a>
+    </div>
+  </div>
+</footer>
+<script>
+const h=document.getElementById('navHamburger'),m=document.getElementById('navMobile');
+if(h){h.addEventListener('click',()=>m.classList.toggle('open'));document.addEventListener('click',e=>{if(!h.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');});}
+</script>
+<!-- SEEKR Agent — Widget IA conversationnel -->
+<script
+  src="https://api.seekr-search.fr/widget/seekr-agent-widget.js"
+  data-key="sk_seekr_live_e6635bb7969851954e15c6e1fa7edf7b0deb446546c216c1019aade4"
+  data-mode="agent"
+  data-theme="dark-gold"
+  data-placeholder="Comment puis-je vous aider ?"
+  async defer
+></script>
+
+</body>
+</html>

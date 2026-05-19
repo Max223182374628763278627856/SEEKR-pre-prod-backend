@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recherche interne WordPress : les 5 meilleures solutions en 2026 | SEEKR Blog</title>
+<meta name="description" content="SearchWP, Relevanssi, ElasticPress ou widget IA SaaS ? Comparatif complet des solutions de recherche interne WordPress 2026 avec critères RGPD, prix et facilité d'installation.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://seekr-search.fr/blog/recherche-interne-wordpress/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://seekr-search.fr/blog/recherche-interne-wordpress/">
+<meta property="og:title" content="Recherche interne WordPress : les 5 meilleures solutions en 2026">
+<meta property="og:description" content="SearchWP, Relevanssi, ElasticPress, FiboSearch et widget IA SaaS. Comparatif complet pour choisir la bonne solution pour votre site WordPress.">
+<meta property="og:image" content="https://seekr-search.fr/og-seekr.png">
+<meta property="og:locale" content="fr_FR">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Recherche interne WordPress : les 5 meilleures solutions en 2026",
+  "description": "Comparatif SearchWP, Relevanssi, ElasticPress, FiboSearch et solutions IA SaaS pour la recherche interne WordPress.",
+  "datePublished": "2026-04-05",
+  "dateModified": "2026-04-05",
+  "author": { "@type": "Organization", "name": "SEEKR", "url": "https://seekr-search.fr" },
+  "publisher": { "@type": "Organization", "name": "SEEKR", "url": "https://seekr-search.fr" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://seekr-search.fr/blog/recherche-interne-wordpress/" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://seekr-search.fr/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://seekr-search.fr/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Recherche WordPress", "item": "https://seekr-search.fr/blog/recherche-interne-wordpress/" }
+    ]
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --gold: #D4AF37; --gold-light: #E8C84A; --black: #080808; --black2: #0f0f0f; --black3: #141414; --white: #F5F5F0; --gray: #888; --gray2: #555; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+nav { position: sticky; top: 0; left: 0; right: 0; z-index: 100; background: rgba(8,8,8,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(212,175,55,0.15); padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-family: 'Anton', sans-serif; font-size: 22px; letter-spacing: 0.12em; color: var(--gold); }
+.nav-logo span { color: var(--white); }
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { font-size: 13px; letter-spacing: 0.08em; color: var(--gray); transition: color 0.2s; white-space: nowrap; }
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+.nav-cta { background: var(--gold); color: var(--black) !important; padding: 9px 20px; border-radius: 4px; font-size: 13px !important; font-weight: 600; }
+.nav-login { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--gray) !important; border: 1px solid rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 4px; cursor: pointer; background: none; font-family: 'Inter', sans-serif; white-space: nowrap; }
+.nav-login svg { width: 14px; height: 14px; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; }
+.nav-mobile { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(8,8,8,0.98); border-bottom: 1px solid rgba(212,175,55,0.15); padding: 16px 24px; flex-direction: column; gap: 4px; z-index: 99; }
+.nav-mobile.open { display: flex; }
+.nav-mobile a { display: block; padding: 12px 0; font-size: 15px; color: var(--gray); border-bottom: 1px solid rgba(255,255,255,0.05); letter-spacing: 0.06em; }
+.nav-mobile .nav-cta-mobile { display: block; text-align: center; background: var(--gold); color: var(--black) !important; padding: 14px; border-radius: 4px; font-weight: 600; margin-top: 8px; border-bottom: none; }
+@media(max-width: 860px) { .nav-links { display: none; } .nav-hamburger { display: flex; } }
+.breadcrumb { padding: 88px 24px 0; max-width: 780px; margin: 0 auto; display: none; align-items: center; gap: 8px; font-size: 13px; color: var(--gray2); }
+.breadcrumb a { color: var(--gray); }
+.article-header { padding: 40px 24px 56px; max-width: 780px; margin: 0 auto; }
+.article-cat { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.article-title { font-family: 'Anton', sans-serif; font-size: clamp(28px, 5vw, 52px); letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.1; margin-bottom: 20px; }
+.article-meta { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--gray2); margin-bottom: 32px; flex-wrap: wrap; }
+.article-intro { font-size: 18px; color: var(--gray); line-height: 1.75; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.article-body { max-width: 780px; margin: 0 auto; padding: 0 24px 80px; }
+.article-body h2 { font-family: 'Anton', sans-serif; font-size: clamp(20px, 3vw, 28px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); margin: 48px 0 20px; }
+.article-body h3 { font-size: 17px; font-weight: 600; color: var(--white); margin: 28px 0 12px; }
+.article-body p { font-size: 15px; color: var(--gray); line-height: 1.85; margin-bottom: 20px; }
+.article-body p strong { color: var(--white); font-weight: 500; }
+.article-body ul { margin: 0 0 20px 20px; }
+.article-body li { font-size: 15px; color: var(--gray); line-height: 1.8; margin-bottom: 8px; }
+.article-body li strong { color: var(--white); font-weight: 500; }
+.article-body a { color: var(--gold); text-decoration: underline; }
+.plugin-card { background: var(--black2); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 24px; margin: 24px 0; }
+.plugin-card.featured { border-color: rgba(212,175,55,0.25); background: linear-gradient(135deg, #0e0c00 0%, var(--black2) 100%); }
+.plugin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+.plugin-name { font-family: 'Anton', sans-serif; font-size: 20px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--white); }
+.plugin-price { background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--gold); letter-spacing: 0.08em; }
+.plugin-price.free { background: rgba(22,163,74,0.1); border-color: rgba(22,163,74,0.2); color: #4ade80; }
+.plugin-desc { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 16px; }
+.plugin-pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.plugin-pros h4, .plugin-cons h4 { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+.plugin-pros h4 { color: #4ade80; }
+.plugin-cons h4 { color: #fca5a5; }
+.plugin-pros ul, .plugin-cons ul { list-style: none; padding: 0; margin: 0; }
+.plugin-pros li, .plugin-cons li { font-size: 13px; color: var(--gray); padding: 4px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+.plugin-for { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 13px; color: var(--gray2); }
+.plugin-for strong { color: var(--gold); }
+@media(max-width: 500px) { .plugin-pros-cons { grid-template-columns: 1fr; } }
+.compare-table { width: 100%; border-collapse: collapse; margin: 28px 0; overflow-x: auto; display: block; }
+.compare-table th { padding: 12px 14px; text-align: left; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray2); border-bottom: 1px solid rgba(255,255,255,0.08); white-space: nowrap; }
+.compare-table th.gold { color: var(--gold); }
+.compare-table td { padding: 10px 14px; font-size: 13px; color: var(--gray); border-bottom: 1px solid rgba(255,255,255,0.04); white-space: nowrap; }
+.compare-table td:first-child { color: var(--white); font-weight: 500; }
+.compare-table td.ok { color: #4ade80; }
+.compare-table td.ko { color: var(--gray2); }
+.compare-table td.gold-val { color: var(--gold); }
+.tip-box { background: rgba(212,175,55,0.05); border: 1px solid rgba(212,175,55,0.15); border-left: 3px solid var(--gold); border-radius: 0 6px 6px 0; padding: 16px 20px; margin: 24px 0; font-size: 14px; color: var(--gray); line-height: 1.7; }
+.tip-box strong { color: var(--white); font-weight: 500; }
+.cta-article { background: linear-gradient(135deg, #141200 0%, var(--black3) 100%); border: 1px solid rgba(212,175,55,0.3); border-radius: 10px; padding: 36px; margin: 48px 0; text-align: center; }
+.cta-article h3 { font-family: 'Anton', sans-serif; font-size: 24px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+.cta-article p { font-size: 14px; color: var(--gray); margin-bottom: 24px; }
+.btn-gold { display: inline-block; background: var(--gold); color: var(--black); padding: 14px 32px; border-radius: 4px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; }
+.btn-gold:hover { background: var(--gold-light); }
+.related { background: var(--black2); border-top: 1px solid rgba(255,255,255,0.05); padding: 64px 24px; }
+.related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1100px; margin: 32px auto 0; }
+.related-card { background: var(--black3); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 24px; transition: border-color 0.2s; }
+.related-card:hover { border-color: rgba(212,175,55,0.3); }
+.related-cat { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.related-title { font-family: 'Anton', sans-serif; font-size: 16px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px; line-height: 1.3; }
+.related-link { font-size: 13px; color: var(--gold); }
+.section-label { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; text-align: center; }
+.section-title { font-family: 'Anton', sans-serif; font-size: clamp(24px, 3.5vw, 36px); letter-spacing: 0.04em; text-transform: uppercase; text-align: center; line-height: 1.1; }
+footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.05); padding: 48px 24px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+.footer-logo { font-family: 'Anton', sans-serif; font-size: 18px; letter-spacing: 0.12em; color: var(--gold); }
+.footer-copy { font-size: 13px; color: var(--gray2); }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: var(--gray2); transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+@media(max-width: 600px) { .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo">SEEKR<span>.</span></a>
+  <div class="nav-links">
+    <a href="/fonctionnalites/">Fonctionnalités</a><a href="/tarifs/">Tarifs</a><a href="/integration/">Intégration</a>
+    <a href="/blog/" class="active">Blog</a>
+    <button class="nav-login" id="openLogin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Connexion</span></button>
+    <a href="/tarifs/" class="nav-cta">Démarrer</a>
+  </div>
+  <button class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="/fonctionnalites/">Fonctionnalités</a><a href="/tarifs/">Tarifs</a><a href="/integration/">Intégration</a><a href="/blog/">Blog</a>
+  <a href="/tarifs/" class="nav-cta-mobile">Démarrer →</a>
+</div>
+<nav class="breadcrumb"><a href="/">Accueil</a><span>›</span><a href="/blog/">Blog</a><span>›</span><span>Recherche WordPress</span></nav>
+<header class="article-header">
+  <div class="article-cat">Guide pratique · WordPress</div>
+  <h1 class="article-title">Recherche interne WordPress : les 5 meilleures solutions en 2026</h1>
+  <div class="article-meta"><span>📅 5 avril 2026</span><span>⏱ 8 min de lecture</span><span>✍️ Équipe SEEKR</span></div>
+  <p class="article-intro">WordPress propulse 43,2% de tous les sites web (WPBeginner, 2025), mais sa recherche native souffre de limitations architecturales importantes. Voici un comparatif complet des 5 meilleures solutions pour l'améliorer en 2026, avec prix vérifiés et critères RGPD.</p>
+</header>
+<article class="article-body">
+
+  <h2>Le problème de la recherche native WordPress</h2>
+  <p>La recherche intégrée à WordPress souffre de <strong>limitations architecturales documentées</strong>. Selon une analyse publiée par Oddjar.com en décembre 2025, l'algorithme natif recherche uniquement dans les titres de posts, le contenu et les métadonnées basiques — en ignorant totalement les champs personnalisés, les documents PDF, les attributs de produits WooCommerce et les termes de taxonomie.</p>
+  <p>Concrètement : si vous gérez une boutique WooCommerce et qu'un client cherche "t-shirt bleu coton taille M", la recherche native WordPress ne trouvera rien si ces attributs sont stockés dans des champs produit séparés plutôt que dans le texte principal du produit.</p>
+
+  <div class="tip-box">
+    <strong>Chiffre clé :</strong> 43% des acheteurs en ligne utilisent la barre de recherche comme premier point d'entrée (Algolia/Forrester 2024). Sur WordPress, si cette barre retourne des résultats non pertinents, vous perdez vos visiteurs les plus qualifiés.
+  </div>
+
+  <h2>Les 5 solutions comparées</h2>
+
+  <div class="plugin-card">
+    <div class="plugin-header">
+      <div class="plugin-name">1. Relevanssi</div>
+      <span class="plugin-price">Gratuit / 99€/an (Premium)</span>
+    </div>
+    <p class="plugin-desc">Relevanssi est le plugin de recherche WordPress le plus utilisé, avec plus de <strong>100 000 installations actives</strong> (source : oddjar.com, décembre 2025). Il remplace la recherche native par son propre algorithme de pertinence, triant les résultats par score de pertinence plutôt que par date de publication.</p>
+    <div class="plugin-pros-cons">
+      <div class="plugin-pros">
+        <h4>✓ Points forts</h4>
+        <ul>
+          <li><span>+</span> Version gratuite fonctionnelle</li>
+          <li><span>+</span> Gestion des synonymes</li>
+          <li><span>+</span> Suggestions "Did you mean?"</li>
+          <li><span>+</span> Indexation du contenu des shortcodes (premium)</li>
+          <li><span>+</span> Licence illimitée en sites (premium)</li>
+        </ul>
+      </div>
+      <div class="plugin-cons">
+        <h4>✗ Limites</h4>
+        <ul>
+          <li><span>-</span> Augmente la taille de la base de données (×3 selon les développeurs)</li>
+          <li><span>-</span> Peut poser des problèmes de performance sur hébergement mutualisé bas de gamme</li>
+          <li><span>-</span> Pas de recherche sémantique vectorielle</li>
+          <li><span>-</span> Pas de dashboard analytics</li>
+        </ul>
+      </div>
+    </div>
+    <div class="plugin-for"><strong>Idéal pour :</strong> Sites WordPress de taille moyenne cherchant une amélioration de la pertinence sans budget. La version gratuite suffit pour la plupart des blogs et sites vitrines.</div>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-header">
+      <div class="plugin-name">2. SearchWP</div>
+      <span class="plugin-price">99€/an (1 site) · 149€/an (5 sites)</span>
+    </div>
+    <p class="plugin-desc">SearchWP est un plugin premium sans version gratuite, conçu pour les sites WordPress jusqu'à 20 000 contenus. Il excelle pour les boutiques WooCommerce nécessitant une recherche dans les attributs produit, et les sites utilisant Advanced Custom Fields (ACF). (Source : oddjar.com, décembre 2025)</p>
+    <div class="plugin-pros-cons">
+      <div class="plugin-pros">
+        <h4>✓ Points forts</h4>
+        <ul>
+          <li><span>+</span> Recherche dans les champs ACF</li>
+          <li><span>+</span> Excellent pour WooCommerce</li>
+          <li><span>+</span> Interface no-code intuitive</li>
+          <li><span>+</span> Indexation des PDFs (avec extension)</li>
+        </ul>
+      </div>
+      <div class="plugin-cons">
+        <h4>✗ Limites</h4>
+        <ul>
+          <li><span>-</span> Uniquement payant (pas de version free)</li>
+          <li><span>-</span> Pas de compréhension sémantique native</li>
+          <li><span>-</span> Limité à ~20 000 contenus</li>
+          <li><span>-</span> Pas de dashboard ROI</li>
+        </ul>
+      </div>
+    </div>
+    <div class="plugin-for"><strong>Idéal pour :</strong> Boutiques WooCommerce de taille moyenne avec des attributs produit complexes et des champs ACF.</div>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-header">
+      <div class="plugin-name">3. FiboSearch</div>
+      <span class="plugin-price">49€/an</span>
+    </div>
+    <p class="plugin-desc">FiboSearch est spécialisé dans la recherche en direct (live search) avec suggestions instantanées. Il supporte nativement la recherche par SKU produit pour WooCommerce et propose une compatibilité multilingue. (Source : elegantthemes.com, janvier 2025)</p>
+    <div class="plugin-pros-cons">
+      <div class="plugin-pros">
+        <h4>✓ Points forts</h4>
+        <ul>
+          <li><span>+</span> Suggestions live instantanées</li>
+          <li><span>+</span> Recherche par SKU WooCommerce</li>
+          <li><span>+</span> Support multilingue</li>
+          <li><span>+</span> Prix accessible</li>
+        </ul>
+      </div>
+      <div class="plugin-cons">
+        <h4>✗ Limites</h4>
+        <ul>
+          <li><span>-</span> Centré sur les produits WooCommerce</li>
+          <li><span>-</span> Pas de recherche dans les pages de contenu</li>
+          <li><span>-</span> Analytics limitées</li>
+        </ul>
+      </div>
+    </div>
+    <div class="plugin-for"><strong>Idéal pour :</strong> Boutiques WooCommerce qui veulent principalement des suggestions live rapides.</div>
+  </div>
+
+  <div class="plugin-card">
+    <div class="plugin-header">
+      <div class="plugin-name">4. ElasticPress</div>
+      <span class="plugin-price">Gratuit (nécessite Elasticsearch)</span>
+    </div>
+    <p class="plugin-desc">ElasticPress connecte WordPress à un serveur Elasticsearch externe. C'est la solution la plus puissante techniquement, mais elle nécessite de maintenir une infrastructure Elasticsearch (serveur dédié ou service cloud payant). (Source : oddjar.com, décembre 2025)</p>
+    <div class="plugin-pros-cons">
+      <div class="plugin-pros">
+        <h4>✓ Points forts</h4>
+        <ul>
+          <li><span>+</span> Très haute performance sur gros volumes</li>
+          <li><span>+</span> Recherche full-text avancée</li>
+          <li><span>+</span> Adapté aux sites avec 100 000+ contenus</li>
+        </ul>
+      </div>
+      <div class="plugin-cons">
+        <h4>✗ Limites</h4>
+        <ul>
+          <li><span>-</span> Nécessite un développeur pour l'installation</li>
+          <li><span>-</span> Coût d'infrastructure Elasticsearch (30€-200€/mois)</li>
+          <li><span>-</span> Maintenance technique régulière</li>
+          <li><span>-</span> Hébergement hors UE selon le provider choisi</li>
+        </ul>
+      </div>
+    </div>
+    <div class="plugin-for"><strong>Idéal pour :</strong> Très grands sites WordPress avec développeur dédié et budget infrastructure.</div>
+  </div>
+
+  <div class="plugin-card featured">
+    <div class="plugin-header">
+      <div class="plugin-name">5. Widget IA SaaS (SEEKR)</div>
+      <span class="plugin-price">À partir de 70€/mois</span>
+    </div>
+    <p class="plugin-desc">Une solution IA SaaS s'intègre via une ligne de code dans WordPress — sans plugin, sans modification de base de données. Elle indexe automatiquement tous les contenus (pages, articles, produits WooCommerce, PDFs) et fournit une recherche sémantique vectorielle avec GPS Sémantique.</p>
+    <div class="plugin-pros-cons">
+      <div class="plugin-pros">
+        <h4>✓ Points forts</h4>
+        <ul>
+          <li><span>+</span> Recherche sémantique vectorielle</li>
+          <li><span>+</span> GPS Sémantique (ancrage au paragraphe)</li>
+          <li><span>+</span> Dashboard analytics ROI complet</li>
+          <li><span>+</span> Hébergement UE natif (RGPD)</span></li>
+          <li><span>+</span> Zéro modification de base de données</li>
+          <li><span>+</span> Intégration en 5 minutes</li>
+        </ul>
+      </div>
+      <div class="plugin-cons">
+        <h4>✗ Limites</h4>
+        <ul>
+          <li><span>-</span> Abonnement mensuel (pas de version gratuite)</li>
+          <li><span>-</span> Dépendance à un service externe</li>
+        </ul>
+      </div>
+    </div>
+    <div class="plugin-for"><strong>Idéal pour :</strong> Sites WordPress et WooCommerce qui veulent une recherche sémantique IA sans infrastructure technique, avec conformité RGPD native et analytics ROI.</div>
+  </div>
+
+  <h2>Tableau comparatif rapide</h2>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Solution</th>
+        <th>Prix</th>
+        <th>Sémantique</th>
+        <th>RGPD UE</th>
+        <th>Analytics</th>
+        <th>Installation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Relevanssi</td><td>Gratuit / 99€/an</td><td class="ko">Non</td><td class="ko">Variable</td><td class="ko">Basique</td><td>Plugin WP</td></tr>
+      <tr><td>SearchWP</td><td>99€/an</td><td class="ko">Non</td><td class="ko">Variable</td><td class="ko">Limitée</td><td>Plugin WP</td></tr>
+      <tr><td>FiboSearch</td><td>49€/an</td><td class="ko">Non</td><td class="ko">Variable</td><td class="ko">Basique</td><td>Plugin WP</td></tr>
+      <tr><td>ElasticPress</td><td>Infra requise</td><td class="ok">Partiel</td><td class="ko">Selon config</td><td class="ko">Non</td><td>Dev requis</td></tr>
+      <tr><td class="gold-val">SEEKR</td><td class="gold-val">À partir 70€/mois</td><td class="ok">Oui + GPS</td><td class="ok">Oui (Frankfurt)</td><td class="ok">ROI complet</td><td class="ok">1 ligne code</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Comment choisir la bonne solution</h2>
+  <ul>
+    <li><strong>Vous avez un petit budget</strong> → Relevanssi (version gratuite) améliore la pertinence sans coût</li>
+    <li><strong>Vous avez une boutique WooCommerce avec ACF</strong> → SearchWP est le plus adapté parmi les plugins</li>
+    <li><strong>Vous voulez des suggestions live simples</strong> → FiboSearch à 49€/an</li>
+    <li><strong>Vous avez un très gros site et un développeur</strong> → ElasticPress avec infrastructure dédiée</li>
+    <li><strong>Vous voulez de la recherche sémantique, du RGPD natif et un dashboard ROI</strong> → Solution SaaS IA</li>
+  </ul>
+
+  <div class="cta-article">
+    <h3>Testez SEEKR sur votre site WordPress</h3>
+    <p>Intégration en 5 minutes. Recherche sémantique vectorielle, GPS Sémantique, dashboard ROI. Hébergement Frankfurt — conforme RGPD.</p>
+    <a href="/integration/" class="btn-gold">Guide d'intégration WordPress →</a>
+  </div>
+
+</article>
+<section class="related">
+  <div class="container">
+    <div class="section-label">Continuer la lecture</div>
+    <h2 class="section-title">Articles liés</h2>
+    <div class="related-grid">
+      <a href="/blog/ameliorer-recherche-prestashop/" class="related-card"><div class="related-cat">Guide</div><div class="related-title">Améliorer la recherche PrestaShop</div><div class="related-link">Lire →</div></a>
+      <a href="/blog/roi-recherche-interne/" class="related-card"><div class="related-cat">SEO</div><div class="related-title">Le ROI d'une bonne recherche interne</div><div class="related-link">Lire →</div></a>
+      <a href="/blog/rgpd-moteur-recherche/" class="related-card"><div class="related-cat">RGPD</div><div class="related-title">RGPD et moteur de recherche IA</div><div class="related-link">Lire →</div></a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo">SEEKR.</a>
+    <div class="footer-copy">© 2026 SEEKR — Moteur de Recherche IA Souverain</div>
+    <div class="footer-links">
+      <a href="/fonctionnalites/">Fonctionnalités</a><a href="/tarifs/">Tarifs</a><a href="/integration/">Intégration</a><a href="/blog/">Blog</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a><a href="mailto:contact@seekr-search.fr">Contact</a>
+    </div>
+  </div>
+</footer>
+<script>
+const h=document.getElementById('navHamburger'),m=document.getElementById('navMobile');
+if(h){h.addEventListener('click',()=>m.classList.toggle('open'));document.addEventListener('click',e=>{if(!h.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');});}
+</script>
+<!-- SEEKR Agent — Widget IA conversationnel -->
+<script
+  src="https://api.seekr-search.fr/widget/seekr-agent-widget.js"
+  data-key="sk_seekr_live_e6635bb7969851954e15c6e1fa7edf7b0deb446546c216c1019aade4"
+  data-mode="agent"
+  data-theme="dark-gold"
+  data-placeholder="Comment puis-je vous aider ?"
+  async defer
+></script>
+
+</body>
+</html>

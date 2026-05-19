@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ══ SEO ══ -->
+<title>Fonctionnalités SEEKR — GPS Sémantique, IA Souveraine, RGPD | Moteur de recherche IA</title>
+<meta name="description" content="Découvrez toutes les fonctionnalités de SEEKR : GPS Sémantique, IA souveraine hébergée en Europe, conformité RGPD, dashboard ROI, white-label agence. Intégration en 5 minutes sur tous les CMS.">
+<meta name="keywords" content="GPS sémantique, moteur recherche IA RGPD, widget recherche site web, dashboard ROI recherche, white label recherche agence, alternative algolia france">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://seekr-search.fr/fonctionnalites/">
+
+<!-- ══ OPEN GRAPH ══ -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seekr-search.fr/fonctionnalites/">
+<meta property="og:title" content="Fonctionnalités SEEKR — GPS Sémantique & IA Souveraine">
+<meta property="og:description" content="GPS Sémantique, IA souveraine, RGPD, dashboard ROI, white-label. Tout ce que SEEKR fait pour transformer la recherche sur votre site.">
+<meta property="og:image" content="https://seekr-search.fr/og-seekr.png">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="SEEKR">
+
+<!-- ══ JSON-LD ══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://seekr-search.fr/fonctionnalites/",
+      "url": "https://seekr-search.fr/fonctionnalites/",
+      "name": "Fonctionnalités SEEKR — GPS Sémantique, IA Souveraine, RGPD",
+      "description": "Toutes les fonctionnalités du moteur de recherche IA SEEKR : GPS Sémantique, conformité RGPD, dashboard ROI, white-label agence.",
+      "isPartOf": { "@id": "https://seekr-search.fr/#website" },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://seekr-search.fr/" },
+          { "@type": "ListItem", "position": 2, "name": "Fonctionnalités", "item": "https://seekr-search.fr/fonctionnalites/" }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Comment fonctionne le GPS Sémantique de SEEKR ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Le GPS Sémantique analyse votre contenu et crée des ancres de navigation profondes. Quand un visiteur tape une requête, SEEKR ne pointe pas seulement vers une page — il guide le visiteur exactement au bon paragraphe avec un scroll automatique précis." }
+        },
+        {
+          "@type": "Question",
+          "name": "SEEKR est-il vraiment conforme RGPD ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Oui. SEEKR est hébergé exclusivement à Francfort (UE). Le widget intègre une bannière de consentement CNIL, gère les révocations et n'envoie aucune donnée hors de l'Europe." }
+        },
+        {
+          "@type": "Question",
+          "name": "Qu'est-ce que le dashboard ROI de SEEKR ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Le dashboard ROI affiche en temps réel les requêtes de vos visiteurs, les taux de conversion par intention (transactionnel, informationnel, commercial), les pages les plus performantes et les opportunités de contenu manquant." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #D4AF37;
+  --gold-light: #E8C84A;
+  --black: #080808;
+  --black2: #0f0f0f;
+  --black3: #141414;
+  --black4: #1a1a1a;
+  --white: #F5F5F0;
+  --gray: #888;
+  --gray2: #555;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(8,8,8,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(212,175,55,0.15);
+  padding: 0 24px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { font-family: 'Anton', sans-serif; font-size: 22px; letter-spacing: 0.12em; color: var(--gold); text-decoration: none; }
+.nav-logo span { color: var(--white); }
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { font-size: 13px; letter-spacing: 0.08em; color: var(--gray); transition: color 0.2s; white-space: nowrap; text-decoration: none; }
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+.nav-cta {
+  background: var(--gold); color: var(--black) !important;
+  padding: 9px 20px; border-radius: 4px; font-size: 13px !important;
+  font-weight: 600; letter-spacing: 0.06em; transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--gold-light) !important; }
+.nav-login {
+  display: flex; align-items: center; gap: 7px; font-size: 13px;
+  letter-spacing: 0.06em; color: var(--gray) !important;
+  border: 1px solid rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 4px;
+  cursor: pointer; transition: border-color 0.2s, color 0.2s !important;
+  background: none; font-family: 'Inter', sans-serif; white-space: nowrap;
+}
+.nav-login:hover { border-color: var(--gold); color: var(--gold) !important; }
+.nav-login svg { width: 14px; height: 14px; }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  background: none; border: none; padding: 8px;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--white); border-radius: 2px; transition: all 0.3s;
+}
+.nav-mobile {
+  display: none; position: fixed; top: 64px; left: 0; right: 0;
+  background: rgba(8,8,8,0.98); border-bottom: 1px solid rgba(212,175,55,0.15);
+  padding: 16px 24px; flex-direction: column; gap: 4px; z-index: 99;
+}
+.nav-mobile.open { display: flex; }
+.nav-mobile a, .nav-mobile button {
+  display: block; padding: 12px 0; font-size: 15px; color: var(--gray);
+  border-bottom: 1px solid rgba(255,255,255,0.05); text-decoration: none;
+  letter-spacing: 0.06em; background: none; border-left: none; border-right: none; border-top: none;
+  text-align: left; width: 100%; font-family: 'Inter', sans-serif; cursor: pointer;
+  transition: color 0.2s;
+}
+.nav-mobile a:hover, .nav-mobile button:hover { color: var(--gold); }
+.nav-mobile a:last-child { border-bottom: none; }
+.nav-mobile .nav-cta-mobile {
+  display: block; text-align: center; background: var(--gold); color: var(--black) !important;
+  padding: 14px; border-radius: 4px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; margin-top: 8px; border: none;
+}
+@media(max-width: 860px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+}
+
+/* ── BREADCRUMB ── */
+.breadcrumb {
+  padding: 88px 24px 0;
+  max-width: 1100px; margin: 0 auto;
+  display: none; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--gray2);
+}
+.breadcrumb a { color: var(--gray); transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--gold); }
+.breadcrumb span { color: var(--gray2); }
+
+/* ── HERO PAGE ── */
+.page-hero {
+  padding: 48px 24px 80px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.page-hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(212,175,55,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.03) 1px, transparent 1px);
+  background-size: 60px 60px; pointer-events: none;
+}
+.page-label { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.page-title {
+  font-family: 'Anton', sans-serif; font-size: clamp(36px, 6vw, 72px);
+  letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.05;
+  margin-bottom: 24px; position: relative; z-index: 1;
+}
+.page-title .gold { color: var(--gold); }
+.page-intro {
+  font-size: clamp(15px, 2vw, 18px); color: var(--gray);
+  max-width: 680px; margin: 0 auto 48px; line-height: 1.75;
+  position: relative; z-index: 1;
+}
+.page-stats {
+  display: flex; gap: 40px; flex-wrap: wrap; justify-content: center;
+  position: relative; z-index: 1;
+}
+.page-stat { text-align: center; }
+.page-stat-num { font-family: 'Anton', sans-serif; font-size: 32px; color: var(--gold); line-height: 1; }
+.page-stat-label { font-size: 12px; color: var(--gray); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+
+/* ── FEATURE SECTIONS ── */
+.feature-section { padding: 80px 0; border-top: 1px solid rgba(255,255,255,0.05); }
+.feature-section:nth-child(even) { background: var(--black2); }
+.feature-section:nth-child(odd) { background: var(--black); }
+
+.feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.feature-grid.reverse { direction: rtl; }
+.feature-grid.reverse > * { direction: ltr; }
+
+.feature-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 20px; padding: 4px 14px;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px;
+}
+.feature-heading {
+  font-family: 'Anton', sans-serif; font-size: clamp(26px, 3.5vw, 44px);
+  letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.1;
+  margin-bottom: 20px;
+}
+.feature-heading .gold { color: var(--gold); }
+.feature-text { font-size: 15px; color: var(--gray); line-height: 1.8; margin-bottom: 24px; }
+.feature-text strong { color: var(--white); font-weight: 500; }
+
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+.feature-list li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 14px; color: var(--gray); line-height: 1.6;
+}
+.feature-list li::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0; margin-top: 7px;
+}
+.feature-list li strong { color: var(--white); font-weight: 500; }
+
+.feature-visual {
+  background: var(--black3);
+  border: 1px solid rgba(212,175,55,0.15);
+  border-radius: 12px; padding: 40px 32px;
+  position: relative; overflow: hidden;
+}
+.feature-visual::before {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.feature-icon-big { font-size: 48px; margin-bottom: 20px; display: block; }
+.feature-visual-title {
+  font-family: 'Anton', sans-serif; font-size: 18px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
+}
+.feature-visual-desc { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+/* Démo GPS */
+.gps-demo {
+  background: var(--black2); border-radius: 8px; padding: 20px;
+  margin-top: 20px;
+}
+.gps-search {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--black); border: 1px solid rgba(212,175,55,0.3);
+  border-radius: 6px; padding: 10px 14px; margin-bottom: 14px;
+}
+.gps-search span { font-size: 13px; color: var(--gray); }
+.gps-result {
+  background: var(--black); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px; padding: 12px 14px; margin-bottom: 8px;
+  font-size: 13px;
+}
+.gps-result.active {
+  border-color: var(--gold);
+  background: rgba(212,175,55,0.05);
+}
+.gps-result-title { color: var(--gold); font-weight: 500; margin-bottom: 3px; }
+.gps-result-url { color: var(--gray2); font-size: 11px; font-family: monospace; }
+.gps-anchor { color: var(--gold); }
+.gps-badge {
+  display: inline-block; background: rgba(212,175,55,0.1);
+  border: 1px solid rgba(212,175,55,0.2); border-radius: 4px;
+  padding: 2px 8px; font-size: 10px; color: var(--gold);
+  letter-spacing: 0.08em; margin-left: 6px; vertical-align: middle;
+}
+
+/* Dashboard ROI preview */
+.dashboard-preview { margin-top: 20px; }
+.dash-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 13px;
+}
+.dash-row:last-child { border-bottom: none; }
+.dash-query { color: var(--white); }
+.dash-intent {
+  font-size: 11px; padding: 2px 8px; border-radius: 10px;
+  letter-spacing: 0.06em;
+}
+.dash-intent.trans { background: rgba(22,163,74,0.15); color: #4ade80; }
+.dash-intent.info  { background: rgba(59,130,246,0.15); color: #93c5fd; }
+.dash-intent.comm  { background: rgba(245,158,11,0.15); color: #fcd34d; }
+.dash-count { color: var(--gray); font-size: 12px; }
+
+/* Métriques inline */
+.metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+.metric-box {
+  background: var(--black2); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px; padding: 16px; text-align: center;
+}
+.metric-num { font-family: 'Anton', sans-serif; font-size: 28px; color: var(--gold); line-height: 1; }
+.metric-label { font-size: 11px; color: var(--gray); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+
+/* Badge plan */
+.plan-badge-inline {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 4px; padding: 4px 10px;
+  font-size: 11px; color: var(--gold); letter-spacing: 0.08em;
+}
+
+@media(max-width: 768px) {
+  .feature-grid { grid-template-columns: 1fr; gap: 40px; }
+  .feature-grid.reverse { direction: ltr; }
+  .metrics-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── COMPARATIF ── */
+#comparatif { padding: 80px 0; background: var(--black2); border-top: 1px solid rgba(255,255,255,0.05); }
+.comp-table { width: 100%; border-collapse: collapse; margin-top: 48px; }
+.comp-table th {
+  padding: 16px 20px; text-align: left;
+  font-family: 'Anton', sans-serif; font-size: 14px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.comp-table th.seekr-col { color: var(--gold); }
+.comp-table th.other-col { color: var(--gray); }
+.comp-table td {
+  padding: 14px 20px; font-size: 14px; color: var(--gray);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.comp-table td.feature-name { color: var(--white); font-weight: 500; }
+.comp-table td.seekr-val { color: var(--gold); }
+.comp-table tr:hover td { background: rgba(255,255,255,0.02); }
+.check { color: #4ade80; font-size: 16px; }
+.cross { color: var(--gray2); font-size: 16px; }
+.partial { color: #fcd34d; font-size: 16px; }
+
+/* ── FAQ ── */
+#faq { padding: 80px 0; background: var(--black); border-top: 1px solid rgba(255,255,255,0.05); }
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid rgba(255,255,255,0.07); padding: 24px 0; cursor: pointer; }
+.faq-q {
+  font-family: 'Anton', sans-serif; font-size: 15px; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--white);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; user-select: none;
+}
+.faq-arrow { color: var(--gold); font-size: 20px; transition: transform 0.3s; flex-shrink: 0; }
+.faq-a { font-size: 14px; color: var(--gray); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, margin-top 0.35s ease; }
+.faq-item.open .faq-a { max-height: 300px; margin-top: 14px; }
+.faq-item.open .faq-arrow { transform: rotate(45deg); }
+
+/* ── CTA ── */
+#cta { padding: 100px 24px; text-align: center; background: var(--black2); border-top: 1px solid rgba(212,175,55,0.1); }
+.cta-title { font-family: 'Anton', sans-serif; font-size: clamp(32px, 5vw, 60px); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 20px; line-height: 1.1; }
+.cta-desc { font-size: 16px; color: var(--gray); max-width: 560px; margin: 0 auto 40px; line-height: 1.7; }
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--gold); color: var(--black); padding: 16px 36px; border-radius: 4px;
+  font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s; display: inline-block;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-outline {
+  background: transparent; color: var(--white); padding: 16px 36px; border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.2); font-size: 14px; letter-spacing: 0.08em;
+  text-transform: uppercase; transition: border-color 0.2s; display: inline-block;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── FOOTER ── */
+footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.05); padding: 48px 24px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+.footer-logo { font-family: 'Anton', sans-serif; font-size: 18px; letter-spacing: 0.12em; color: var(--gold); }
+.footer-copy { font-size: 13px; color: var(--gray2); }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: var(--gray2); transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+@media(max-width: 600px) {
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .page-stats { gap: 24px; }
+  .cta-btns { flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-outline { text-align: center; }
+}
+
+/* section label/title helpers */
+.section-label { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.section-title { font-family: 'Anton', sans-serif; font-size: clamp(28px, 4vw, 48px); letter-spacing: 0.04em; text-transform: uppercase; text-align: center; margin-bottom: 16px; line-height: 1.1; }
+.section-desc { font-size: 16px; color: var(--gray); text-align: center; max-width: 580px; margin: 0 auto; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="/" class="nav-logo" aria-label="SEEKR Accueil">SEEKR<span>.</span></a>
+  <div class="nav-links">
+    <a href="/fonctionnalites/">Fonctionnalités</a>
+    <a href="/tarifs/">Tarifs</a>
+    <a href="/integration/">Intégration</a>
+    <a href="/blog/">Blog</a>
+    <button class="nav-login" id="openLogin" aria-label="Se connecter">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span>Connexion</span>
+    </button>
+    <a href="/tarifs/" class="nav-cta">Démarrer</a>
+  </div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="/fonctionnalites/">Fonctionnalités</a>
+  <a href="/tarifs/">Tarifs</a>
+  <a href="/integration/">Intégration</a>
+  <a href="/blog/">Blog</a>
+  <button onclick="openLogin&&openLogin()" style="padding:12px 0;font-size:15px;color:var(--gray);border-bottom:1px solid rgba(255,255,255,0.05);background:none;border-left:none;border-right:none;border-top:none;text-align:left;width:100%;font-family:Inter,sans-serif;cursor:pointer;letter-spacing:0.06em;">Connexion</button>
+  <a href="/tarifs/" class="nav-cta-mobile">Démarrer →</a>
+</div>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="Fil d'Ariane">
+  <a href="/">Accueil</a>
+  <span>›</span>
+  <span>Fonctionnalités</span>
+</nav>
+
+<!-- HERO -->
+<header class="page-hero">
+  <div class="page-hero-grid" aria-hidden="true"></div>
+  <div class="container">
+    <div class="page-label">Technologie SEEKR</div>
+    <h1 class="page-title">Toutes les fonctionnalités<br>de votre moteur <span class="gold">IA souverain</span></h1>
+    <p class="page-intro">SEEKR n'est pas un simple champ de recherche. C'est une infrastructure IA complète — GPS Sémantique, conformité RGPD native, dashboard ROI et white-label — hébergée en Europe, prête en 5 minutes.</p>
+    <div class="page-stats">
+      <div class="page-stat"><div class="page-stat-num">&lt;200ms</div><div class="page-stat-label">Temps de réponse</div></div>
+      <div class="page-stat"><div class="page-stat-num">80+</div><div class="page-stat-label">Pages indexées</div></div>
+      <div class="page-stat"><div class="page-stat-num">5 min</div><div class="page-stat-label">Pour intégrer</div></div>
+      <div class="page-stat"><div class="page-stat-num">100%</div><div class="page-stat-label">Hébergé en Europe</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════
+     FEATURE 1 — GPS SÉMANTIQUE
+══════════════════════════════════ -->
+<section class="feature-section" id="gps-semantique" aria-labelledby="gps-title">
+  <div class="container">
+    <div class="feature-grid">
+      <div>
+        <div class="feature-tag">Technologie exclusive</div>
+        <h2 class="feature-heading" id="gps-title">GPS <span class="gold">Sémantique</span><br>Ancrage profond</h2>
+        <p class="feature-text">
+          La majorité des moteurs de recherche renvoient vers une <strong>page</strong>. SEEKR va plus loin : il pointe directement vers le <strong>bon paragraphe</strong>, grâce à un système d'ancres sémantiques créées automatiquement lors du crawl.
+        </p>
+        <p class="feature-text">
+          Quand un visiteur tape "politique de retour" sur votre site e-commerce, SEEKR ne l'envoie pas sur votre page CGV — il le scrolle directement jusqu'à la section "Retours et remboursements". <strong>Expérience visiteur révolutionnaire, taux de conversion amélioré.</strong>
+        </p>
+        <ul class="feature-list">
+          <li><strong>Ancres auto-générées</strong> à partir de vos titres H1/H2/H3</li>
+          <li><strong>Scroll automatique précis</strong> vers le paragraphe cible</li>
+          <li><strong>Détection d'intention</strong> : transactionnel, informationnel, commercial</li>
+          <li><strong>Compatible</strong> avec tous les CMS et technologies web</li>
+        </ul>
+        <span class="plan-badge-inline">Disponible sur tous les plans</span>
+      </div>
+      <div>
+        <div class="feature-visual">
+          <span class="feature-icon-big" aria-hidden="true">🛰️</span>
+          <div class="feature-visual-title">Démo GPS en action</div>
+          <div class="gps-demo">
+            <div class="gps-search">
+              <span style="color:var(--gold);">🔍</span>
+              <span>politique de retour produit</span>
+            </div>
+            <div class="gps-result active">
+              <div class="gps-result-title">Retours & Remboursements <span class="gps-badge">GPS</span></div>
+              <div class="gps-result-url">monsite.fr/cgv/<span class="gps-anchor">#seekr-retours-remboursements</span></div>
+            </div>
+            <div class="gps-result">
+              <div class="gps-result-title">Conditions Générales de Vente</div>
+              <div class="gps-result-url">monsite.fr/cgv/</div>
+            </div>
+            <div class="gps-result">
+              <div class="gps-result-title">FAQ — Questions fréquentes</div>
+              <div class="gps-result-url">monsite.fr/faq/</div>
+            </div>
+          </div>
+          <p style="font-size:12px;color:var(--gray2);margin-top:12px;">Le résultat actif pointe directement au bon paragraphe via l'ancre GPS.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     FEATURE 2 — IA SOUVERAINE
+══════════════════════════════════ -->
+<section class="feature-section" id="ia-souveraine" aria-labelledby="ia-title">
+  <div class="container">
+    <div class="feature-grid reverse">
+      <div>
+        <div class="feature-tag">Souveraineté européenne</div>
+        <h2 class="feature-heading" id="ia-title">IA Propriétaire<br><span class="gold">Hébergée en Europe</span></h2>
+        <p class="feature-text">
+          SEEKR est une <strong>alternative souveraine à Algolia</strong>, hébergée exclusivement à Francfort (Allemagne), dans l'Union Européenne. Vos données ne transitent jamais par des serveurs américains — ni chez Google, ni chez Amazon, ni chez OpenAI.
+        </p>
+        <p class="feature-text">
+          Notre moteur sémantique traite les requêtes en moins de <strong>200ms</strong>, comprend les synonymes, les fautes de frappe et les requêtes en langage naturel. La recherche "chaussures confortables pour marcher longtemps" trouvera vos "chaussures de randonnée" même si le mot n'est pas dans la requête.
+        </p>
+        <ul class="feature-list">
+          <li><strong>Serveurs Frankfurt fra-1</strong> — données 100% en UE</li>
+          <li><strong>Zéro dépendance</strong> aux GAFAM ou cloud américain</li>
+          <li><strong>Compréhension sémantique</strong> des synonymes et intentions</li>
+          <li><strong>Self-Healing</strong> — retry automatique en cas d'erreur</li>
+          <li><strong>Scraper furtif</strong> — crawl automatique avec rotation d'agents</li>
+        </ul>
+        <span class="plan-badge-inline">Disponible sur tous les plans</span>
+      </div>
+      <div>
+        <div class="feature-visual">
+          <span class="feature-icon-big" aria-hidden="true">🤖</span>
+          <div class="feature-visual-title">Compréhension sémantique</div>
+          <div class="metrics-grid">
+            <div class="metric-box">
+              <div class="metric-num">&lt;200ms</div>
+              <div class="metric-label">Réponse</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-num">100%</div>
+              <div class="metric-label">UE</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-num">80+</div>
+              <div class="metric-label">Pages indexées</div>
+            </div>
+            <div class="metric-box">
+              <div class="metric-num">3×</div>
+              <div class="metric-label">Retry auto</div>
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--gray);margin-top:20px;line-height:1.6;">Compréhension des synonymes, fautes de frappe, requêtes longue traîne et intentions d'achat — sans configuration manuelle.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     FEATURE 3 — RGPD & CNIL
+══════════════════════════════════ -->
+<section class="feature-section" id="rgpd" aria-labelledby="rgpd-title">
+  <div class="container">
+    <div class="feature-grid">
+      <div>
+        <div class="feature-tag">Conformité légale</div>
+        <h2 class="feature-heading" id="rgpd-title">RGPD & CNIL<br><span class="gold">Conformité totale</span></h2>
+        <p class="feature-text">
+          SEEKR est conçu depuis le premier jour pour être <strong>conforme RGPD et aux recommandations CNIL</strong>. Le widget intègre nativement la gestion du consentement — si un visiteur refuse les cookies, la recherche reste fonctionnelle mais aucune donnée de tracking n'est collectée.
+        </p>
+        <p class="feature-text">
+          Les adresses IP sont <strong>hachées de manière irréversible</strong> avant stockage. Aucun cookie de tracking tiers n'est déposé. Toutes les données restent sur des serveurs européens. Zéro risque de sanction CNIL pour votre entreprise.
+        </p>
+        <ul class="feature-list">
+          <li><strong>Bannière de consentement</strong> intégrée et personnalisable</li>
+          <li><strong>Gestion des révocations</strong> en temps réel</li>
+          <li><strong>Hachage IP</strong> — aucune donnée personnelle stockée en clair</li>
+          <li><strong>Droit à l'effacement</strong> — suppression des données sur demande</li>
+          <li><strong>Audit trail</strong> disponible pour vos DPO</li>
+        </ul>
+        <span class="plan-badge-inline">Disponible sur tous les plans</span>
+      </div>
+      <div>
+        <div class="feature-visual">
+          <span class="feature-icon-big" aria-hidden="true">🔒</span>
+          <div class="feature-visual-title">Architecture sécurisée</div>
+          <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--black2);border-radius:6px;font-size:13px;">
+              <span style="color:#4ade80;font-size:16px;">✓</span>
+              <span style="color:var(--white);">Données hébergées à Francfort (UE)</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--black2);border-radius:6px;font-size:13px;">
+              <span style="color:#4ade80;font-size:16px;">✓</span>
+              <span style="color:var(--white);">IP hachée SHA-256 + sel unique</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--black2);border-radius:6px;font-size:13px;">
+              <span style="color:#4ade80;font-size:16px;">✓</span>
+              <span style="color:var(--white);">Consentement CNIL géré nativement</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--black2);border-radius:6px;font-size:13px;">
+              <span style="color:#4ade80;font-size:16px;">✓</span>
+              <span style="color:var(--white);">Zéro cookie tiers déposé</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--black2);border-radius:6px;font-size:13px;">
+              <span style="color:#4ade80;font-size:16px;">✓</span>
+              <span style="color:var(--white);">HTTPS TLS 1.3 sur toutes les requêtes</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--black2);border-radius:6px;font-size:13px;">
+              <span style="color:#4ade80;font-size:16px;">✓</span>
+              <span style="color:var(--white);">Droit à l'effacement (RGPD Art. 17)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     FEATURE 4 — DASHBOARD ROI
+══════════════════════════════════ -->
+<section class="feature-section" id="dashboard" aria-labelledby="dash-title">
+  <div class="container">
+    <div class="feature-grid reverse">
+      <div>
+        <div class="feature-tag">Analytics & Intelligence</div>
+        <h2 class="feature-heading" id="dash-title">Dashboard <span class="gold">ROI</span><br>Temps réel</h2>
+        <p class="feature-text">
+          SEEKR ne fait pas que chercher — il <strong>analyse les comportements de vos visiteurs</strong> et transforme chaque requête en données actionnables. Savoir ce que cherchent vos clients, c'est savoir comment améliorer votre contenu et vos conversions.
+        </p>
+        <p class="feature-text">
+          Le dashboard affiche en temps réel les requêtes populaires, la <strong>détection d'intention</strong> (transactionnel, informationnel, commercial), les pages les plus performantes et les <strong>opportunités de contenu manquant</strong> — les sujets que vos visiteurs cherchent mais ne trouvent pas.
+        </p>
+        <ul class="feature-list">
+          <li><strong>Top requêtes</strong> de vos visiteurs en temps réel</li>
+          <li><strong>Détection d'intention</strong> par catégorie (achat, info, contact)</li>
+          <li><strong>Taux de conversion</strong> par type de recherche</li>
+          <li><strong>Opportunités SEO</strong> — requêtes sans résultats = contenu à créer</li>
+          <li><strong>Rapports PDF</strong> automatiques chaque mois (PME+)</li>
+        </ul>
+        <span class="plan-badge-inline" style="margin-right:8px;">Basique — Starter</span>
+        <span class="plan-badge-inline">Avancé — PME & Agency</span>
+      </div>
+      <div>
+        <div class="feature-visual">
+          <span class="feature-icon-big" aria-hidden="true">📊</span>
+          <div class="feature-visual-title">Requêtes en direct</div>
+          <div class="dashboard-preview">
+            <div class="dash-row">
+              <span class="dash-query">serrure porte blindée appartement</span>
+              <span class="dash-intent trans">transactionnel</span>
+              <span class="dash-count">47×</span>
+            </div>
+            <div class="dash-row">
+              <span class="dash-query">comment choisir une serrure</span>
+              <span class="dash-intent info">informationnel</span>
+              <span class="dash-count">31×</span>
+            </div>
+            <div class="dash-row">
+              <span class="dash-query">prix serrure connectée</span>
+              <span class="dash-intent comm">commercial</span>
+              <span class="dash-count">28×</span>
+            </div>
+            <div class="dash-row">
+              <span class="dash-query">installateur serrure Paris</span>
+              <span class="dash-intent trans">transactionnel</span>
+              <span class="dash-count">19×</span>
+            </div>
+            <div class="dash-row">
+              <span class="dash-query">serrure anti-effraction norme</span>
+              <span class="dash-intent info">informationnel</span>
+              <span class="dash-count">12×</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     FEATURE 5 — WHITE-LABEL
+══════════════════════════════════ -->
+<section class="feature-section" id="white-label" aria-labelledby="wl-title">
+  <div class="container">
+    <div class="feature-grid">
+      <div>
+        <div class="feature-tag">Plan Agency</div>
+        <h2 class="feature-heading" id="wl-title">White-Label<br><span class="gold">Pour les agences</span></h2>
+        <p class="feature-text">
+          Le plan Agency transforme SEEKR en <strong>votre propre produit</strong>. Gérez jusqu'à 10 sites clients depuis un seul dashboard, avec votre logo sur chaque rapport PDF et les couleurs du widget adaptées à chaque client.
+        </p>
+        <p class="feature-text">
+          Vos clients reçoivent des rapports mensuels <strong>à votre marque</strong>, sans aucune mention SEEKR. Vous devenez leur fournisseur de technologie IA — tout en bénéficiant de l'infrastructure SEEKR en coulisses.
+        </p>
+        <ul class="feature-list">
+          <li><strong>Logo agence</strong> sur tous les rapports PDF (Cloudinary CDN)</li>
+          <li><strong>Dashboard multi-clients</strong> — jusqu'à 10 sites simultanés</li>
+          <li><strong>Widget personnalisable</strong> par couleurs et thème par client</li>
+          <li><strong>Rapports PDF</strong> mensuels automatiques sous votre marque</li>
+          <li><strong>Support dédié + SLA</strong> pour votre agence</li>
+          <li><strong>API complète</strong> pour intégration dans vos outils existants</li>
+        </ul>
+        <span class="plan-badge-inline">Plan Agency — 500€/mois · 10 sites</span>
+      </div>
+      <div>
+        <div class="feature-visual">
+          <span class="feature-icon-big" aria-hidden="true">🎨</span>
+          <div class="feature-visual-title">Ce que vous personnalisez</div>
+          <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px;">
+            <div style="padding:14px 16px;background:var(--black2);border-radius:8px;">
+              <div style="font-size:12px;color:var(--gray2);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Logo agence</div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:40px;height:40px;border:1px dashed rgba(212,175,55,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--gray2);">PNG</div>
+                <span style="font-size:13px;color:var(--white);">Votre logo sur tous les PDFs</span>
+              </div>
+            </div>
+            <div style="padding:14px 16px;background:var(--black2);border-radius:8px;">
+              <div style="font-size:12px;color:var(--gray2);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Couleurs widget</div>
+              <div style="display:flex;gap:8px;">
+                <div style="width:24px;height:24px;border-radius:50%;background:var(--gold);"></div>
+                <div style="width:24px;height:24px;border-radius:50%;background:#3B82F6;"></div>
+                <div style="width:24px;height:24px;border-radius:50%;background:#10B981;"></div>
+                <div style="width:24px;height:24px;border-radius:50%;background:#EF4444;"></div>
+                <span style="font-size:13px;color:var(--gray);margin-left:4px;">Adaptées à chaque client</span>
+              </div>
+            </div>
+            <div style="padding:14px 16px;background:var(--black2);border-radius:8px;">
+              <div style="font-size:12px;color:var(--gray2);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Dashboard multi-clients</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <span style="font-size:12px;padding:3px 10px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:20px;color:var(--gold);">Client A</span>
+                <span style="font-size:12px;padding:3px 10px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:20px;color:var(--gold);">Client B</span>
+                <span style="font-size:12px;padding:3px 10px;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);border-radius:20px;color:var(--gold);">Client C</span>
+                <span style="font-size:12px;padding:3px 10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;color:var(--gray2);">+ 7 sites</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     COMPARATIF
+══════════════════════════════════ -->
+<section id="comparatif" aria-labelledby="comp-title">
+  <div class="container">
+    <div class="section-label">Comparatif</div>
+    <h2 class="section-title" id="comp-title">SEEKR vs les alternatives</h2>
+    <p class="section-desc">Pourquoi choisir SEEKR plutôt qu'Algolia, Elasticsearch ou la recherche native de votre CMS ?</p>
+    <div style="overflow-x:auto;">
+      <table class="comp-table" aria-label="Comparatif SEEKR vs alternatives">
+        <thead>
+          <tr>
+            <th style="width:35%;">Fonctionnalité</th>
+            <th class="seekr-col">SEEKR</th>
+            <th class="other-col">Algolia</th>
+            <th class="other-col">Recherche native CMS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-name">GPS Sémantique (ancrage paragraphe)</td>
+            <td class="seekr-val"><span class="check">✓</span> Exclusif</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td class="feature-name">Hébergement en Europe (RGPD)</td>
+            <td class="seekr-val"><span class="check">✓</span> Frankfurt</td>
+            <td><span class="cross">✗</span> USA/Global</td>
+            <td><span class="partial">~</span> Selon hébergeur</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Détection d'intention IA</td>
+            <td class="seekr-val"><span class="check">✓</span> Natif</td>
+            <td><span class="partial">~</span> Payant</td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td class="feature-name">Dashboard ROI + analytics</td>
+            <td class="seekr-val"><span class="check">✓</span> Inclus</td>
+            <td><span class="partial">~</span> Dashboard basique</td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td class="feature-name">White-label agence</td>
+            <td class="seekr-val"><span class="check">✓</span> Plan Agency</td>
+            <td><span class="partial">~</span> Sur devis</td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td class="feature-name">Intégration (1 ligne de code)</td>
+            <td class="seekr-val"><span class="check">✓</span> 5 minutes</td>
+            <td><span class="partial">~</span> 1-2 jours dev</td>
+            <td><span class="check">✓</span> Natif</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Compréhension sémantique / synonymes</td>
+            <td class="seekr-val"><span class="check">✓</span> Natif</td>
+            <td><span class="check">✓</span> Natif</td>
+            <td><span class="cross">✗</span> Mot exact</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Tarif entrée de gamme</td>
+            <td class="seekr-val">70€/mois</td>
+            <td>~99€/mois</td>
+            <td>Gratuit (limité)</td>
+          </tr>
+          <tr>
+            <td class="feature-name">Consentement CNIL intégré</td>
+            <td class="seekr-val"><span class="check">✓</span> Natif</td>
+            <td><span class="cross">✗</span> À configurer</td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     FAQ
+══════════════════════════════════ -->
+<section id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="section-label">Questions fréquentes</div>
+    <h2 class="section-title" id="faq-title">Tout sur les fonctionnalités</h2>
+    <div class="faq-list" style="margin-top:48px;">
+      <div class="faq-item">
+        <div class="faq-q">Comment fonctionne exactement le GPS Sémantique ? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Lors du crawl initial, SEEKR analyse chaque page de votre site et extrait les titres H1, H2, H3. Pour chaque titre, il crée une ancre de navigation unique (ex: #seekr-retours-remboursements) et indexe le paragraphe qui suit. Quand un visiteur effectue une recherche, SEEKR sélectionne non seulement la meilleure page mais aussi l'ancre la plus pertinente, et construit l'URL directe vers ce paragraphe précis.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">La détection d'intention, qu'est-ce que c'est concrètement ? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">SEEKR analyse chaque requête et la classe dans une des trois catégories : transactionnel (l'utilisateur veut acheter), informationnel (il cherche de l'information) ou commercial (il compare des options). Cette détection permet d'afficher les résultats les plus adaptés et de fournir dans le dashboard des métriques précieuses sur l'intention d'achat de vos visiteurs.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">SEEKR est-il vraiment conforme RGPD ? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Oui. SEEKR est hébergé exclusivement à Francfort (Allemagne), dans l'Union Européenne. Le widget intègre une bannière de consentement native. Les adresses IP sont hachées de manière irréversible avant stockage. Aucun cookie tiers n'est déposé. Si un visiteur refuse le consentement, la recherche reste fonctionnelle mais aucune donnée analytique n'est collectée. Toutes ces dispositions sont conformes au RGPD et aux recommandations CNIL.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Qu'est-ce que le Self-Healing de SEEKR ? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Le Self-Healing est le système de résilience automatique de SEEKR. Si une requête de crawl ou de recherche échoue (timeout réseau, erreur temporaire), SEEKR relance automatiquement l'opération jusqu'à 3 fois avec un délai exponentiel entre chaque tentative. Cela garantit une disponibilité maximale sans intervention humaine.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Quelle est la différence entre le plan Starter et PME pour le dashboard ? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Le plan Starter inclut un dashboard basique avec les requêtes récentes et les métriques essentielles. Le plan PME débloque le dashboard avancé ROI : taux de conversion par intention, opportunités SEO (requêtes sans résultats = contenu à créer), valeur estimée des ventes sauvegardées, et génération de rapports PDF mensuels automatiques.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Le white-label Agency inclut-il vraiment zéro mention SEEKR ? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Oui. En plan Agency, vous uploadez votre logo via Cloudinary, et ce logo remplace toutes les mentions SEEKR sur les rapports PDF envoyés à vos clients. Le widget de recherche peut être personnalisé avec les couleurs de chaque client. Vos clients voient votre marque — SEEKR reste invisible en coulisses.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section id="cta">
+  <h2 class="cta-title">Prêt à transformer<br><span style="color:var(--gold)">la recherche de votre site ?</span></h2>
+  <p class="cta-desc">Intégration en 5 minutes. Aucun engagement. Votre conseiller SEEKR vous accompagne dès la première démonstration.</p>
+  <div class="cta-btns">
+    <a href="/tarifs/" class="btn-primary">Voir les tarifs →</a>
+    <a href="/integration/" class="btn-outline">Guide d'intégration</a>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo">SEEKR.</a>
+    <div class="footer-copy">© 2026 SEEKR — Moteur de Recherche IA Souverain</div>
+    <div class="footer-links">
+      <a href="/fonctionnalites/">Fonctionnalités</a>
+      <a href="/tarifs/">Tarifs</a>
+      <a href="/integration/">Intégration</a>
+      <a href="/blog/">Blog</a>
+      <a href="/mentions-legales/">Mentions légales</a>
+      <a href="/confidentialite/">Confidentialité</a>
+      <a href="mailto:contact@seekr-search.fr">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ── HAMBURGER ──
+const hamburger = document.getElementById('navHamburger');
+const navMobile = document.getElementById('navMobile');
+if (hamburger && navMobile) {
+  hamburger.addEventListener('click', () => {
+    navMobile.classList.toggle('open');
+  });
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !navMobile.contains(e.target)) {
+      navMobile.classList.remove('open');
+    }
+  });
+}
+
+</script>
+<!-- SEEKR Agent — Widget IA conversationnel -->
+<script
+  src="https://api.seekr-search.fr/widget/seekr-agent-widget.js"
+  data-key="sk_seekr_live_e6635bb7969851954e15c6e1fa7edf7b0deb446546c216c1019aade4"
+  data-mode="agent"
+  data-theme="dark-gold"
+  data-placeholder="Comment puis-je vous aider ?"
+  async defer
+></script>
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réinitialisation du mot de passe — SEEKR</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #D4AF37; --gold-light: #E8C84A;
+  --black: #080808; --black2: #0f0f0f; --black3: #141414;
+  --white: #F5F5F0; --gray: #888; --gray2: #555; --red: #A71B1A;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+}
+.card {
+  background: var(--black3);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 8px;
+  width: 100%; max-width: 420px;
+  padding: 40px;
+}
+.logo {
+  font-family: 'Anton', sans-serif;
+  font-size: 20px; letter-spacing: 0.12em;
+  color: var(--gold); margin-bottom: 6px;
+}
+.logo span { color: var(--white); }
+.subtitle { font-size: 13px; color: var(--gray); letter-spacing: 0.06em; margin-bottom: 32px; }
+
+/* ÉTAPES */
+.step { display: none; }
+.step.active { display: block; }
+
+.field { margin-bottom: 16px; }
+.field label {
+  display: block; font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--gray); margin-bottom: 8px;
+}
+.field input {
+  width: 100%; background: var(--black2);
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 4px;
+  padding: 12px 14px; font-size: 14px; color: var(--white);
+  font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.2s;
+}
+.field input:focus { border-color: rgba(212,175,55,0.5); }
+.field input::placeholder { color: var(--gray2); }
+
+.alert {
+  display: none; border-radius: 4px; padding: 10px 14px;
+  font-size: 13px; margin-bottom: 16px;
+}
+.alert.error { background: rgba(167,27,26,0.12); border: 1px solid rgba(167,27,26,0.3); color: #e05555; }
+.alert.success { background: rgba(0,180,100,0.08); border: 1px solid rgba(0,180,100,0.25); color: #4caf80; }
+.alert.show { display: block; }
+
+.btn {
+  width: 100%; background: var(--gold); color: var(--black);
+  border: none; border-radius: 4px; padding: 14px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; cursor: pointer;
+  font-family: 'Inter', sans-serif; transition: background 0.2s;
+  margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn:hover { background: var(--gold-light); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.spinner {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(0,0,0,0.3); border-top-color: var(--black);
+  border-radius: 50%; animation: spin 0.7s linear infinite; display: none;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.back-link {
+  display: block; text-align: center; margin-top: 20px;
+  font-size: 12px; color: var(--gray2);
+}
+.back-link a { color: var(--gray); text-decoration: underline; }
+
+.password-hint {
+  font-size: 11px; color: var(--gray2); margin-top: 6px; line-height: 1.5;
+}
+
+/* Indicateur force mdp */
+.strength-bar {
+  height: 3px; border-radius: 2px; margin-top: 8px;
+  background: rgba(255,255,255,0.06); overflow: hidden;
+}
+.strength-fill {
+  height: 100%; border-radius: 2px; width: 0%;
+  transition: width 0.3s, background 0.3s;
+}
+
+/* Succès final */
+.success-icon { font-size: 48px; text-align: center; margin-bottom: 16px; }
+.success-title {
+  font-family: 'Anton', sans-serif; font-size: 24px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--gold); text-align: center; margin-bottom: 12px;
+}
+.success-desc { font-size: 14px; color: var(--gray); text-align: center; line-height: 1.7; margin-bottom: 24px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">SEEKR<span>.</span></div>
+
+  <!-- ÉTAPE 1 : Demande d'email -->
+  <div class="step active" id="step-forgot">
+    <div class="subtitle">Mot de passe oublié</div>
+    <div class="alert error" id="forgot-error"></div>
+    <div class="alert success" id="forgot-success"></div>
+    <div class="field">
+      <label>Votre email</label>
+      <input type="email" id="forgot-email" placeholder="vous@exemple.fr" autocomplete="email">
+    </div>
+    <button class="btn" id="forgot-btn">
+      <span id="forgot-btn-text">Envoyer le lien</span>
+      <div class="spinner" id="forgot-spinner"></div>
+    </button>
+    <div class="back-link"><a href="https://seekr-search.fr">← Retour à la connexion</a></div>
+  </div>
+
+  <!-- ÉTAPE 2 : Nouveau mot de passe (via token URL) -->
+  <div class="step" id="step-reset">
+    <div class="subtitle">Nouveau mot de passe</div>
+    <div class="alert error" id="reset-error"></div>
+    <div class="field">
+      <label>Nouveau mot de passe</label>
+      <input type="password" id="reset-password" placeholder="Min. 10 caractères" autocomplete="new-password">
+      <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
+      <div class="password-hint">Minimum 10 caractères · Mélangez majuscules, chiffres et symboles</div>
+    </div>
+    <div class="field">
+      <label>Confirmer le mot de passe</label>
+      <input type="password" id="reset-confirm" placeholder="Répétez le mot de passe" autocomplete="new-password">
+    </div>
+    <button class="btn" id="reset-btn">
+      <span id="reset-btn-text">Enregistrer le mot de passe</span>
+      <div class="spinner" id="reset-spinner"></div>
+    </button>
+  </div>
+
+  <!-- ÉTAPE 3 : Succès -->
+  <div class="step" id="step-success">
+    <div class="success-icon">✅</div>
+    <div class="success-title">Mot de passe mis à jour !</div>
+    <div class="success-desc">Votre mot de passe a été modifié avec succès. Vous pouvez maintenant vous connecter.</div>
+    <a href="https://seekr-search.fr" class="btn" style="text-decoration:none;">Se connecter →</a>
+  </div>
+
+  <!-- Token invalide -->
+  <div class="step" id="step-invalid">
+    <div class="success-icon">⚠️</div>
+    <div class="success-title" style="color:#e05555;">Lien invalide</div>
+    <div class="success-desc">Ce lien de réinitialisation est invalide ou a expiré (validité : 1 heure).<br>Veuillez refaire une demande.</div>
+    <a href="/reset-password/" class="btn" style="text-decoration:none;">Nouvelle demande</a>
+  </div>
+</div>
+
+<script>
+const API = 'https://seekr-api.onrender.com';
+
+function showStep(id) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function setLoading(btnId, spinnerId, textId, loading, text) {
+  document.getElementById(btnId).disabled = loading;
+  document.getElementById(spinnerId).style.display = loading ? 'block' : 'none';
+  document.getElementById(textId).textContent = loading ? 'Chargement…' : text;
+}
+
+// ── Vérifier si token dans URL ──────────────────────────────────────────────
+const urlParams = new URLSearchParams(window.location.search);
+const resetToken = urlParams.get('token');
+
+if (resetToken) {
+  // Vérifier le token
+  fetch(`${API}/api/auth/reset-password/verify?token=${resetToken}`)
+    .then(r => r.json())
+    .then(data => {
+      if (data.valid) {
+        showStep('step-reset');
+      } else {
+        showStep('step-invalid');
+      }
+    })
+    .catch(() => showStep('step-invalid'));
+}
+
+// ── Formulaire demande reset ────────────────────────────────────────────────
+document.getElementById('forgot-btn').addEventListener('click', async () => {
+  const email = document.getElementById('forgot-email').value.trim();
+  const errorEl   = document.getElementById('forgot-error');
+  const successEl = document.getElementById('forgot-success');
+
+  errorEl.classList.remove('show');
+  successEl.classList.remove('show');
+
+  if (!email) {
+    errorEl.textContent = 'Veuillez saisir votre email.';
+    errorEl.classList.add('show');
+    return;
+  }
+
+  setLoading('forgot-btn', 'forgot-spinner', 'forgot-btn-text', true);
+
+  try {
+    const res  = await fetch(`${API}/api/auth/forgot-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const data = await res.json();
+    successEl.textContent = 'Si cet email est enregistré, vous recevrez un lien dans quelques minutes.';
+    successEl.classList.add('show');
+    document.getElementById('forgot-email').value = '';
+  } catch {
+    errorEl.textContent = 'Erreur réseau. Veuillez réessayer.';
+    errorEl.classList.add('show');
+  }
+
+  setLoading('forgot-btn', 'forgot-spinner', 'forgot-btn-text', false, 'Envoyer le lien');
+});
+
+document.getElementById('forgot-email').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('forgot-btn').click();
+});
+
+// ── Indicateur force mot de passe ───────────────────────────────────────────
+document.getElementById('reset-password').addEventListener('input', function() {
+  const v = this.value;
+  let score = 0;
+  if (v.length >= 10) score++;
+  if (/[A-Z]/.test(v)) score++;
+  if (/[0-9]/.test(v)) score++;
+  if (/[^A-Za-z0-9]/.test(v)) score++;
+  const fill = document.getElementById('strength-fill');
+  const colors = ['#e05555','#e09955','#D4AF37','#4caf80'];
+  fill.style.width = (score * 25) + '%';
+  fill.style.background = colors[score - 1] || 'transparent';
+});
+
+// ── Formulaire nouveau mot de passe ─────────────────────────────────────────
+document.getElementById('reset-btn').addEventListener('click', async () => {
+  const password = document.getElementById('reset-password').value;
+  const confirm  = document.getElementById('reset-confirm').value;
+  const errorEl  = document.getElementById('reset-error');
+
+  errorEl.classList.remove('show');
+
+  if (password.length < 10) {
+    errorEl.textContent = 'Le mot de passe doit contenir au moins 10 caractères.';
+    errorEl.classList.add('show'); return;
+  }
+  if (password !== confirm) {
+    errorEl.textContent = 'Les mots de passe ne correspondent pas.';
+    errorEl.classList.add('show'); return;
+  }
+
+  setLoading('reset-btn', 'reset-spinner', 'reset-btn-text', true);
+
+  try {
+    const res  = await fetch(`${API}/api/auth/reset-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: resetToken, password }),
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      errorEl.textContent = data.error || 'Erreur lors de la réinitialisation.';
+      errorEl.classList.add('show');
+      setLoading('reset-btn', 'reset-spinner', 'reset-btn-text', false, 'Enregistrer le mot de passe');
+      return;
+    }
+    showStep('step-success');
+  } catch {
+    errorEl.textContent = 'Erreur réseau. Veuillez réessayer.';
+    errorEl.classList.add('show');
+    setLoading('reset-btn', 'reset-spinner', 'reset-btn-text', false, 'Enregistrer le mot de passe');
+  }
+});
+</script>
+<!-- SEEKR Agent — Widget IA conversationnel -->
+<script
+  src="https://api.seekr-search.fr/widget/seekr-agent-widget.js"
+  data-key="sk_seekr_live_e6635bb7969851954e15c6e1fa7edf7b0deb446546c216c1019aade4"
+  data-mode="agent"
+  data-theme="dark-gold"
+  data-placeholder="Comment puis-je vous aider ?"
+  async defer
+></script>
+
+</body>
+</html>

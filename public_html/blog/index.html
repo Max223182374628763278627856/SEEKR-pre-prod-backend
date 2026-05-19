@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Blog SEEKR — Conseils SEO, Recherche IA, GPS Sémantique</title>
+<meta name="description" content="Le blog SEEKR : conseils SEO, stratégies de recherche interne, GPS Sémantique, RGPD et alternatives à Algolia. Ressources gratuites pour améliorer votre site.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://seekr-search.fr/blog/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://seekr-search.fr/blog/">
+<meta property="og:title" content="Blog SEEKR — Conseils SEO & Recherche IA">
+<meta property="og:description" content="Conseils SEO, GPS Sémantique, RGPD, alternatives à Algolia. Ressources gratuites pour améliorer la recherche de votre site.">
+<meta property="og:image" content="https://seekr-search.fr/og-seekr.png">
+<meta property="og:locale" content="fr_FR">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": "https://seekr-search.fr/blog/",
+  "url": "https://seekr-search.fr/blog/",
+  "name": "Blog SEEKR",
+  "description": "Conseils SEO, recherche IA, GPS Sémantique et stratégies pour améliorer la navigation de votre site web.",
+  "publisher": { "@type": "Organization", "name": "SEEKR", "url": "https://seekr-search.fr" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://seekr-search.fr/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://seekr-search.fr/blog/" }
+    ]
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #D4AF37; --gold-light: #E8C84A; --black: #080808;
+  --black2: #0f0f0f; --black3: #141414; --black4: #1a1a1a;
+  --white: #F5F5F0; --gray: #888; --gray2: #555;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--black); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(8,8,8,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(212,175,55,0.15);
+  padding: 0 24px; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { font-family: 'Anton', sans-serif; font-size: 22px; letter-spacing: 0.12em; color: var(--gold); text-decoration: none; }
+.nav-logo span { color: var(--white); }
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { font-size: 13px; letter-spacing: 0.08em; color: var(--gray); transition: color 0.2s; white-space: nowrap; text-decoration: none; }
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+.nav-cta { background: var(--gold); color: var(--black) !important; padding: 9px 20px; border-radius: 4px; font-size: 13px !important; font-weight: 600; letter-spacing: 0.06em; transition: background 0.2s !important; }
+.nav-cta:hover { background: var(--gold-light) !important; }
+.nav-login { display: flex; align-items: center; gap: 7px; font-size: 13px; letter-spacing: 0.06em; color: var(--gray) !important; border: 1px solid rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 4px; cursor: pointer; transition: border-color 0.2s, color 0.2s !important; background: none; font-family: 'Inter', sans-serif; white-space: nowrap; }
+.nav-login:hover { border-color: var(--gold); color: var(--gold) !important; }
+.nav-login svg { width: 14px; height: 14px; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s; }
+.nav-mobile { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(8,8,8,0.98); border-bottom: 1px solid rgba(212,175,55,0.15); padding: 16px 24px; flex-direction: column; gap: 4px; z-index: 99; }
+.nav-mobile.open { display: flex; }
+.nav-mobile a { display: block; padding: 12px 0; font-size: 15px; color: var(--gray); border-bottom: 1px solid rgba(255,255,255,0.05); letter-spacing: 0.06em; transition: color 0.2s; }
+.nav-mobile a:hover { color: var(--gold); }
+.nav-mobile .nav-cta-mobile { display: block; text-align: center; background: var(--gold); color: var(--black) !important; padding: 14px; border-radius: 4px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 8px; border-bottom: none; }
+@media(max-width: 860px) { .nav-links { display: none; } .nav-hamburger { display: flex; } }
+
+/* ── BREADCRUMB ── */
+.breadcrumb { padding: 88px 24px 0; max-width: 1100px; margin: 0 auto; display: none; align-items: center; gap: 8px; font-size: 13px; color: var(--gray2); }
+.breadcrumb a { color: var(--gray); transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--gold); }
+
+/* ── HERO ── */
+.page-hero { padding: 48px 24px 72px; text-align: center; position: relative; overflow: hidden; }
+.page-hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(212,175,55,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+.page-label { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.page-title { font-family: 'Anton', sans-serif; font-size: clamp(36px, 6vw, 72px); letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.05; margin-bottom: 20px; position: relative; z-index: 1; }
+.page-title .gold { color: var(--gold); }
+.page-intro { font-size: clamp(15px, 2vw, 17px); color: var(--gray); max-width: 600px; margin: 0 auto; line-height: 1.75; position: relative; z-index: 1; }
+
+/* ── CATEGORIES ── */
+.categories { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 32px 0; }
+.cat-btn { background: var(--black3); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 6px 16px; font-size: 12px; color: var(--gray); cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; letter-spacing: 0.06em; }
+.cat-btn:hover, .cat-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.06); }
+
+/* ── FEATURED ── */
+#featured { padding: 0 0 64px; }
+.featured-card {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  background: var(--black3); border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 12px; overflow: hidden; transition: border-color 0.2s;
+  text-decoration: none; color: inherit;
+}
+.featured-card:hover { border-color: var(--gold); }
+.featured-img {
+  background: linear-gradient(135deg, #141200 0%, #1a1400 50%, #0f0f0f 100%);
+  display: flex; align-items: center; justify-content: center;
+  min-height: 300px; position: relative; overflow: hidden;
+}
+.featured-img-icon { font-size: 80px; opacity: 0.15; }
+.featured-img-label {
+  position: absolute; bottom: 20px; left: 20px;
+  background: var(--gold); color: var(--black);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; padding: 4px 12px; border-radius: 12px;
+}
+.featured-body { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+.featured-cat { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.featured-title { font-family: 'Anton', sans-serif; font-size: clamp(22px, 2.5vw, 32px); letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.15; margin-bottom: 16px; }
+.featured-excerpt { font-size: 14px; color: var(--gray); line-height: 1.7; margin-bottom: 24px; }
+.featured-meta { display: flex; align-items: center; gap: 16px; font-size: 12px; color: var(--gray2); }
+.featured-read { color: var(--gold); font-size: 13px; font-weight: 500; margin-top: 20px; }
+@media(max-width: 768px) { .featured-card { grid-template-columns: 1fr; } .featured-img { min-height: 180px; } .featured-body { padding: 24px; } }
+
+/* ── BLOG GRID ── */
+#articles { padding: 0 0 80px; }
+.articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+.article-card {
+  background: var(--black3); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px; overflow: hidden; transition: border-color 0.2s, transform 0.2s;
+  display: flex; flex-direction: column; text-decoration: none; color: inherit;
+}
+.article-card:hover { border-color: rgba(212,175,55,0.3); transform: translateY(-3px); }
+.article-thumb {
+  height: 160px; background: linear-gradient(135deg, #141414 0%, #1a1400 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px; opacity: 0.6; position: relative;
+}
+.article-thumb-label {
+  position: absolute; top: 12px; left: 12px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 3px 10px; border-radius: 10px;
+}
+.label-seo { background: rgba(59,130,246,0.2); color: #93c5fd; }
+.label-tech { background: rgba(212,175,55,0.15); color: var(--gold); }
+.label-guide { background: rgba(22,163,74,0.15); color: #4ade80; }
+.label-comparison { background: rgba(239,68,68,0.15); color: #fca5a5; }
+.article-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+.article-cat { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.article-title { font-family: 'Anton', sans-serif; font-size: 18px; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.2; margin-bottom: 12px; }
+.article-excerpt { font-size: 13px; color: var(--gray); line-height: 1.6; flex: 1; margin-bottom: 16px; }
+.article-meta { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--gray2); }
+.article-read { color: var(--gold); font-size: 12px; font-weight: 500; }
+
+/* ── NEWSLETTER ── */
+#newsletter { padding: 72px 0; background: var(--black2); border-top: 1px solid rgba(255,255,255,0.05); }
+.newsletter-card { max-width: 600px; margin: 0 auto; text-align: center; }
+.newsletter-title { font-family: 'Anton', sans-serif; font-size: clamp(24px, 3.5vw, 40px); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 16px; line-height: 1.1; }
+.newsletter-desc { font-size: 15px; color: var(--gray); margin-bottom: 32px; line-height: 1.7; }
+.newsletter-form { display: flex; gap: 12px; max-width: 480px; margin: 0 auto; }
+.newsletter-input { flex: 1; background: var(--black3); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 13px 16px; font-size: 14px; color: var(--white); font-family: 'Inter', sans-serif; outline: none; transition: border-color 0.2s; }
+.newsletter-input:focus { border-color: rgba(212,175,55,0.4); }
+.newsletter-input::placeholder { color: var(--gray2); }
+.newsletter-btn { background: var(--gold); color: var(--black); border: none; border-radius: 4px; padding: 13px 24px; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; font-family: 'Inter', sans-serif; transition: background 0.2s; white-space: nowrap; }
+.newsletter-btn:hover { background: var(--gold-light); }
+.newsletter-note { font-size: 12px; color: var(--gray2); margin-top: 12px; }
+@media(max-width: 500px) { .newsletter-form { flex-direction: column; } }
+
+/* ── CTA ── */
+#cta { padding: 80px 24px; text-align: center; background: var(--black); border-top: 1px solid rgba(212,175,55,0.1); }
+.cta-title { font-family: 'Anton', sans-serif; font-size: clamp(28px, 4.5vw, 52px); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 20px; line-height: 1.1; }
+.cta-desc { font-size: 16px; color: var(--gray); max-width: 520px; margin: 0 auto 36px; line-height: 1.7; }
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary { background: var(--gold); color: var(--black); padding: 16px 36px; border-radius: 4px; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.2s; display: inline-block; }
+.btn-primary:hover { background: var(--gold-light); }
+.btn-outline { background: transparent; color: var(--white); padding: 16px 36px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; transition: border-color 0.2s; display: inline-block; }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ── FOOTER ── */
+footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.05); padding: 48px 24px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+.footer-logo { font-family: 'Anton', sans-serif; font-size: 18px; letter-spacing: 0.12em; color: var(--gold); }
+.footer-copy { font-size: 13px; color: var(--gray2); }
+.footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: var(--gray2); transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+@media(max-width: 600px) { .footer-inner { flex-direction: column; align-items: flex-start; gap: 16px; } .cta-btns { flex-direction: column; align-items: stretch; } .btn-primary, .btn-outline { text-align: center; } }
+
+.section-label { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; text-align: center; }
+.section-title { font-family: 'Anton', sans-serif; font-size: clamp(28px, 4vw, 48px); letter-spacing: 0.04em; text-transform: uppercase; text-align: center; margin-bottom: 12px; line-height: 1.1; }
+.section-desc { font-size: 15px; color: var(--gray); text-align: center; max-width: 580px; margin: 0 auto; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="/" class="nav-logo" aria-label="SEEKR Accueil">SEEKR<span>.</span></a>
+  <div class="nav-links">
+    <a href="/fonctionnalites/">Fonctionnalités</a>
+    <a href="/tarifs/">Tarifs</a>
+    <a href="/integration/">Intégration</a>
+    <a href="/blog/" class="active">Blog</a>
+    <button class="nav-login" id="openLogin" aria-label="Se connecter">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span>Connexion</span>
+    </button>
+    <a href="/tarifs/" class="nav-cta">Démarrer</a>
+  </div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="/fonctionnalites/">Fonctionnalités</a>
+  <a href="/tarifs/">Tarifs</a>
+  <a href="/integration/">Intégration</a>
+  <a href="/blog/" class="active">Blog</a>
+  <a href="/tarifs/" class="nav-cta-mobile">Démarrer →</a>
+</div>
+
+<!-- BREADCRUMB -->
+<nav class="breadcrumb" aria-label="Fil d'Ariane">
+  <a href="/">Accueil</a>
+  <span>›</span>
+  <span>Blog</span>
+</nav>
+
+<!-- HERO -->
+<header class="page-hero">
+  <div class="page-hero-grid" aria-hidden="true"></div>
+  <div class="container">
+    <div class="page-label">Ressources & Conseils</div>
+    <h1 class="page-title">Le blog <span class="gold">SEEKR</span></h1>
+    <p class="page-intro">SEO, recherche IA, GPS Sémantique, RGPD et stratégies pour transformer la navigation de vos visiteurs. Des ressources concrètes, gratuites, pour tous les niveaux.</p>
+    <div class="categories">
+      <button class="cat-btn active" onclick="filterCat('all', this)">Tous les articles</button>
+      <button class="cat-btn" onclick="filterCat('seo', this)">SEO & Contenu</button>
+      <button class="cat-btn" onclick="filterCat('tech', this)">Technologie IA</button>
+      <button class="cat-btn" onclick="filterCat('guide', this)">Guides pratiques</button>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLE FEATURED -->
+<section id="featured">
+  <div class="container">
+    <a href="/blog/roi-recherche-interne/" class="featured-card" data-cat="seo">
+      <div class="featured-img">
+        <span class="featured-img-icon">📊</span>
+        <span class="featured-img-label">Article phare</span>
+      </div>
+      <div class="featured-body">
+        <div class="featured-cat">SEO & Conversion</div>
+        <h2 class="featured-title">Le ROI d'une bonne recherche interne : chiffres et méthode</h2>
+        <p class="featured-excerpt">Les visiteurs qui utilisent la recherche interne convertissent à 4,63% contre 2,77% pour la moyenne du site. Comment mesurer et maximiser ce ROI ? Données vérifiées, formule de calcul et méthode concrète.</p>
+        <div class="featured-meta">
+          <span>10 avril 2026</span>
+          <span>·</span>
+          <span>7 min de lecture</span>
+        </div>
+        <div class="featured-read">Lire l'article →</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ARTICLES GRID -->
+<section id="articles">
+  <div class="container">
+    <div class="articles-grid">
+
+      <a href="/blog/ameliorer-recherche-prestashop/" class="article-card" data-cat="guide">
+
+        <div class="article-thumb">
+          🛒
+          <span class="article-thumb-label label-guide">Guide</span>
+        </div>
+        <div class="article-body">
+          <div class="article-cat">Guide pratique</div>
+          <h2 class="article-title">Comment améliorer la recherche PrestaShop en 2026</h2>
+          <p class="article-excerpt">La recherche native de PrestaShop ne comprend que les mots exacts. Voici comment la remplacer par une IA sémantique qui convertit 3× plus, sans développeur.</p>
+          <div class="article-meta">
+            <span>14 avril 2026 · 6 min</span>
+            <span class="article-read">Lire →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/gps-semantique-explication/" class="article-card" data-cat="tech">
+        <div class="article-thumb">
+          🛰️
+          <span class="article-thumb-label label-tech">Technologie</span>
+        </div>
+        <div class="article-body">
+          <div class="article-cat">Technologie IA</div>
+          <h2 class="article-title">GPS Sémantique : comment ça marche vraiment ?</h2>
+          <p class="article-excerpt">Le GPS Sémantique de SEEKR ne pointe pas vers une page — il amène le visiteur exactement au bon paragraphe. Explication technique accessible de cette technologie exclusive.</p>
+          <div class="article-meta">
+            <span>12 avril 2026 · 5 min</span>
+            <span class="article-read">Lire →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/roi-recherche-interne/" class="article-card" data-cat="seo">
+        <div class="article-thumb">
+          📊
+          <span class="article-thumb-label label-seo">SEO</span>
+        </div>
+        <div class="article-body">
+          <div class="article-cat">SEO & Conversion</div>
+          <h2 class="article-title">Le ROI d'une bonne recherche interne : chiffres et méthode</h2>
+          <p class="article-excerpt">Les visiteurs qui utilisent la recherche interne convertissent 5× plus que les autres. Voici comment mesurer et maximiser ce ROI sur votre site.</p>
+          <div class="article-meta">
+            <span>10 avril 2026 · 7 min</span>
+            <span class="article-read">Lire →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/rgpd-moteur-recherche/" class="article-card" data-cat="tech">
+        <div class="article-thumb">
+          🔒
+          <span class="article-thumb-label label-tech">RGPD</span>
+        </div>
+        <div class="article-body">
+          <div class="article-cat">RGPD & Conformité</div>
+          <h2 class="article-title">RGPD et moteur de recherche IA : ce que la loi impose en 2026</h2>
+          <p class="article-excerpt">Quelles données un moteur de recherche IA peut-il collecter ? Que dit le RGPD sur le tracking des recherches visiteurs ? Guide complet pour les DPO et responsables marketing.</p>
+          <div class="article-meta">
+            <span>8 avril 2026 · 9 min</span>
+            <span class="article-read">Lire →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/recherche-interne-wordpress/" class="article-card" data-cat="guide">
+        <div class="article-thumb">
+          🔵
+          <span class="article-thumb-label label-guide">Guide</span>
+        </div>
+        <div class="article-body">
+          <div class="article-cat">Guide pratique</div>
+          <h2 class="article-title">Recherche interne WordPress : les 5 meilleures solutions en 2026</h2>
+          <p class="article-excerpt">SearchWP, Relevanssi, FacetWP ou SEEKR ? Comparatif complet des solutions de recherche interne pour WordPress, avec critères RGPD et facilité d'intégration.</p>
+          <div class="article-meta">
+            <span>5 avril 2026 · 8 min</span>
+            <span class="article-read">Lire →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="/blog/intention-recherche-ecommerce/" class="article-card" data-cat="seo">
+        <div class="article-thumb">
+          🎯
+          <span class="article-thumb-label label-seo">SEO</span>
+        </div>
+        <div class="article-body">
+          <div class="article-cat">SEO & E-commerce</div>
+          <h2 class="article-title">Intention de recherche en e-commerce : transactionnel, informationnel, commercial</h2>
+          <p class="article-excerpt">Comprendre l'intention derrière chaque recherche visiteur, c'est savoir quoi lui montrer. Comment la détection d'intention IA transforme vos conversions e-commerce.</p>
+          <div class="article-meta">
+            <span>2 avril 2026 · 6 min</span>
+            <span class="article-read">Lire →</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section id="newsletter">
+  <div class="container">
+    <div class="newsletter-card">
+      <div class="section-label">Newsletter</div>
+      <h2 class="newsletter-title">Restez à la<br><span style="color:var(--gold)">pointe du SEO IA</span></h2>
+      <p class="newsletter-desc">Un article par semaine sur le SEO, la recherche IA et les stratégies de conversion. Pas de spam — uniquement du contenu actionnable.</p>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="votre@email.fr" id="nl-email">
+        <button class="newsletter-btn" onclick="subscribeNL()">S'inscrire</button>
+      </div>
+      <div class="newsletter-note" id="nl-msg">🔒 Aucun spam. Désinscription en 1 clic.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <h2 class="cta-title">Prêt à passer à<br><span style="color:var(--gold)">l'action ?</span></h2>
+  <p class="cta-desc">Intégrez SEEKR sur votre site en 5 minutes et commencez à mesurer l'impact réel de votre recherche interne.</p>
+  <div class="cta-btns">
+    <a href="/tarifs/" class="btn-primary">Voir les tarifs →</a>
+    <a href="/integration/" class="btn-outline">Guide d'intégration</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo">SEEKR.</a>
+    <div class="footer-copy">© 2026 SEEKR — Moteur de Recherche IA Souverain</div>
+    <div class="footer-links">
+      <a href="/fonctionnalites/">Fonctionnalités</a>
+      <a href="/tarifs/">Tarifs</a>
+      <a href="/integration/">Intégration</a>
+      <a href="/blog/">Blog</a>
+      <a href="/mentions-legales/">Mentions légales</a>
+      <a href="/confidentialite/">Confidentialité</a>
+      <a href="mailto:contact@seekr-search.fr">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── HAMBURGER ──
+const hamburger = document.getElementById('navHamburger');
+const navMobile = document.getElementById('navMobile');
+if (hamburger && navMobile) {
+  hamburger.addEventListener('click', () => navMobile.classList.toggle('open'));
+  document.addEventListener('click', e => {
+    if (!hamburger.contains(e.target) && !navMobile.contains(e.target))
+      navMobile.classList.remove('open');
+  });
+}
+
+// ── FILTRE CATEGORIES ──
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.article-card, .featured-card').forEach(card => {
+    if (cat === 'all' || card.dataset.cat === cat) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// ── NEWSLETTER ──
+function subscribeNL() {
+  const email = document.getElementById('nl-email').value.trim();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    document.getElementById('nl-msg').textContent = '⚠️ Veuillez entrer une adresse email valide.';
+    return;
+  }
+  document.getElementById('nl-msg').textContent = '✅ Merci ! Vous êtes inscrit(e).';
+  document.getElementById('nl-email').value = '';
+}
+</script>
+<!-- SEEKR Agent — Widget IA conversationnel -->
+<script
+  src="https://api.seekr-search.fr/widget/seekr-agent-widget.js"
+  data-key="sk_seekr_live_e6635bb7969851954e15c6e1fa7edf7b0deb446546c216c1019aade4"
+  data-mode="agent"
+  data-theme="dark-gold"
+  data-placeholder="Comment puis-je vous aider ?"
+  async defer
+></script>
+
+</body>
+</html>

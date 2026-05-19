@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentions Légales — SEEKR</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c10;
+    --surface: #0e1318;
+    --border: #1a2230;
+    --accent: #00e5ff;
+    --accent-dim: rgba(0,229,255,0.08);
+    --text: #c8d8e8;
+    --text-muted: #526070;
+    --heading: #eaf4ff;
+    --tag-bg: rgba(0,229,255,0.06);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(8,12,16,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--heading);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a.active { color: var(--accent); }
+
+  /* HERO BAND */
+  .page-hero {
+    margin-top: 56px;
+    padding: 4rem 2rem 3rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(0,229,255,0.03) 0%, transparent 100%);
+    text-align: center;
+  }
+  .page-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--tag-bg);
+    border: 1px solid rgba(0,229,255,0.2);
+    padding: 4px 14px;
+    border-radius: 2px;
+    margin-bottom: 1.2rem;
+  }
+  .page-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--heading);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.6rem;
+  }
+  .page-meta {
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .toc-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .toc ol { padding-left: 1.2rem; }
+  .toc li { margin: 0.3rem 0; }
+  .toc a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .toc a:hover { color: var(--accent); }
+
+  /* SECTIONS */
+  .section { margin-bottom: 3rem; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(0,229,255,0.15);
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px;
+    flex-shrink: 0;
+    letter-spacing: 0.05em;
+  }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--heading);
+    letter-spacing: 0.02em;
+  }
+  p { margin-bottom: 0.9rem; color: var(--text); }
+  p:last-child { margin-bottom: 0; }
+
+  /* INFO GRID */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 1rem;
+  }
+  .info-row {
+    display: contents;
+  }
+  .info-key {
+    background: var(--surface);
+    padding: 0.7rem 1rem;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .info-val {
+    background: var(--bg);
+    padding: 0.7rem 1rem;
+    font-size: 13px;
+    color: var(--heading);
+    border-bottom: 1px solid var(--border);
+  }
+  .info-key:last-of-type, .info-val:last-of-type { border-bottom: none; }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  footer a { color: var(--text-muted); }
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .info-grid { grid-template-columns: 1fr; }
+    .info-key { border-bottom: none; padding-bottom: 0.2rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://seekr-search.fr" class="nav-logo">SEEK<span>R</span></a>
+  <div class="nav-links">
+    <a href="https://seekr-search.fr">Accueil</a>
+    <a href="/mentions-legales/" class="active">Mentions légales</a>
+    <a href="/confidentialite/">Confidentialité</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-tag">Légal</div>
+  <h1 class="page-title">Mentions Légales</h1>
+  <p class="page-meta">Dernière mise à jour : juin 2025 &nbsp;·&nbsp; SEEKR</p>
+</div>
+
+<div class="container">
+
+  <div class="toc">
+    <div class="toc-title">Sommaire</div>
+    <ol>
+      <li><a href="#editeur">Éditeur du site</a></li>
+      <li><a href="#hebergement">Hébergement</a></li>
+      <li><a href="#propriete">Propriété intellectuelle</a></li>
+      <li><a href="#responsabilite">Limitation de responsabilité</a></li>
+      <li><a href="#donnees">Données personnelles</a></li>
+      <li><a href="#cookies">Cookies</a></li>
+      <li><a href="#droit">Droit applicable</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </div>
+
+  <!-- 1 -->
+  <div class="section" id="editeur">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Éditeur du site</h2>
+    </div>
+    <p>Le site <strong>seekr-search.fr</strong> est édité par :</p>
+    <div class="info-grid">
+      <div class="info-key">Dénomination</div><div class="info-val">SEEKR (en cours de constitution — SAS)</div>
+      <div class="info-key">Forme juridique</div><div class="info-val">SAS (Société par Actions Simplifiée) — en cours de création</div>
+      <div class="info-key">Siège social</div><div class="info-val">France</div>
+      <div class="info-key">Directeur de publication</div><div class="info-val">Maximilien Redon</div>
+      <div class="info-key">Email de contact</div><div class="info-val"><a href="/cdn-cgi/l/email-protection#ccbea9a8a3a2a1adb4a5a1a5a0a5a9a2fcf88caba1ada5a0e2afa3a1"><span class="__cf_email__" data-cfemail="d6a4b3b2b9b8bbb7aebfbbbfbabfb3b8e6e296b1bbb7bfbaf8b5b9bb">[email&#160;protected]</span></a></div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="hebergement">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Hébergement</h2>
+    </div>
+    <p>Le site et ses services sont hébergés par :</p>
+    <div class="info-grid">
+      <div class="info-key">Hébergeur — Frontend</div><div class="info-val">Render Services, Inc. — 525 Brannan St, San Francisco, CA 94107, USA</div>
+      <div class="info-key">Hébergeur — Backend API</div><div class="info-val">Render Services, Inc. — Région Europe (Frankfurt)</div>
+      <div class="info-key">Base de données</div><div class="info-val">MongoDB Atlas — MongoDB, Inc., 1633 Broadway, New York, NY 10019, USA (région Frankfurt)</div>
+      <div class="info-key">Nom de domaine</div><div class="info-val">OVH SAS — 2 rue Kellermann, 59100 Roubaix, France</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="propriete">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Propriété intellectuelle</h2>
+    </div>
+    <p>L'ensemble des éléments constituant le site seekr-search.fr (textes, graphiques, logiciels, technologies, marques, logos, architecture) sont la propriété exclusive de SEEKR ou font l'objet d'une autorisation d'utilisation. Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite sauf autorisation préalable écrite de SEEKR.</p>
+    <p>Le nom et la marque <strong>SEEKR</strong>, ainsi que le widget GPS intégré (<em>seekr-widget.js</em>), sont des créations originales protégées. Toute utilisation non autorisée constitue une contrefaçon sanctionnée par le Code de la propriété intellectuelle.</p>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="responsabilite">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Limitation de responsabilité</h2>
+    </div>
+    <p>SEEKR s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées sur ce site. Toutefois, SEEKR ne peut garantir l'exactitude, la précision ou l'exhaustivité des informations mises à disposition sur le site.</p>
+    <p>SEEKR décline toute responsabilité pour toute interruption du site, survenance de bugs, inexactitudes ou omissions portant sur des informations disponibles sur le site, et pour tous dommages résultant d'une intrusion frauduleuse d'un tiers ayant entraîné une modification des informations mises à disposition sur le site.</p>
+    <p>Les liens hypertextes mis en place en direction d'autres sites ne sauraient engager la responsabilité de SEEKR quant au contenu de ces sites.</p>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="donnees">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Données personnelles</h2>
+    </div>
+    <p>SEEKR traite des données à caractère personnel dans le cadre de l'utilisation de ses services (création de compte, abonnement, analytics). Ces traitements sont détaillés dans notre <a href="/confidentialite/">Politique de Confidentialité</a>, conformément au Règlement Général sur la Protection des Données (RGPD — Règlement UE 2016/679).</p>
+    <p>Pour exercer vos droits (accès, rectification, suppression, portabilité, limitation), contactez : <a href="/cdn-cgi/l/email-protection#582a3d3c373635392031353134313d36686c183f35393134763b3735"><span class="__cf_email__" data-cfemail="2d5f48494243404c55444044414448431d196d4a404c4441034e4240">[email&#160;protected]</span></a>.</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="cookies">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>Cookies</h2>
+    </div>
+    <p>Le site seekr-search.fr utilise des cookies techniques nécessaires au bon fonctionnement du service (authentification JWT, préférences). Une bannière de consentement conforme à la réglementation CNIL est affichée lors de votre première visite.</p>
+    <p>Aucun cookie publicitaire ou de tracking tiers n'est déposé sans votre consentement explicite.</p>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="droit">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>Droit applicable & Juridiction</h2>
+    </div>
+    <p>Les présentes mentions légales sont régies par le droit français. En cas de litige et après tentative de résolution amiable, les tribunaux français seront seuls compétents pour connaître de ce litige.</p>
+    <p>Conformément aux dispositions du Code de la consommation concernant le règlement amiable des litiges, SEEKR adhère au Service du Médiateur du e-commerce de la FEVAD (Fédération du e-commerce et de la vente à distance) dont les coordonnées sont les suivantes : 60 Rue La Boétie, 75008 Paris.</p>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="contact">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>Contact</h2>
+    </div>
+    <p>Pour toute question relative aux présentes mentions légales ou à l'utilisation du site :</p>
+    <div class="info-grid">
+      <div class="info-key">Email</div><div class="info-val"><a href="/cdn-cgi/l/email-protection#0c7e69686362616d74656165606569623c384c6b616d6560226f6361"><span class="__cf_email__" data-cfemail="691b0c0d06070408110004000500
+
+<!-- SEEKR Agent — Widget IA conversationnel -->
+<script
+  src="https://api.seekr-search.fr/widget/seekr-agent-widget.js"
+  data-key="sk_seekr_live_e6635bb7969851954e15c6e1fa7edf7b0deb446546c216c1019aade4"
+  data-mode="agent"
+  data-theme="dark-gold"
+  data-placeholder="Comment puis-je vous aider ?"
+  async defer
+></script>
+
+</body>
+</html>
