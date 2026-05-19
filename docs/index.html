@@ -670,7 +670,8 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.05);
     <a href="/blog/">Blog</a>
   </div>
   <div class="nav-search-wrap">
-      </div>
+    <div id="seekr-search"></div>
+  </div>
   <button id="seekr-cookie-nav-btn" onclick="window.SEEKR_RGPD&&window.SEEKR_RGPD.showBanner()">
     🍪 Activer la recherche
   </button>
@@ -1191,7 +1192,6 @@ if (hamburger && navMobile) {
 </script>
 
 <!-- SEEKR Search Widget -->
-<div id="seekr-search" style="display:none"></div>
 <script async
   src="https://api.seekr-search.fr/widget/seekr-widget.js"
   data-key="sk_seekr_live_e6635bb7969851954e15c6e1fa7edf7b0deb446546c216c1019aade4"
