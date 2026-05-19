@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEEKR — Dashboard v5.1</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Epilogue:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+:root{
+  --bg:#080a10;--s1:#0c0e18;--s2:#111422;--s3:#161928;
+  --bd:#1c2035;--bd2:#242840;
+  --text:#dde1f5;--dim:#7880a8;--dim2:#3d4265;
+  --blue:#4d6ef5;--blue-g:rgba(77,110,245,.16);
+  --cyan:#36d1f7;--cyan-g:rgba(54,209,247,.12);
+  --gold:#D4AF37;--gold-g:rgba(212,175,55,.16);--gold-b:rgba(212,175,55,.07);
+  --eco:#2dd4a0;--eco-g:rgba(45,212,160,.14);--eco-b:rgba(45,212,160,.06);
+  --seo:#f97046;--seo-g:rgba(249,112,70,.14);--seo-b:rgba(249,112,70,.06);
+  --red:#f7506a;--red-g:rgba(247,80,106,.14);
+  --yel:#f5c842;--yel-g:rgba(245,200,66,.12);
+  --pur:#9b74f5;
+  --r:10px;--mono:'DM Mono',monospace;--sans:'Epilogue',sans-serif;
+}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);display:flex;font-size:13px}
+
+/* LOGIN */
+#login-screen{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center}
+#login-screen.hidden{display:none}
+.login-box{background:var(--s2);border:1px solid var(--bd);border-radius:16px;padding:40px;width:400px;text-align:center}
+.login-logo{font-family:var(--mono);font-size:28px;letter-spacing:8px;background:linear-gradient(110deg,var(--gold),#fff8e1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.login-sub{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:2px;margin-bottom:32px}
+.login-field{margin-bottom:14px;text-align:left}
+.login-label{display:block;font-size:10px;color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+.login-input{width:100%;padding:10px 14px;background:var(--s3);border:1px solid var(--bd);border-radius:8px;color:var(--text);font-size:13px;font-family:var(--sans);outline:none;transition:border-color .2s}
+.login-input:focus{border-color:var(--gold)}
+.login-btn{width:100%;padding:12px;background:var(--gold);color:#0d0d12;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--sans);margin-top:8px;transition:opacity .2s}
+.login-btn:hover{opacity:.88}
+.login-err{color:var(--red);font-size:11px;margin-top:10px;min-height:16px}
+.login-api{font-family:var(--mono);font-size:9px;color:var(--dim2);margin-top:16px}
+
+/* SIDEBAR */
+.sb{width:214px;flex-shrink:0;background:var(--s1);border-right:1px solid var(--bd);display:flex;flex-direction:column;height:100vh;position:sticky;top:0;overflow-y:auto}
+.logo-wrap{padding:20px 16px 14px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--mono);font-size:18px;letter-spacing:5px;font-weight:500;background:linear-gradient(110deg,var(--gold),#fff8e1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo-v{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:1.5px;margin-top:2px}
+.logout-btn{font-size:10px;color:var(--dim);cursor:pointer;padding:4px 8px;border-radius:6px;border:1px solid var(--bd);background:none;font-family:var(--sans);transition:all .15s}
+.logout-btn:hover{color:var(--red);border-color:var(--red)}
+.sb-site{padding:10px 14px;border-bottom:1px solid var(--bd);background:var(--gold-b)}
+.sb-site-name{font-weight:700;font-size:12px;color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-site-domain{font-family:var(--mono);font-size:9px;color:var(--dim);margin-top:2px}
+.nav-section{padding:10px 10px 2px}
+.nav-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--dim2);padding:6px 8px 3px;text-transform:uppercase}
+.nb{width:100%;display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;color:var(--dim);border:1px solid transparent;background:none;text-align:left;font-family:var(--sans);transition:all .14s;position:relative}
+.nb:hover{color:var(--text);background:var(--s2)}
+.nb.gold.active{color:var(--gold);background:var(--gold-b);border-color:rgba(212,175,55,.2)}
+.nb.eco.active{color:var(--eco);background:var(--eco-b);border-color:rgba(45,212,160,.2)}
+.nb.seo.active{color:var(--seo);background:var(--seo-b);border-color:rgba(249,112,70,.2)}
+.nb.blue.active{color:var(--blue);background:var(--blue-g);border-color:rgba(77,110,245,.2)}
+.nb.dim.active{color:var(--text);background:var(--s2);border-color:var(--bd)}
+.nb-ico{font-size:13px;flex-shrink:0}
+.nb-badge{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:8px;padding:1px 5px;border-radius:20px;font-weight:700}
+.nb-badge.eco{background:var(--eco-g);color:var(--eco)}
+.nb-badge.seo{background:var(--seo-g);color:var(--seo)}
+.nb-badge.gold{background:var(--gold-g);color:var(--gold)}
+
+/* MAIN */
+main{flex:1;min-width:0;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+.top-bar{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--bd);flex-shrink:0;background:var(--s1)}
+.page-title{font-size:15px;font-weight:800;flex:1;display:flex;align-items:center;gap:8px}
+.ptitle-badge{font-size:8px;padding:2px 7px;border-radius:20px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.pb-gold{background:var(--gold-g);color:var(--gold)}.pb-eco{background:var(--eco-g);color:var(--eco)}.pb-seo{background:var(--seo-g);color:var(--seo)}.pb-blue{background:var(--blue-g);color:var(--blue)}.pb-dim{background:var(--s3);color:var(--dim)}
+.period-wrap{display:flex;gap:4px;flex-shrink:0}
+.ptab{font-family:var(--mono);font-size:9px;padding:4px 9px;border-radius:6px;cursor:pointer;color:var(--dim);background:var(--s2);border:1px solid var(--bd);transition:all .14s;font-weight:500}
+.ptab.active,.ptab:hover{color:var(--gold);background:var(--gold-b);border-color:rgba(212,175,55,.25)}
+.content-scroll{flex:1;overflow-y:auto;padding:20px}
+.panel{display:none}.panel.active{display:block}
+
+/* CARDS */
+.card{background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);margin-bottom:14px;overflow:hidden}
+.card-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--bd)}
+.ct{font-weight:700;font-size:13px;display:flex;align-items:center;gap:7px}
+.ca{display:flex;gap:6px;align-items:center}
+.card-body{padding:14px 16px}
+.kpi-grid{display:grid;gap:12px;margin-bottom:14px}
+.kpi-4{grid-template-columns:repeat(4,1fr)}.kpi-3{grid-template-columns:repeat(3,1fr)}.kpi-2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:1100px){.kpi-4{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--s3);border:1px solid var(--bd);border-radius:var(--r);padding:14px 16px}
+.kpi.gold{border-color:rgba(212,175,55,.25);background:var(--gold-b)}.kpi.eco{border-color:rgba(45,212,160,.2);background:var(--eco-b)}.kpi.seo{border-color:rgba(249,112,70,.2);background:var(--seo-b)}.kpi.blue{border-color:rgba(77,110,245,.2);background:var(--blue-g)}
+.kl{font-size:10px;color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+.kv{font-size:24px;font-weight:900;font-family:var(--mono);line-height:1}
+.kv.gold{color:var(--gold)}.kv.eco{color:var(--eco)}.kv.seo{color:var(--seo)}.kv.blue{color:var(--blue)}.kv.red{color:var(--red)}
+.ks{font-size:10px;color:var(--dim);margin-top:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse}
+th{font-size:9px;text-transform:uppercase;letter-spacing:1.2px;color:var(--dim2);font-weight:700;padding:8px 10px;border-bottom:1px solid var(--bd);text-align:left}
+td{padding:9px 10px;border-bottom:1px solid var(--bd);vertical-align:middle;font-size:12px}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.018)}
+.tag{display:inline-block;font-size:9px;padding:2px 7px;border-radius:20px;font-weight:700}
+.teco{background:var(--eco-g);color:var(--eco)}.tseo{background:var(--seo-g);color:var(--seo)}.tblue{background:var(--blue-g);color:var(--blue)}.tcyn{background:var(--cyan-g);color:var(--cyan)}.tgold{background:var(--gold-g);color:var(--gold)}.tyel{background:var(--yel-g);color:var(--yel)}.tred{background:var(--red-g);color:var(--red)}.tdim{background:var(--s3);color:var(--dim)}
+.br{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--bd)}.br:last-child{border-bottom:none}
+.bl{font-size:11px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bl-w{width:160px;flex-shrink:0}
+.bt{flex:1;height:6px;background:var(--s3);border-radius:3px;overflow:hidden}.bf{height:100%;border-radius:3px;transition:width .4s ease}
+.bv{font-family:var(--mono);font-size:10px;color:var(--dim);flex-shrink:0;width:30px;text-align:right}
+.oi{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--bd)}.oi:last-child{border-bottom:none}
+.oit{font-weight:700;font-size:12px;margin-bottom:2px}.oid{font-size:10px;color:var(--dim);margin-bottom:4px}.oitags{display:flex;gap:5px;flex-wrap:wrap}
+.funnel-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.funnel-label{width:170px;font-size:11px;color:var(--dim);flex-shrink:0}
+.funnel-bar-wrap{flex:1;background:var(--s3);border-radius:4px;overflow:hidden;height:22px}
+.funnel-bar{height:100%;display:flex;align-items:center;padding-left:8px;font-family:var(--mono);font-size:10px;font-weight:700;color:#000;border-radius:4px;min-width:30px}
+.funnel-pct{font-family:var(--mono);font-size:10px;color:var(--dim);flex-shrink:0;width:32px;text-align:right}
+.btn{padding:6px 14px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;border:none;font-family:var(--sans);transition:all .15s;display:inline-flex;align-items:center;gap:5px}
+.bp{background:var(--gold);color:#0d0d12}.bp:hover{opacity:.88}.bg{background:var(--s3);color:var(--text);border:1px solid var(--bd)}.bg:hover{background:var(--bd)}.bsm{padding:4px 10px;font-size:10px}.bred{background:var(--red-g);color:var(--red);border:1px solid rgba(247,80,106,.2)}
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}.mo.open{display:flex}
+.md{background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:24px;min-width:400px;max-width:680px;width:90%}
+.mdt{font-size:16px;font-weight:800;margin-bottom:4px}.mds{font-size:11px;color:var(--dim);margin-bottom:18px;font-family:var(--mono)}.mdf{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+.fgr{margin-bottom:12px}.fl{display:block;font-size:10px;color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
+.fi{width:100%;padding:9px 12px;background:var(--s3);border:1px solid var(--bd);border-radius:8px;color:var(--text);font-size:13px;font-family:var(--sans);outline:none;transition:border-color .2s}.fi:focus{border-color:var(--gold)}
+.loading{display:flex;align-items:center;justify-content:center;padding:40px;gap:10px;color:var(--dim);font-size:12px}
+.sp{width:18px;height:18px;border:2px solid var(--bd2);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{padding:40px;text-align:center;color:var(--dim)}.ei{font-size:32px;margin-bottom:8px}.et{font-weight:700;margin-bottom:4px}.ed{font-size:10px;font-family:var(--mono)}
+.log{padding:10px 14px;max-height:260px;overflow-y:auto;font-size:10px}.ll{display:flex;align-items:center;gap:7px;padding:3px 0}.lok{color:var(--eco);font-weight:700}
+code{font-family:var(--mono);font-size:10px;padding:2px 6px;background:var(--s3);border:1px solid var(--bd);border-radius:4px;color:var(--cyan)}
+.deploy-card{background:var(--s3);border:1px solid var(--bd);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:14px;margin-bottom:10px;transition:border-color .2s}.deploy-card:hover{border-color:var(--gold)}
+.deploy-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.deploy-info{flex:1;min-width:0}.deploy-name{font-weight:700;font-size:13px}.deploy-domain{font-family:var(--mono);font-size:9px;color:var(--dim);margin-top:2px}
+.deploy-stats{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px}.deploy-stat{font-size:10px;color:var(--dim);display:flex;align-items:center;gap:4px}.deploy-stat strong{color:var(--text)}
+.deploy-actions{display:flex;gap:6px;flex-shrink:0}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0}.dot-green{background:var(--eco)}.dot-gold{background:var(--gold)}.dot-red{background:var(--red)}.dot-dim{background:var(--dim2)}.dot-pulse{animation:dotpulse 2s ease infinite}
+@keyframes dotpulse{0%,100%{opacity:1}50%{opacity:.3}}
+.script-block{background:#0a0d1a;border:1px solid var(--gold);border-radius:8px;padding:14px;font-family:var(--mono);font-size:10px;color:#f0eacc;white-space:pre-wrap;line-height:1.7;position:relative}.script-copy{position:absolute;top:8px;right:8px}
+.progress-bar{height:4px;background:var(--bd);border-radius:2px;overflow:hidden;margin-top:6px}.progress-fill{height:100%;border-radius:2px;transition:width .4s ease}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">SEEKR</div>
+    <div class="login-sub">v5.1 · DASHBOARD ÉQUIPE</div>
+    <div class="login-field"><label class="login-label">Email</label><input class="login-input" id="login-email" type="email" placeholder="admin@seekr.fr" autocomplete="email"></div>
+    <div class="login-field"><label class="login-label">Mot de passe</label><input class="login-input" id="login-password" type="password" placeholder="••••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="login-btn" onclick="doLogin()" id="login-btn">Se connecter</button>
+    <div class="login-err" id="login-err"></div>
+    <div class="login-api">🔗 api.seekr-search.fr</div>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sb">
+  <div class="logo-wrap">
+    <div><div class="logo">SEEKR</div><div class="logo-v">v5.1 · DASHBOARD</div></div>
+    <button class="logout-btn" onclick="doLogout()">⏏</button>
+  </div>
+  <div class="sb-site"><div class="sb-site-name" id="sb-name">—</div><div class="sb-site-domain" id="sb-domain">Sélectionnez un site</div></div>
+  <div class="nav-section">
+    <div class="nav-label">Vue générale</div>
+    <button class="nb dim" onclick="nav('overview')"><span class="nb-ico">📊</span>Vue d'ensemble</button>
+    <button class="nb dim" onclick="nav('deployment')"><span class="nb-ico">🚀</span>Déploiement<span class="nb-badge gold">NOUVEAU</span></button>
+    <button class="nb dim" onclick="nav('live')"><span class="nb-ico">⚡</span>Live</button>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">E-Commerce</div>
+    <button class="nb eco" onclick="nav('eco-analytics')"><span class="nb-ico">🛒</span>Analytics E-COM</button>
+    <button class="nb eco" onclick="nav('intentions')"><span class="nb-ico">🎯</span>Intentions d'achat</button>
+    <button class="nb eco" onclick="nav('conversion')"><span class="nb-ico">💰</span>Conversion & ROI</button>
+    <button class="nb eco" onclick="nav('produits')"><span class="nb-ico">📦</span>Produits</button>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">SEO / Contenu</div>
+    <button class="nb seo" onclick="nav('seo-analytics')"><span class="nb-ico">📈</span>Analytics SEO</button>
+    <button class="nb seo" onclick="nav('pages')"><span class="nb-ico">📄</span>Pages indexées</button>
+    <button class="nb seo" onclick="nav('opportunites')"><span class="nb-ico">💡</span>Opportunités<span id="opp-badge" class="nb-badge seo">0</span></button>
+    <button class="nb seo" onclick="nav('synonymes')"><span class="nb-ico">🔗</span>Synonymes</button>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">Administration</div>
+    <button class="nb blue" onclick="nav('crawl')"><span class="nb-ico">🕷️</span>Crawl</button>
+    <button class="nb blue" onclick="nav('sites')"><span class="nb-ico">🌐</span>Sites clients</button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main>
+  <div class="top-bar">
+    <div class="page-title" id="page-title">Vue d'ensemble <span class="ptitle-badge pb-dim">SEEKR v5.1</span></div>
+    <div class="period-wrap" id="period-wrap">
+      <button class="ptab" onclick="setPeriod('24h',this)">24h</button>
+      <button class="ptab active" onclick="setPeriod('7d',this)">7j</button>
+      <button class="ptab" onclick="setPeriod('30d',this)">30j</button>
+      <button class="ptab" onclick="setPeriod('90d',this)">90j</button>
+    </div>
+    <select class="fi bsm" id="site-select" onchange="changeSite(this.value)" style="padding:5px 10px;width:180px"><option value="">— Site actif —</option></select>
+  </div>
+  <div class="content-scroll">
+
+    <div class="panel active" id="panel-overview">
+      <div class="kpi-grid kpi-4">
+        <div class="kpi gold"><div class="kl">Recherches</div><div class="kv gold" id="ov-searches">—</div><div class="ks">Période sélectionnée</div></div>
+        <div class="kpi eco"><div class="kl">Taux conversion</div><div class="kv eco" id="ov-conv">—%</div><div class="ks">Sessions → achat</div></div>
+        <div class="kpi seo"><div class="kl">Opportunités SEO</div><div class="kv seo" id="ov-opp">—</div><div class="ks">Sujets manquants</div></div>
+        <div class="kpi blue"><div class="kl">Pages indexées</div><div class="kv blue" id="ov-pages">—</div><div class="ks">Actives en base</div></div>
+      </div>
+      <div class="card"><div class="card-hd"><div class="ct">📈 Activité <span id="ov-chart-lbl" style="font-family:var(--mono);font-size:10px;color:var(--dim)">7j</span></div></div><div class="card-body"><div id="ov-chart"></div><div id="ov-chart-labels" style="display:flex;justify-content:space-between;padding:4px 10px 0"></div></div></div>
+      <div class="grid2">
+        <div class="card"><div class="card-hd"><div class="ct">🛒 Requêtes E-Commerce</div></div><div class="card-body" id="ov-eco-queries"><div class="loading"><div class="sp"></div></div></div></div>
+        <div class="card"><div class="card-hd"><div class="ct">💡 Top Opportunités SEO</div></div><div class="card-body" id="ov-seo-opps"><div class="loading"><div class="sp"></div></div></div></div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-deployment">
+      <div class="card"><div class="card-hd"><div class="ct">🚀 Suivi de déploiement</div><div class="ca"><button class="btn bg bsm" onclick="loadDeployment()">↺ Actualiser</button></div></div><div class="card-body" id="deployment-list"><div class="loading"><div class="sp"></div></div></div></div>
+      <div class="card"><div class="card-hd"><div class="ct">📋 Script d'intégration</div><div class="ca"><select class="fi bsm" id="script-site-select" onchange="loadIntegrationScript(this.value)" style="padding:4px 8px"><option value="">— Choisir un site —</option></select></div></div><div class="card-body" id="integration-script-zone"><div class="empty"><div class="ei">📋</div><div class="et">Sélectionnez un site</div></div></div></div>
+    </div>
+
+    <div class="panel" id="panel-live">
+      <div class="card"><div class="card-hd"><div class="ct">⚡ Recherches en temps réel</div><div class="ca"><span style="display:flex;align-items:center;gap:6px;font-size:10px;color:var(--dim)"><span class="dot dot-green dot-pulse"></span>Live · 5s</span></div></div><div id="live-table"><div class="loading"><div class="sp"></div></div></div></div>
+    </div>
+
+    <div class="panel" id="panel-eco-analytics">
+      <div class="kpi-grid kpi-4">
+        <div class="kpi eco"><div class="kl">Intentions E-COM</div><div class="kv eco" id="ea-buy">—</div></div>
+        <div class="kpi eco"><div class="kl">Taux conversion</div><div class="kv eco" id="ea-conv">—%</div></div>
+        <div class="kpi eco"><div class="kl">Total recherches</div><div class="kv eco" id="ea-prod">—</div></div>
+        <div class="kpi red"><div class="kl">Sujets manquants</div><div class="kv red" id="ea-miss">—</div></div>
+      </div>
+      <div class="grid2">
+        <div class="card"><div class="card-hd"><div class="ct">🛒 Requêtes commerciales</div></div><div class="card-body" id="ea-buy-list"><div class="loading"><div class="sp"></div></div></div></div>
+        <div class="card"><div class="card-hd"><div class="ct">🎯 Entonnoir intentions</div></div><div class="card-body" id="ea-funnel"><div class="loading"><div class="sp"></div></div></div></div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-conversion">
+      <div class="kpi-grid kpi-4">
+        <div class="kpi eco"><div class="kl">Taux conversion</div><div class="kv eco" id="cvt-rate">—%</div></div>
+        <div class="kpi eco"><div class="kl">Intention achat</div><div class="kv eco" id="cvt-intent">—%</div></div>
+        <div class="kpi gold"><div class="kl">Ventes sauvées</div><div class="kv gold" id="cvt-roi">— €</div></div>
+        <div class="kpi gold"><div class="kl">Revenu suivi</div><div class="kv gold" id="cvt-revenue">— €</div></div>
+      </div>
+      <div class="card"><div class="card-hd"><div class="ct">🎯 Entonnoir de conversion</div></div><div class="card-body" id="cvt-funnel"><div class="loading"><div class="sp"></div></div></div></div>
+    </div>
+
+    <div class="panel" id="panel-intentions">
+      <div class="kpi-grid kpi-3">
+        <div class="kpi eco"><div class="kl">Intentions achat</div><div class="kv eco" id="int-buy">—</div></div>
+        <div class="kpi blue"><div class="kl">Intentions contact</div><div class="kv blue" id="int-contact">—</div></div>
+        <div class="kpi"><div class="kl">Navigation pure</div><div class="kv" id="int-browse">—</div></div>
+      </div>
+      <div class="card"><div class="card-hd"><div class="ct">🎯 Requêtes commerciales</div></div><div id="int-table"><div class="loading"><div class="sp"></div></div></div></div>
+    </div>
+
+    <div class="panel" id="panel-seo-analytics">
+      <div class="kpi-grid kpi-4">
+        <div class="kpi seo"><div class="kl">Sujets manquants</div><div class="kv seo" id="sa-no-res">—</div></div>
+        <div class="kpi seo"><div class="kl">Contenu insuffisant</div><div class="kv seo" id="sa-thin">—</div></div>
+        <div class="kpi seo"><div class="kl">Pages jamais trouvées</div><div class="kv seo" id="sa-never">—</div></div>
+        <div class="kpi eco"><div class="kl">Bien indexées</div><div class="kv eco" id="sa-ok">—</div></div>
+      </div>
+      <div class="grid2">
+        <div class="card"><div class="card-hd"><div class="ct">📈 Requêtes SEO</div></div><div class="card-body" id="sa-queries"><div class="loading"><div class="sp"></div></div></div></div>
+        <div class="card"><div class="card-hd"><div class="ct">📉 Sans résultat / jour</div></div><div class="card-body" id="sa-chart"><div class="loading"><div class="sp"></div></div></div></div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-pages">
+      <div class="card"><div class="card-hd"><div class="ct">📄 Pages indexées <span id="pages-count" style="color:var(--dim);font-weight:400;font-size:11px"></span></div><div class="ca"><button class="btn bg bsm" onclick="openModal('modal-crawl')">🕷️ Crawl</button><button class="btn bg bsm" onclick="loadPages()">↺</button></div></div><div id="pages-table"><div class="loading"><div class="sp"></div></div></div></div>
+      <div class="card"><div class="card-hd"><div class="ct">🕷️ Statut crawl</div><div class="ca"><span id="crawl-last-info" style="font-size:9px;color:var(--dim);font-family:var(--mono)"></span></div></div><div id="crawl-detail"><div class="loading"><div class="sp"></div></div></div></div>
+    </div>
+
+    <div class="panel" id="panel-opportunites">
+      <div class="kpi-grid kpi-4">
+        <div class="kpi seo"><div class="kl">Sujets sans contenu</div><div class="kv seo" id="op-no">—</div></div>
+        <div class="kpi seo"><div class="kl">Contenu à enrichir</div><div class="kv seo" id="op-thin">—</div></div>
+        <div class="kpi red"><div class="kl">Priorité haute</div><div class="kv red" id="op-high">—</div></div>
+        <div class="kpi"><div class="kl">Pages jamais trouvées</div><div class="kv" id="op-never">—</div></div>
+      </div>
+      <div class="grid2">
+        <div class="card"><div class="card-hd"><div class="ct">📝 Contenu à créer</div></div><div class="card-body" id="op-no-list"><div class="loading"><div class="sp"></div></div></div></div>
+        <div class="card"><div class="card-hd"><div class="ct">⚡ Contenu à enrichir</div></div><div class="card-body" id="op-thin-list"><div class="loading"><div class="sp"></div></div></div></div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-synonymes"><div class="card"><div class="card-hd"><div class="ct">🔗 Dictionnaire sémantique</div></div><div id="syn-table"><div class="loading"><div class="sp"></div></div></div></div></div>
+
+    <div class="panel" id="panel-crawl">
+      <div class="card">
+        <div class="card-hd"><div class="ct">🕷️ Lancer un crawl</div><div class="ca"><span id="crawl-last-info2" style="font-size:9px;color:var(--dim);font-family:var(--mono)"></span></div></div>
+        <div class="card-body">
+          <div class="fgr"><label class="fl">Site ID</label><input class="fi" id="crawl-sid" placeholder="votre-site-id"></div>
+          <div class="fgr"><label class="fl">URL de base</label><input class="fi" id="crawl-url" placeholder="https://monsite.fr"></div>
+          <button class="btn bp" onclick="doCrawl()">🕷️ Démarrer</button>
+          <div id="crawl-msg" style="margin-top:10px;font-size:11px;color:var(--dim)"></div>
+        </div>
+        <div id="crawl-detail2"><div class="empty"><div class="ed">Aucun crawl effectué</div></div></div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-produits"><div class="card"><div class="card-hd"><div class="ct">📦 Produits <span id="prod-count" style="color:var(--dim);font-weight:400;font-size:11px"></span></div></div><div id="prod-table"><div class="loading"><div class="sp"></div></div></div></div></div>
+
+    <div class="panel" id="panel-sites">
+      <div class="card"><div class="card-hd"><div class="ct">🌐 Sites clients</div><div class="ca"><button class="btn bp bsm" onclick="openModal('modal-site')">+ Nouveau client</button></div></div><div id="sites-table"><div class="loading"><div class="sp"></div></div></div></div>
+    </div>
+
+  </div>
+</main>
+
+<!-- MODALES -->
+<div class="mo" id="modal-crawl" onclick="if(event.target===this)closeModal('modal-crawl')">
+  <div class="md"><div class="mdt">🕷️ Lancer un crawl</div><div class="mds">POST /api/pages/crawl</div>
+    <div class="fgr"><label class="fl">Site ID</label><input class="fi" id="m-csid" placeholder="votre-site-id"></div>
+    <div class="fgr"><label class="fl">URL de base</label><input class="fi" id="m-curl" placeholder="https://monsite.fr"></div>
+    <div class="mdf"><button class="btn bg" onclick="closeModal('modal-crawl')">Annuler</button><button class="btn bp" onclick="doCrawlModal()">🕷️ Démarrer</button></div>
+  </div>
+</div>
+
+<div class="mo" id="modal-site" onclick="if(event.target===this)closeModal('modal-site')">
+  <div class="md"><div class="mdt">🌐 Nouveau client</div><div class="mds">POST /api/sites</div>
+    <div class="fgr"><label class="fl">Nom</label><input class="fi" id="ns-name" placeholder="Mon site"></div>
+    <div class="fgr"><label class="fl">Domaine</label><input class="fi" id="ns-domain" placeholder="monsite.fr"></div>
+    <div class="fgr"><label class="fl">Plateforme</label><select class="fi" id="ns-plat"><option value="html">HTML / Static</option><option value="shopify">Shopify</option><option value="wordpress">WordPress</option><option value="prestashop">PrestaShop</option><option value="other">Autre</option></select></div>
+    <div class="mdf"><button class="btn bg" onclick="closeModal('modal-site')">Annuler</button><button class="btn bp" onclick="addSite()">Créer</button></div>
+  </div>
+</div>
+
+<div class="mo" id="modal-script" onclick="if(event.target===this)closeModal('modal-script')">
+  <div class="md"><div class="mdt">📋 Script d'intégration</div><div class="mds" id="modal-script-site"></div>
+    <div class="script-block"><button class="btn bg bsm script-copy" onclick="copyScript()">📋 Copier</button><div id="modal-script-content"></div></div>
+    <div class="mdf"><button class="btn bp" onclick="closeModal('modal-script')">Fermer</button></div>
+  </div>
+</div>
+
+<script>
+const API_URL = 'https://api.seekr-search.fr';
+let JWT = localStorage.getItem('seekr_jwt') || '';
+let JWT_EXPIRY = parseInt(localStorage.getItem('seekr_jwt_expiry') || '0');
+let refreshTimer = null;
+let SID = localStorage.getItem('seekr_sid') || '';
+let period = '7d', curPanel = 'overview', liveTimer = null;
+let _sites = [], _analyticsCache = null, _analyticsCacheKey = '';
+const ECO = ['buy','contact','music'], SEO_I = ['info','browse','compare'];
+const IICO = {buy:'🛒',contact:'📩',info:'📖',music:'🎵',compare:'⚖️',browse:'🔍'};
+const ILBL = {buy:'Achat',contact:'Contact',info:'Info',music:'Musique',compare:'Comparaison',browse:'Navigation'};
+const ICLR = {buy:'var(--eco)',contact:'var(--cyan)',info:'var(--seo)',music:'var(--yel)',compare:'var(--pur)',browse:'var(--dim)'};
+const SECCLS = {accueil:'tcyn',biographie:'tblue',discographie:'tblue',boutique:'teco',contact:'tyel',evenements:'tred',actualites:'tblue',page:'tdim'};
+const PICO = {shopify:'🛍',wordpress:'📝',prestashop:'🧡',html:'🌐',other:'💻'};
+
+function isTokenValid(){ return JWT && Date.now() < JWT_EXPIRY - 60000; }
+
+function saveToken(token){
+  JWT = token;
+  // Token valide 7 jours — on programme le refresh à J-1h
+  JWT_EXPIRY = Date.now() + 7*24*60*60*1000;
+  localStorage.setItem('seekr_jwt', token);
+  localStorage.setItem('seekr_jwt_expiry', JWT_EXPIRY.toString());
+}
+
+// ── REFRESH AUTOMATIQUE via /api/auth/refresh ──
+// Appelle le backend avec le token existant pour en obtenir un nouveau
+// sans avoir besoin du mot de passe. Se déclenche 1h avant expiration.
+function scheduleRefresh(){
+  if(refreshTimer) clearTimeout(refreshTimer);
+  const msUntilRefresh = JWT_EXPIRY - Date.now() - 60*60*1000; // 1h avant expiration
+  const delay = Math.max(msUntilRefresh, 30000); // minimum 30s
+  refreshTimer = setTimeout(async()=>{
+    try{
+      const r = await fetch(`${API_URL}/api/auth/refresh`,{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Authorization':`Bearer ${JWT}`}
+      });
+      if(r.ok){
+        const data = await r.json();
+        saveToken(data.token);
+        scheduleRefresh(); // replanifier le prochain refresh
+        console.log('✅ Token refreshed automatiquement');
+      } else {
+        // Token invalide — déconnexion propre
+        doLogout();
+      }
+    }catch(e){
+      console.warn('Auto-refresh failed:', e.message);
+      // Retry dans 5 min si réseau indisponible
+      refreshTimer = setTimeout(scheduleRefresh, 5*60*1000);
+    }
+  }, delay);
+}
+
+async function doLogin(){
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-password').value;
+  const btn = document.getElementById('login-btn');
+  const err = document.getElementById('login-err');
+  if(!email||!pass){ err.textContent='Email et mot de passe requis'; return; }
+  btn.textContent='Connexion…'; btn.disabled=true; err.textContent='';
+  try{
+    const r = await fetch(`${API_URL}/api/auth/login`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password:pass})});
+    const data = await r.json();
+    if(!r.ok) throw new Error(data.error||'Identifiants incorrects');
+    saveToken(data.token);
+    document.getElementById('login-screen').classList.add('hidden');
+    scheduleRefresh();
+    await bootstrapSites();
+  }catch(e){ err.textContent=e.message; }
+  finally{ btn.textContent='Se connecter'; btn.disabled=false; }
+}
+
+function doLogout(){
+  JWT=''; JWT_EXPIRY=0;
+  ['seekr_jwt','seekr_jwt_expiry'].forEach(k=>localStorage.removeItem(k));
+  if(refreshTimer) clearTimeout(refreshTimer);
+  if(liveTimer){ clearInterval(liveTimer); liveTimer=null; }
+  document.getElementById('login-screen').classList.remove('hidden');
+  document.getElementById('login-email').value='';
+  document.getElementById('login-password').value='';
+  document.getElementById('login-err').textContent='';
+}
+
+async function apiFetch(path, opts={}){
+  const r = await fetch(API_URL+path,{...opts,headers:{'Content-Type':'application/json','Authorization':`Bearer ${JWT}`,...(opts.headers||{})}});
+  if(r.status===401){ doLogout(); throw new Error('Session expirée'); }
+  if(!r.ok){ const e=await r.json().catch(()=>{}); throw new Error(e?.error||`HTTP ${r.status}`); }
+  return r.json();
+}
+function errEl(id,msg){ const e=document.getElementById(id); if(e) e.innerHTML=`<div class="empty"><div class="ei">⚠️</div><div class="et">Erreur</div><div class="ed">${esc(msg)}</div></div>`; }
+function loadEl(id){ const e=document.getElementById(id); if(e) e.innerHTML='<div class="loading"><div class="sp"></div>Chargement…</div>'; }
+function esc(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
+
+async function bootstrapSites(){
+  try{ _sites=await apiFetch('/api/sites'); popSels(_sites); if(_sites.length&&!SID){SID=_sites[0].id;localStorage.setItem('seekr_sid',SID);} if(SID){const s=_sites.find(x=>x.id===SID);if(s)setSite(s);} }catch(e){ console.warn(e.message); }
+  refreshPanel(curPanel);
+}
+
+function popSels(sites){
+  const sel=document.getElementById('site-select'), sc=document.getElementById('script-site-select');
+  sel.innerHTML=`<option value="">— Site actif —</option>`+sites.map(s=>`<option value="${s.id}" ${s.id===SID?'selected':''}>${esc(s.name)} · ${esc(s.domain)}</option>`).join('');
+  sc.innerHTML=`<option value="">— Choisir un site —</option>`+sites.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('');
+}
+
+async function changeSite(id){ if(!id)return; SID=id; localStorage.setItem('seekr_sid',SID); _analyticsCache=null; const s=_sites.find(x=>x.id===id); if(s)setSite(s); refreshPanel(curPanel); }
+function setSite(s){ document.getElementById('sb-name').textContent=s.name||s.domain; document.getElementById('sb-domain').textContent=s.domain||''; }
+async function getSID(){ if(SID)return SID; if(!_sites.length)_sites=await apiFetch('/api/sites'); if(!_sites[0])throw new Error('Aucun site. Créez un client.'); SID=_sites[0].id; localStorage.setItem('seekr_sid',SID); setSite(_sites[0]); return SID; }
+
+const PTITLES={overview:["Vue d'ensemble",'pb-dim','SEEKR v5.1'],deployment:['🚀 Déploiement','pb-gold','NOUVEAU'],live:['⚡ Live','pb-dim','Temps réel'],'eco-analytics':['Analytics E-Commerce','pb-eco','E-COM'],produits:['Produits','pb-eco','E-COM'],intentions:["Intentions d'achat",'pb-eco','E-COM'],conversion:['Conversion & ROI','pb-eco','E-COM'],'seo-analytics':['Analytics SEO','pb-seo','SEO'],pages:['Pages indexées','pb-seo','SEO'],opportunites:['Opportunités SEO','pb-seo','SEO'],synonymes:['Synonymes','pb-seo','SEO'],crawl:['🕷️ Crawl','pb-blue','CORE'],sites:['🌐 Sites clients','pb-blue','CORE']};
+
+function nav(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  document.querySelectorAll('.nb').forEach(b=>{if(b.getAttribute('onclick')?.includes(`'${id}'`))b.classList.add('active');});
+  const [t,badge,bt]=PTITLES[id]||[id,'pb-dim',''];
+  document.getElementById('page-title').innerHTML=`${t} <span class="ptitle-badge ${badge}">${bt}</span>`;
+  curPanel=id;
+  document.getElementById('period-wrap').style.display=['live','crawl','sites','synonymes','produits','deployment'].includes(id)?'none':'flex';
+  if(id!=='live'&&liveTimer){clearInterval(liveTimer);liveTimer=null;}
+  refreshPanel(id);
+}
+
+function refreshPanel(id){
+  if(id==='overview')loadOverview();
+  if(id==='deployment')loadDeployment();
+  if(id==='live')loadLive();
+  if(id==='eco-analytics')loadEcoAnalytics();
+  if(id==='produits')loadProduits();
+  if(id==='intentions')loadIntentions();
+  if(id==='conversion')loadConversion();
+  if(id==='seo-analytics')loadSeoAnalytics();
+  if(id==='pages'){loadPages();loadCrawlStatus();}
+  if(id==='opportunites')loadOpportunites();
+  if(id==='synonymes')renderSynonyms();
+  if(id==='crawl')loadCrawlStatus();
+  if(id==='sites')loadSites();
+}
+
+function setPeriod(p,el){period=p;document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('ov-chart-lbl').textContent=p;_analyticsCache=null;refreshPanel(curPanel);}
+
+async function fetchA(){ const sid=await getSID(); const key=sid+period; if(_analyticsCache&&_analyticsCacheKey===key)return _analyticsCache; const data=await apiFetch(`/api/analytics/${sid}?period=${period}`); _analyticsCache=data;_analyticsCacheKey=key; return data; }
+
+async function loadOverview(){ try{ const d=await fetchA(),m=d.metrics||{},opp=d.seo_opportunities||{},sum=opp.summary||{}; document.getElementById('ov-searches').textContent=(m.total_searches||0).toLocaleString('fr-FR'); document.getElementById('ov-conv').textContent=(m.conversion_rate||0)+'%'; document.getElementById('ov-opp').textContent=sum.missing_content_topics||0; document.getElementById('ov-pages').textContent=m.pages_indexed||0; renderBarList('ov-eco-queries',(d.top_queries||[]).filter(q=>ECO.includes(q.intent)).slice(0,7),'var(--eco)'); renderOppList('ov-seo-opps',(opp.no_results_queries||[]).slice(0,5)); renderDailyChart(d.daily_data||[],'ov-chart','ov-chart-labels'); }catch(e){ errEl('ov-eco-queries',e.message); errEl('ov-seo-opps',e.message); } }
+
+async function loadDeployment(){ loadEl('deployment-list'); try{ const ov=await apiFetch('/api/deployment-overview'),el=document.getElementById('deployment-list'); if(!ov.length){el.innerHTML='<div class="empty"><div class="ei">🌐</div><div class="et">Aucun site</div></div>';return;} el.innerHTML=ov.map(s=>{const ico=PICO[s.platform]||'🌐';const wl=s.widget_active?'<span class="tag teco">Actif</span>':'<span class="tag tdim">Inactif</span>';const cl=s.crawl.status==='done'?`<span class="tag teco">${s.crawl.indexed}p</span>`:'<span class="tag tdim">—</span>';return `<div class="deploy-card"><div class="deploy-icon" style="background:var(--s2)">${ico}</div><div class="deploy-info"><div class="deploy-name">${esc(s.name)}</div><div class="deploy-domain">${esc(s.domain)}</div><div class="deploy-stats"><div class="deploy-stat"><span class="dot ${s.widget_active?'dot-green':'dot-dim'}"></span>${wl}</div><div class="deploy-stat">🕷️ ${cl}</div><div class="deploy-stat">📊 <strong>${s.searches_24h}</strong>/24h</div></div></div><div class="deploy-actions"><button class="btn bg bsm" onclick="activateWidget('${s.id}',${!s.widget_active})">${s.widget_active?'⏸':'▶'}</button><button class="btn bp bsm" onclick="showScript('${s.id}')">📋</button></div></div>`;}).join(''); }catch(e){errEl('deployment-list',e.message);} }
+
+async function activateWidget(id,a){ try{await apiFetch(`/api/sites/${id}`,{method:'PATCH',body:JSON.stringify({widget_active:a})});loadDeployment();}catch(e){alert(e.message);} }
+async function showScript(id){ try{const d=await apiFetch(`/api/sites/${id}/integration-script`);document.getElementById('modal-script-site').textContent=`Client : ${d.domain}`;document.getElementById('modal-script-content').textContent=d.script;openModal('modal-script');}catch(e){alert(e.message);} }
+async function loadIntegrationScript(id){ if(!id)return;const z=document.getElementById('integration-script-zone');z.innerHTML='<div class="loading"><div class="sp"></div></div>';try{const d=await apiFetch(`/api/sites/${id}/integration-script`);z.innerHTML=`<div class="script-block"><button class="btn bg bsm script-copy" onclick="copyScriptFrom('isc')">📋 Copier</button><code id="isc" style="background:transparent;border:none;padding:0;font-size:11px;color:#f0eacc;white-space:pre-wrap">${esc(d.script)}</code></div>`;}catch(e){z.innerHTML=`<div class="empty"><div class="ed">${esc(e.message)}</div></div>`;} }
+function copyScript(){navigator.clipboard.writeText(document.getElementById('modal-script-content').textContent).then(()=>alert('Copié ✓'));}
+function copyScriptFrom(id){navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>alert('Copié ✓'));}
+
+async function loadEcoAnalytics(){ try{const d=await fetchA(),m=d.metrics||{},dist=d.intent_distribution||[],et=dist.filter(x=>ECO.includes(x.intent)).reduce((s,x)=>s+x.count,0);document.getElementById('ea-buy').textContent=et;document.getElementById('ea-conv').textContent=(m.conversion_rate||0)+'%';document.getElementById('ea-prod').textContent=m.total_searches||0;document.getElementById('ea-miss').textContent=d.seo_opportunities?.summary?.missing_content_topics||0;renderBarList('ea-buy-list',(d.top_queries||[]).filter(q=>ECO.includes(q.intent)).slice(0,8),'var(--eco)');renderFunnel('ea-funnel',dist);}catch(e){errEl('ea-buy-list',e.message);} }
+async function loadConversion(){ try{const d=await fetchA(),m=d.metrics||{},roi=d.roi||{},dist=d.intent_distribution||[];document.getElementById('cvt-rate').textContent=(m.conversion_rate||0)+'%';document.getElementById('cvt-intent').textContent=(m.buy_intent_rate||0)+'%';document.getElementById('cvt-roi').textContent=(roi.saved_sales_est||0).toLocaleString('fr-FR',{minimumFractionDigits:2})+' €';document.getElementById('cvt-revenue').textContent=(roi.revenue_tracked||0).toLocaleString('fr-FR',{minimumFractionDigits:2})+' €';renderFunnel('cvt-funnel',dist);}catch(e){errEl('cvt-funnel',e.message);} }
+async function loadIntentions(){ try{const d=await fetchA(),dist=d.intent_distribution||[],q=d.top_queries||[];document.getElementById('int-buy').textContent=dist.find(x=>x.intent==='buy')?.count||0;document.getElementById('int-contact').textContent=dist.find(x=>x.intent==='contact')?.count||0;document.getElementById('int-browse').textContent=dist.find(x=>x.intent==='browse')?.count||0;document.getElementById('int-table').innerHTML=`<table><thead><tr><th>Requête</th><th>Intention</th><th>Volume</th><th>∅</th></tr></thead><tbody>${q.filter(x=>ECO.includes(x.intent)).map(x=>`<tr><td style="font-family:var(--mono);font-size:10px">${esc(x.original||x.query)}</td><td>${IICO[x.intent]||'🔍'} <span class="tag ${x.intent==='buy'?'teco':'tcyn'}">${ILBL[x.intent]||x.intent}</span></td><td style="font-family:var(--mono)">${x.count}</td><td>${x.no_results>0?`<span class="tag tred">${x.no_results}</span>`:'—'}</td></tr>`).join('')}</tbody></table>`;}catch(e){errEl('int-table',e.message);} }
+async function loadSeoAnalytics(){ try{const d=await fetchA(),opp=d.seo_opportunities||{},sum=opp.summary||{};document.getElementById('sa-no-res').textContent=sum.missing_content_topics||0;document.getElementById('sa-thin').textContent=sum.topics_to_enrich||0;document.getElementById('sa-never').textContent=sum.pages_never_found||0;document.getElementById('sa-ok').textContent=(opp.pages_coverage||[]).filter(p=>p.status==='bien_indexe').length;renderBarList('sa-queries',(d.top_queries||[]).filter(q=>SEO_I.includes(q.intent)).slice(0,8),'var(--seo)');const daily=d.daily_data||[];if(daily.length){const max=Math.max(...daily.map(x=>x.no_results||0),1);document.getElementById('sa-chart').innerHTML=`<div style="display:flex;align-items:flex-end;gap:3px;height:60px">${daily.slice(-14).map(x=>{const h=Math.max(4,Math.round(((x.no_results||0)/max)*52));return `<div style="flex:1;height:${h}px;background:var(--seo);opacity:.55;border-radius:2px 2px 0 0"></div>`;}).join('')}</div>`;}}catch(e){errEl('sa-queries',e.message);} }
+
+async function loadPages(){ loadEl('pages-table');try{const sid=await getSID(),pages=await apiFetch(`/api/pages/${sid}`);document.getElementById('pages-count').textContent=`${pages.length} pages`;if(!pages.length){errEl('pages-table','Aucune page. Lancez un crawl.');return;}document.getElementById('pages-table').innerHTML=`<table><thead><tr><th>Section</th><th>Chemin</th><th>Titre</th><th>Ancres GPS</th><th>Crawlé</th><th></th></tr></thead><tbody>${pages.map(p=>`<tr><td><span class="tag ${SECCLS[p.section]||'tdim'}">${p.section||'page'}</span></td><td style="font-family:var(--mono);font-size:9px;color:var(--blue);max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(p.path||p.url)}</td><td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(p.title||'—')}</td><td><span class="tag ${p.anchors_count>0?'tgold':'tdim'}">${p.anchors_count||0}</span></td><td style="font-family:var(--mono);font-size:9px;color:var(--dim)">${p.crawled_at?new Date(p.crawled_at).toLocaleDateString('fr-FR'):'—'}</td><td><button class="btn bg bsm" onclick="delPage('${p.id}')">🗑</button></td></tr>`).join('')}</tbody></table>`;}catch(e){errEl('pages-table',e.message);} }
+async function delPage(id){if(!confirm('Supprimer ?'))return;try{await apiFetch(`/api/pages/${id}`,{method:'DELETE'});loadPages();}catch(e){alert(e.message);}}
+
+async function loadOpportunites(){ try{const d=await fetchA(),opp=d.seo_opportunities||{},sum=opp.summary||{};document.getElementById('op-no').textContent=sum.missing_content_topics||0;document.getElementById('op-thin').textContent=sum.topics_to_enrich||0;document.getElementById('op-high').textContent=sum.high_priority_topics||0;document.getElementById('op-never').textContent=sum.pages_never_found||0;document.getElementById('opp-badge').textContent=sum.total_opportunities||0;renderOppList('op-no-list',opp.no_results_queries||[]);renderThinList('op-thin-list',opp.thin_content_queries||[]);}catch(e){errEl('op-no-list',e.message);} }
+
+async function loadLive(){ try{const sid=await getSID(),data=await apiFetch(`/api/analytics/${sid}/live`);renderLiveTable(data);if(!liveTimer)liveTimer=setInterval(async()=>{if(curPanel==='live'){const d=await apiFetch(`/api/analytics/${sid}/live`).catch(()=>[]);renderLiveTable(d);}},5000);}catch(e){errEl('live-table',e.message);} }
+function renderLiveTable(rows){const el=document.getElementById('live-table');if(!rows.length){el.innerHTML='<div class="empty"><div class="ei">🌙</div><div class="et">Aucune recherche récente</div></div>';return;}el.innerHTML=`<table><thead><tr><th>Requête</th><th>Intention</th><th>Résultats</th><th>ms</th><th>Heure</th></tr></thead><tbody>${rows.map(r=>`<tr><td style="font-family:var(--mono);font-size:10px">${esc(r.query)}</td><td>${IICO[r.intent]||'🔍'} <span class="tag tdim">${ILBL[r.intent]||r.intent}</span></td><td>${r.results_count===0?'<span class="tag tred">0</span>':r.results_count<3?`<span class="tag tyel">${r.results_count}</span>`:`<span class="tag teco">${r.results_count}</span>`}</td><td style="font-family:var(--mono);color:var(--dim)">${r.response_ms||'—'}</td><td style="font-family:var(--mono);font-size:9px;color:var(--dim)">${r.timestamp?new Date(r.timestamp*1000).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',second:'2-digit'}):'—'}</td></tr>`).join('')}</tbody></table>`;}
+
+async function loadProduits(){ loadEl('prod-table');try{const sid=await getSID(),p=await apiFetch(`/api/products/${sid}`);document.getElementById('prod-count').textContent=`${p.length} produits`;if(!p.length){errEl('prod-table','Aucun produit.');return;}document.getElementById('prod-table').innerHTML=`<table><thead><tr><th>Nom</th><th>Catégorie</th><th>Prix</th><th>Stock</th></tr></thead><tbody>${p.map(x=>`<tr><td style="font-weight:600">${esc(x.name)}</td><td><span class="tag tdim">${esc(x.category||'—')}</span></td><td style="font-family:var(--mono)">${x.price?`${x.price} ${x.currency||'EUR'}`:'—'}</td><td><span class="tag ${x.stock>0?'teco':'tred'}">${x.stock>0?`${x.stock}`:'Rupture'}</span></td></tr>`).join('')}</tbody></table>`;}catch(e){errEl('prod-table',e.message);} }
+
+const SYNS={groupe:['band','orchestre','formation'],concert:['show','live','gig'],album:['disque','ep','vinyle'],acheter:['commander','shop','merch'],contact:['booking','reservation','email'],ecouter:['stream','spotify','deezer'],prix:['tarif','cout','promo'],retour:['remboursement','echange','sav']};
+function renderSynonyms(){document.getElementById('syn-table').innerHTML=`<table><thead><tr><th>Terme</th><th>Synonymes</th><th>#</th></tr></thead><tbody>${Object.entries(SYNS).map(([t,s])=>`<tr><td style="font-family:var(--mono);color:var(--blue)">${t}</td><td>${s.map(w=>`<span class="tag tdim" style="margin:2px">${esc(w)}</span>`).join('')}</td><td style="font-family:var(--mono);color:var(--dim)">${s.length}</td></tr>`).join('')}</tbody></table>`;}
+
+async function loadCrawlStatus(){
+  ['crawl-detail','crawl-detail2'].forEach(id=>loadEl(id));
+  try{
+    const sid=await getSID(),data=await apiFetch(`/api/pages/crawl/status/${sid}`),log=data.last||data,live=data.live;
+    const html=live?.status==='running'?`<div style="padding:14px 16px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span class="dot dot-gold dot-pulse"></span><strong>En cours — ${live.progress}/${live.total||'?'} pages</strong></div><div class="progress-bar"><div class="progress-fill" style="width:${live.total>0?Math.round(live.progress/live.total*100):0}%;background:var(--gold)"></div></div></div>`:crawlHTML(log);
+    ['crawl-detail','crawl-detail2'].forEach(id=>{const e=document.getElementById(id);if(e)e.innerHTML=html;});
+    if(log?.indexed!==undefined){const txt=`Dernier : ${log.indexed}/${log.crawled}p · ${log.timestamp?new Date(log.timestamp).toLocaleString('fr-FR'):'—'}`;['crawl-last-info','crawl-last-info2'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=txt;});}
+  }catch(e){['crawl-detail','crawl-detail2'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='<div class="empty"><div class="ed">Aucun crawl effectué</div></div>';});}
+}
+function crawlHTML(log){if(!log?.crawled)return'<div class="empty"><div class="ed">Aucun crawl effectué</div></div>';return`<div style="display:flex;gap:20px;padding:12px 16px;border-bottom:1px solid var(--bd)"><div><div style="font-size:9px;text-transform:uppercase;color:var(--dim)">Crawlées</div><div style="font-size:22px;font-weight:900">${log.crawled}</div></div><div><div style="font-size:9px;text-transform:uppercase;color:var(--dim)">Indexées</div><div style="font-size:22px;font-weight:900;color:var(--eco)">${log.indexed}</div></div><div><div style="font-size:9px;text-transform:uppercase;color:var(--dim)">GPS</div><div style="font-size:22px;font-weight:900;color:var(--gold)">${log.anchors_total||0}</div></div></div><div class="log">${(log.pages||[]).slice(0,20).map(p=>`<div class="ll"><span class="lok">✓</span><span class="tag tdim" style="font-size:8px">${esc(p.section||'page')}</span><span style="font-family:var(--mono);font-size:9px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">${esc(p.url)}</span></div>`).join('')}</div>`;}
+
+async function doCrawl(){const sid=document.getElementById('crawl-sid').value.trim(),url=document.getElementById('crawl-url').value.trim(),msg=document.getElementById('crawl-msg');if(!sid||!url){alert('Site ID et URL requis');return;}try{const r=await apiFetch('/api/pages/crawl',{method:'POST',body:JSON.stringify({site_id:sid,base_url:url})});msg.innerHTML=`<span style="color:var(--eco)">✓ ${esc(r.message)}</span>`;setTimeout(()=>loadCrawlStatus(),2000);}catch(e){msg.innerHTML=`<span style="color:var(--red)">✗ ${esc(e.message)}</span>`;}}
+async function doCrawlModal(){const sid=document.getElementById('m-csid').value.trim(),url=document.getElementById('m-curl').value.trim();if(!sid||!url){alert('Site ID et URL requis');return;}try{const r=await apiFetch('/api/pages/crawl',{method:'POST',body:JSON.stringify({site_id:sid,base_url:url})});closeModal('modal-crawl');alert(r.message);setTimeout(()=>loadCrawlStatus(),2000);}catch(e){alert('Erreur : '+e.message);}}
+
+async function loadSites(){ loadEl('sites-table');try{const sites=await apiFetch('/api/sites');_sites=sites;popSels(sites);if(!sites.length){errEl('sites-table','Aucun site.');return;}document.getElementById('sites-table').innerHTML=`<table><thead><tr><th>Nom</th><th>Domaine</th><th>Platform</th><th>API Key</th><th>Pages</th><th>Actions</th></tr></thead><tbody>${sites.map(s=>`<tr><td style="font-weight:700">${esc(s.name)}</td><td style="font-family:var(--mono);font-size:10px;color:var(--blue)">${esc(s.domain)}</td><td><span class="tag tdim">${esc(s.platform||'html')}</span></td><td><code style="font-size:9px">${esc((s.api_key||'').slice(0,22)+'…')}</code></td><td style="font-family:var(--mono)">${s.pages_count||0}</td><td style="display:flex;gap:5px"><button class="btn bg bsm" onclick="setSiteActive('${s.id}')">Activer</button><button class="btn bp bsm" onclick="showScript('${s.id}')">📋</button><button class="btn bred bsm" onclick="delSite('${s.id}')">🗑</button></td></tr>`).join('')}</tbody></table>`;}catch(e){errEl('sites-table',e.message);} }
+function setSiteActive(id){SID=id;localStorage.setItem('seekr_sid',id);_analyticsCache=null;const s=_sites.find(x=>x.id===id);if(s)setSite(s);document.getElementById('site-select').value=id;refreshPanel(curPanel);}
+async function addSite(){const name=document.getElementById('ns-name').value.trim(),domain=document.getElementById('ns-domain').value.trim(),platform=document.getElementById('ns-plat').value;if(!name||!domain){alert('Nom et domaine requis');return;}try{const s=await apiFetch('/api/sites',{method:'POST',body:JSON.stringify({name,domain,platform})});closeModal('modal-site');alert(`✓ Site créé\nAPI Key : ${s.api_key}`);await loadSites();}catch(e){alert('Erreur : '+e.message);}}
+async function delSite(id){if(!confirm('Désactiver ?'))return;try{await apiFetch(`/api/sites/${id}`,{method:'DELETE'});loadSites();}catch(e){alert(e.message);}}
+
+function renderBarList(id,qs,color){const el=document.getElementById(id);if(!qs.length){el.innerHTML='<div class="empty"><div class="ed">Pas de données</div></div>';return;}const max=qs[0]?.count||1;el.innerHTML=qs.map(q=>`<div class="br"><span class="bl bl-w">${IICO[q.intent]||'🔍'} ${esc(q.original||q.query)}</span><div class="bt"><div class="bf" style="width:${Math.round(q.count/max*100)}%;background:${color}"></div></div><span class="bv">${q.count}</span>${q.no_results>0?`<span class="tag tred" style="font-size:8px">${q.no_results}×∅</span>`:''}</div>`).join('');}
+function renderOppList(id,opps){const el=document.getElementById(id);if(!opps.length){el.innerHTML='<div class="empty"><div class="ei">🎉</div><div class="et">Aucune opportunité !</div></div>';return;}el.innerHTML=opps.map(q=>`<div class="oi"><span style="font-size:16px;flex-shrink:0">📝</span><div><div class="oit">${esc(q.query)}</div><div class="oitags"><span class="tag ${q.priority==='haute'?'tred':q.priority==='moyenne'?'tyel':'tdim'}">${q.priority||'basse'}</span><span class="tag tred">${q.count}×∅</span></div></div></div>`).join('');}
+function renderThinList(id,opps){const el=document.getElementById(id);if(!opps||!opps.length){el.innerHTML='<div class="empty"><div class="ei">✅</div><div class="et">Contenu suffisant</div></div>';return;}el.innerHTML=opps.map(q=>`<div class="oi"><span style="font-size:16px;flex-shrink:0">⚡</span><div><div class="oit">${esc(q.query)}</div><div class="oitags"><span class="tag tyel">${q.count}× peu</span></div></div></div>`).join('');}
+function renderDailyChart(daily,cid,lid){const w=document.getElementById(cid),l=document.getElementById(lid);if(!daily.length){w.innerHTML='<div class="empty"><div class="ed">Pas de données</div></div>';return;}const max=Math.max(...daily.map(d=>d.searches),1),W=600,H=90,pad=10,pts=daily.map((d,i)=>[pad+(i/(daily.length-1||1))*(W-pad*2),H-pad-((d.searches/max)*(H-pad*2))]),ps=pts.map(p=>p.join(',')).join(' L ');w.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:80px"><path d="M ${pts[0]} L ${ps} L ${pts[pts.length-1][0]},${H} L ${pts[0][0]},${H} Z" fill="rgba(212,175,55,.15)"/><path d="M ${ps}" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linejoin="round"/></svg>`;if(l){const step=Math.ceil(daily.length/5);l.innerHTML=daily.filter((_,i)=>i%step===0||i===daily.length-1).map(d=>`<span style="font-family:var(--mono);font-size:9px;color:var(--dim)">${d.day?.slice(5)}</span>`).join('');}}
+function renderFunnel(id,dist){const el=document.getElementById(id),total=dist.reduce((s,d)=>s+d.count,0)||1;const steps=[['Toutes les recherches',total,'var(--blue)'],['Intent e-commerce',dist.filter(d=>ECO.includes(d.intent)).reduce((s,d)=>s+d.count,0),'var(--eco)'],['Intent achat',dist.find(d=>d.intent==='buy')?.count||0,'var(--gold)'],['Contact',dist.find(d=>d.intent==='contact')?.count||0,'var(--cyan)']];el.innerHTML=steps.map(([l,v,c])=>{const p=Math.round(v/total*100);return `<div class="funnel-row"><div class="funnel-label">${l}</div><div class="funnel-bar-wrap"><div class="funnel-bar" style="width:${Math.max(p,2)}%;background:${c}">${v}</div></div><div class="funnel-pct">${p}%</div></div>`;}).join('');}
+
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+
+window.addEventListener('load', async()=>{
+  if(isTokenValid()){
+    document.getElementById('login-screen').classList.add('hidden');
+    scheduleRefresh(); // planifier le refresh automatique
+    await bootstrapSites();
+  } else {
+    JWT=''; localStorage.removeItem('seekr_jwt'); localStorage.removeItem('seekr_jwt_expiry');
+    document.getElementById('login-screen').classList.remove('hidden');
+  }
+  if(SID){document.getElementById('crawl-sid').value=SID;document.getElementById('m-csid').value=SID;}
+  document.querySelector('.nb.dim')?.classList.add('active');
+});
+</script>
+</body>
+</html>

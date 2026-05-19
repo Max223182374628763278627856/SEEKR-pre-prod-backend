@@ -1,0 +1,29 @@
+# ╔══════════════════════════════════════════════════════════════╗
+# ║  SEEKR Edge Worker — Config Cloudflare Workers               ║
+# ║  wrangler deploy                                             ║
+# ╚══════════════════════════════════════════════════════════════╝
+
+name = "seekr-edge"
+main = "seekr-edge-worker.js"
+compatibility_date = "2024-01-01"
+
+# KV Namespace pour le cache des réponses API
+# Créer avec : wrangler kv:namespace create "SEEKR_KV"
+[[kv_namespaces]]
+binding = "SEEKR_KV"
+id = "VOTRE_KV_NAMESPACE_ID"
+
+# Variables à définir via wrangler secret put ou dashboard CF
+# wrangler secret put SEEKR_API_KEY
+# wrangler secret put SEEKR_API_URL
+# wrangler secret put SEEKR_WIDGET_URL
+
+[vars]
+SEEKR_THEME = "light"
+SEEKR_PLACEHOLDER = "Comment puis-je vous aider ?"
+SEEKR_AB_RATIO = "0"   # 0 = agent pour 100% des visiteurs, 0.5 = 50/50
+
+# Déploiement sur un domaine client spécifique
+# [routes]
+# pattern = "client-domain.com/*"
+# zone_name = "client-domain.com"

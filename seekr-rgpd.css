@@ -1,0 +1,151 @@
+/* ═══════════════════════════════════════════════════
+   SEEKR RGPD v5.0 — Styles bannière consentement CNIL
+   Thème : Noir / Or (cohérent avec le widget)
+   ═══════════════════════════════════════════════════ */
+
+#seekr-rgpd-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999999;
+  background: #0d0d12;
+  border-top: 2px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.6);
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  animation: seekr-slide-up 0.3s ease;
+}
+
+@keyframes seekr-slide-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.seekr-rgpd-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  flex-wrap: wrap;
+}
+
+.seekr-rgpd-text {
+  flex: 1;
+  min-width: 240px;
+}
+
+.seekr-rgpd-text p {
+  margin: 0 0 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(240, 234, 204, 0.75);
+}
+
+.seekr-rgpd-text p:last-child {
+  margin-bottom: 0;
+}
+
+.seekr-rgpd-text strong {
+  color: #f0eacc;
+  font-weight: 600;
+}
+
+.seekr-rgpd-text a {
+  color: #D4AF37;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.seekr-rgpd-text a:hover {
+  text-decoration: underline;
+}
+
+.seekr-rgpd-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.seekr-btn {
+  padding: 9px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s, transform 0.15s;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.seekr-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.seekr-btn:active {
+  transform: translateY(0);
+}
+
+/* Accepter — doré (call-to-action principal) */
+.seekr-btn-accept {
+  background: #D4AF37;
+  color: #0d0d12;
+}
+
+/* Refuser — neutre (mais visible — conformité CNIL : équivalence visuelle) */
+.seekr-btn-refuse {
+  background: rgba(240, 234, 204, 0.08);
+  color: rgba(240, 234, 204, 0.65);
+  border: 1px solid rgba(240, 234, 204, 0.15);
+}
+
+.seekr-btn-refuse:hover {
+  background: rgba(240, 234, 204, 0.12);
+  color: rgba(240, 234, 204, 0.85);
+}
+
+/* ── Bouton retrait consentement ── */
+.seekr-revoke-btn {
+  background: none;
+  border: none;
+  color: rgba(240, 234, 204, 0.35);
+  font-size: 11px;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 4px 0;
+  transition: color 0.15s;
+}
+
+.seekr-revoke-btn:hover {
+  color: #D4AF37;
+}
+
+/* ── Responsive mobile ── */
+@media (max-width: 600px) {
+  .seekr-rgpd-inner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px 16px 20px;
+    gap: 14px;
+  }
+
+  .seekr-rgpd-actions {
+    justify-content: stretch;
+  }
+
+  .seekr-btn {
+    flex: 1;
+    text-align: center;
+    padding: 11px 16px;
+    font-size: 14px;
+  }
+}
