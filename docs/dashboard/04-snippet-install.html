@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEEKR — Étape 3 : Installer le Widget</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #080810;
+  color: #e8e0c8;
+  min-height: 100vh;
+  display: flex;
+}
+.sidebar {
+  width: 220px;
+  background: #0d0d18;
+  border-right: 1px solid rgba(212,175,55,0.1);
+  padding: 24px 0;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-logo {
+  padding: 0 24px 28px;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: #D4AF37;
+  border-bottom: 1px solid rgba(212,175,55,0.1);
+  margin-bottom: 16px;
+}
+.sidebar-logo span { color: #e8e0c8; }
+.step-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px;
+  font-size: 13px;
+}
+.step-nav-num {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  flex-shrink: 0;
+}
+.step-nav-num.done { background: rgba(74,222,128,0.12); color: #4ade80; }
+.step-nav-num.active { background: #D4AF37; color: #0d0d12; }
+.step-nav-num.pending { background: rgba(232,224,200,0.05); color: rgba(232,224,200,0.2); border: 1px solid rgba(232,224,200,0.1); }
+.step-nav-label.done { color: rgba(232,224,200,0.4); }
+.step-nav-label.active { color: #f0eacc; font-weight: 600; }
+.step-nav-label.pending { color: rgba(232,224,200,0.2); }
+
+.main { flex: 1; padding: 48px 60px; overflow-y: auto; max-width: 860px; }
+
+.tag {
+  display: inline-block;
+  background: rgba(212,175,55,0.12);
+  color: #D4AF37;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #f0eacc;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+.subtitle {
+  font-size: 14px;
+  color: rgba(232,224,200,0.5);
+  line-height: 1.65;
+  max-width: 540px;
+  margin-bottom: 36px;
+}
+
+/* ── Tabs méthode ── */
+.method-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.tab {
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid rgba(212,175,55,0.12);
+  color: rgba(232,224,200,0.4);
+  transition: all 0.15s;
+}
+.tab.active {
+  background: rgba(212,175,55,0.12);
+  border-color: rgba(212,175,55,0.35);
+  color: #D4AF37;
+  font-weight: 600;
+}
+.tab .tab-badge {
+  margin-left: 6px;
+  font-size: 9px;
+  background: rgba(212,175,55,0.2);
+  padding: 1px 5px;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+
+/* ── Code block ── */
+.code-block {
+  background: #060610;
+  border: 1px solid rgba(212,175,55,0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(212,175,55,0.04);
+  border-bottom: 1px solid rgba(212,175,55,0.1);
+}
+.code-lang {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(232,224,200,0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.code-lang::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #D4AF37;
+}
+.copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #D4AF37;
+  cursor: pointer;
+  background: rgba(212,175,55,0.08);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 5px;
+  padding: 4px 10px;
+}
+.code-body {
+  padding: 20px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+.c-comment { color: rgba(232,224,200,0.25); }
+.c-tag { color: #7dd3fc; }
+.c-attr { color: #86efac; }
+.c-value { color: #fca5a5; }
+.c-string { color: #D4AF37; }
+.c-highlight {
+  background: rgba(212,175,55,0.1);
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+/* ── Placement visuel ── */
+.placement-block {
+  margin-bottom: 28px;
+}
+.placement-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(232,224,200,0.7);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.placement-title::before {
+  content: '';
+  width: 3px; height: 14px;
+  background: #D4AF37;
+  border-radius: 2px;
+}
+.html-preview {
+  background: #0a0a16;
+  border: 1px solid rgba(212,175,55,0.1);
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.8;
+  color: rgba(232,224,200,0.3);
+}
+.html-tag { color: #7dd3fc; }
+.html-highlight {
+  background: rgba(212,175,55,0.15);
+  border-radius: 3px;
+  padding: 1px 4px;
+  color: #D4AF37;
+}
+.html-arrow {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 11px;
+  color: #D4AF37;
+  background: rgba(212,175,55,0.1);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* ── Alternatives d'intégration ── */
+.alt-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.alt-card {
+  background: #0d0d18;
+  border: 1px solid rgba(212,175,55,0.08);
+  border-radius: 10px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.alt-card:hover { border-color: rgba(212,175,55,0.2); }
+.alt-card-icon { font-size: 20px; margin-bottom: 8px; }
+.alt-card-name { font-size: 12px; font-weight: 700; color: #f0eacc; margin-bottom: 4px; }
+.alt-card-desc { font-size: 11px; color: rgba(232,224,200,0.35); line-height: 1.5; }
+
+/* ── Vérification en direct ── */
+.verify-block {
+  background: #0d0d18;
+  border: 1px solid rgba(74,222,128,0.2);
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.verify-icon {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(74,222,128,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.verify-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #4ade80;
+  margin-bottom: 4px;
+}
+.verify-desc {
+  font-size: 12px;
+  color: rgba(232,224,200,0.4);
+}
+.verify-btn {
+  margin-left: auto;
+  padding: 8px 16px;
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.25);
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4ade80;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #D4AF37;
+  color: #0d0d12;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-logo">SEEKR<span>.</span></div>
+  <div class="step-nav-item"><div class="step-nav-num done">✓</div><div class="step-nav-label done">Compte créé</div></div>
+  <div class="step-nav-item"><div class="step-nav-num done">✓</div><div class="step-nav-label done">Site analysé</div></div>
+  <div class="step-nav-item"><div class="step-nav-num active">3</div><div class="step-nav-label active">Installer le widget</div></div>
+  <div class="step-nav-item"><div class="step-nav-num pending">4</div><div class="step-nav-label pending">Go live</div></div>
+</div>
+
+<div class="main">
+  <div class="tag">Étape 3 sur 4</div>
+  <h1>Copiez ce snippet sur votre site</h1>
+  <p class="subtitle">Une seule ligne à coller avant le <code style="font-family:monospace;font-size:13px;background:rgba(212,175,55,0.1);padding:1px 6px;border-radius:4px;color:#D4AF37;">&lt;/body&gt;</code> de toutes vos pages. L'agent se charge automatiquement.</p>
+
+  <!-- Tabs -->
+  <div class="method-tabs">
+    <div class="tab active">Script tag <span class="tab-badge">Le plus simple</span></div>
+    <div class="tab">Cloudflare Worker <span class="tab-badge">Recommandé</span></div>
+    <div class="tab">NPM Package</div>
+  </div>
+
+  <!-- Code snippet -->
+  <div class="code-block">
+    <div class="code-header">
+      <div class="code-lang">HTML</div>
+      <div class="copy-btn">📋 Copier</div>
+    </div>
+    <div class="code-body">
+      <span class="c-comment">&lt;!-- SEEKR Agent — à coller avant &lt;/body&gt; --&gt;</span><br>
+      <span class="c-tag">&lt;script</span><br>
+      &nbsp;&nbsp;<span class="c-attr">src</span>=<span class="c-string">"https://api.seekr-search.fr/widget/seekr-agent-widget.js"</span><br>
+      &nbsp;&nbsp;<span class="c-attr">data-key</span>=<span class="c-highlight c-string">"sk_seekr_live_a7b3c8d2e1f4..."</span><br>
+      &nbsp;&nbsp;<span class="c-attr">data-mode</span>=<span class="c-string">"agent"</span><br>
+      &nbsp;&nbsp;<span class="c-attr">data-theme</span>=<span class="c-string">"light"</span><br>
+      &nbsp;&nbsp;<span class="c-attr">data-placeholder</span>=<span class="c-string">"Comment puis-je vous aider ?"</span><br>
+      &nbsp;&nbsp;<span class="c-attr">async</span> <span class="c-attr">defer</span><br>
+      <span class="c-tag">&gt;&lt;/script&gt;</span>
+    </div>
+  </div>
+
+  <!-- Où coller -->
+  <div class="placement-block">
+    <div class="placement-title">Où le placer dans votre HTML</div>
+    <div class="html-preview">
+      <span class="html-tag">&lt;html&gt;</span><br>
+      &nbsp;&nbsp;<span class="html-tag">&lt;head&gt;</span>…<span class="html-tag">&lt;/head&gt;</span><br>
+      &nbsp;&nbsp;<span class="html-tag">&lt;body&gt;</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgba(232,224,200,0.2);">… votre contenu …</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="html-highlight">&lt;script src="seekr-agent-widget.js" …&gt;&lt;/script&gt;</span>
+      <span class="html-arrow">← ici</span><br>
+      &nbsp;&nbsp;<span class="html-tag">&lt;/body&gt;</span><br>
+      <span class="html-tag">&lt;/html&gt;</span>
+    </div>
+  </div>
+
+  <!-- Alternatives -->
+  <div style="font-size:13px;font-weight:700;color:rgba(232,224,200,0.4);margin-bottom:14px;">Ou via votre CMS</div>
+  <div class="alt-methods">
+    <div class="alt-card">
+      <div class="alt-card-icon">🟦</div>
+      <div class="alt-card-name">WordPress</div>
+      <div class="alt-card-desc">Plugin dédié ou dans le footer via Appearance > Theme Editor</div>
+    </div>
+    <div class="alt-card">
+      <div class="alt-card-icon">🔶</div>
+      <div class="alt-card-name">Shopify</div>
+      <div class="alt-card-desc">Ajouter dans theme.liquid avant &lt;/body&gt;</div>
+    </div>
+    <div class="alt-card">
+      <div class="alt-card-icon">☁️</div>
+      <div class="alt-card-name">Cloudflare</div>
+      <div class="alt-card-desc">Déployer seekr-edge-worker.js — injection automatique sur tout le site</div>
+    </div>
+  </div>
+
+  <!-- Statut de détection -->
+  <div class="verify-block">
+    <div class="verify-icon">✅</div>
+    <div>
+      <div class="verify-title">Widget détecté sur maison-lefevre.fr !</div>
+      <div class="verify-desc">SEEKR a bien été trouvé sur votre page d'accueil. L'agent est actif.</div>
+    </div>
+    <div class="verify-btn">Tester en direct →</div>
+  </div>
+
+  <div class="btn-next">Voir mon rapport SEO →</div>
+</div>
+
+</body>
+</html>

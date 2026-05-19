@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEEKR — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #07070f; color: #ddd5bb; min-height: 100vh; display: flex; overflow: hidden; }
+
+/* ══════════════════ SIDEBAR ══════════════════ */
+.sidebar {
+  width: 232px; flex-shrink: 0;
+  background: #0b0b17;
+  border-right: 1px solid rgba(212,175,55,0.08);
+  display: flex; flex-direction: column;
+  height: 100vh; position: sticky; top: 0;
+}
+.sb-logo {
+  padding: 24px 20px 20px;
+  font-size: 18px; font-weight: 900;
+  letter-spacing: 0.14em; color: #D4AF37;
+  border-bottom: 1px solid rgba(212,175,55,0.07);
+}
+.sb-logo span { color: #ddd5bb; }
+.sb-logo sub { font-size: 9px; font-weight: 500; color: rgba(212,175,55,0.4); letter-spacing: 0.08em; display: block; margin-top: 2px; }
+
+.sb-site {
+  margin: 12px 12px 0;
+  padding: 10px 12px;
+  background: rgba(212,175,55,0.05);
+  border: 1px solid rgba(212,175,55,0.1);
+  border-radius: 10px;
+  display: flex; align-items: center; gap: 9px;
+  cursor: pointer;
+}
+.sb-site-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
+.sb-site-name { font-size: 12px; font-weight: 600; color: #ddd5bb; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sb-site-change { font-size: 10px; color: rgba(212,175,55,0.4); }
+
+.sb-section { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(221,213,187,0.25); padding: 18px 20px 6px; }
+
+.sb-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 20px; font-size: 13px;
+  color: rgba(221,213,187,0.45);
+  cursor: pointer; border-left: 2px solid transparent;
+  transition: all 0.13s; position: relative;
+}
+.sb-item:hover { color: #ddd5bb; background: rgba(212,175,55,0.04); }
+.sb-item.active { color: #D4AF37; background: rgba(212,175,55,0.07); border-left-color: #D4AF37; font-weight: 600; }
+.sb-item svg { width: 15px; height: 15px; flex-shrink: 0; }
+.sb-item .sb-badge {
+  margin-left: auto; font-size: 10px; font-weight: 700;
+  background: rgba(248,113,113,0.15); color: #f87171;
+  padding: 1px 6px; border-radius: 10px;
+}
+.sb-item .sb-badge.warn { background: rgba(250,204,21,0.12); color: #facc15; }
+.sb-item .sb-badge.ok { background: rgba(74,222,128,0.1); color: #4ade80; }
+
+.sb-bottom {
+  margin-top: auto;
+  padding: 16px 20px;
+  border-top: 1px solid rgba(212,175,55,0.07);
+}
+.sb-plan {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; color: rgba(221,213,187,0.35); margin-bottom: 10px;
+}
+.sb-plan-badge { background: rgba(212,175,55,0.12); color: #D4AF37; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px; }
+.sb-avatar-row { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.sb-avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(212,175,55,0.15); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #D4AF37; }
+.sb-user-name { font-size: 12px; font-weight: 600; color: rgba(221,213,187,0.6); }
+
+/* ══════════════════ MAIN ══════════════════ */
+.main { flex: 1; overflow-y: auto; height: 100vh; }
+
+/* Sections (pages) */
+.page { display: none; padding: 36px 40px; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ── Topbar commun ── */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 32px;
+}
+.topbar-left h1 { font-size: 20px; font-weight: 800; color: #f0e8cc; }
+.topbar-left p { font-size: 13px; color: rgba(221,213,187,0.4); margin-top: 3px; }
+.topbar-actions { display: flex; gap: 10px; align-items: center; }
+
+.btn-ghost {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 16px; border-radius: 8px; font-size: 12px; font-weight: 600;
+  background: rgba(212,175,55,0.07); border: 1px solid rgba(212,175,55,0.18);
+  color: rgba(212,175,55,0.8); cursor: pointer; transition: all 0.15s;
+}
+.btn-ghost:hover { background: rgba(212,175,55,0.12); color: #D4AF37; }
+.btn-primary {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: 8px; font-size: 12px; font-weight: 700;
+  background: #D4AF37; color: #0a0a0a; cursor: pointer; transition: opacity 0.15s;
+}
+.btn-primary:hover { opacity: 0.88; }
+
+/* ── Stat cards ── */
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+.stat-card {
+  background: #0e0e1c; border: 1px solid rgba(212,175,55,0.09);
+  border-radius: 14px; padding: 20px;
+}
+.stat-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+.stat-icon { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; }
+.stat-icon svg { width: 16px; height: 16px; }
+.stat-delta { font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 5px; }
+.delta-up { background: rgba(74,222,128,0.1); color: #4ade80; }
+.delta-down { background: rgba(248,113,113,0.1); color: #f87171; }
+.delta-neutral { background: rgba(221,213,187,0.07); color: rgba(221,213,187,0.4); }
+.stat-value { font-size: 28px; font-weight: 800; color: #f0e8cc; line-height: 1; margin-bottom: 4px; }
+.stat-label { font-size: 12px; color: rgba(221,213,187,0.4); }
+
+/* ── Section title ── */
+.section-title {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(221,213,187,0.3);
+  margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+}
+.section-title::after { content: ''; flex: 1; height: 1px; background: rgba(212,175,55,0.07); }
+
+/* ── Panel card ── */
+.panel {
+  background: #0e0e1c; border: 1px solid rgba(212,175,55,0.09);
+  border-radius: 14px; overflow: hidden;
+}
+.panel-header {
+  padding: 16px 20px; border-bottom: 1px solid rgba(212,175,55,0.07);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.panel-title { font-size: 13px; font-weight: 700; color: #ddd5bb; }
+.panel-action { font-size: 11px; color: #D4AF37; cursor: pointer; }
+
+/* ── Table ── */
+.table-head {
+  display: grid; padding: 10px 20px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(221,213,187,0.25);
+  border-bottom: 1px solid rgba(212,175,55,0.06);
+}
+.table-row {
+  display: grid; padding: 13px 20px;
+  align-items: center; border-bottom: 1px solid rgba(212,175,55,0.04);
+  cursor: pointer; transition: background 0.12s;
+}
+.table-row:last-child { border-bottom: none; }
+.table-row:hover { background: rgba(212,175,55,0.04); }
+.table-row.selected { background: rgba(212,175,55,0.06); }
+
+/* Score badge */
+.sbadge { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 24px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+.sbadge.g { background: rgba(74,222,128,0.1); color: #4ade80; }
+.sbadge.w { background: rgba(250,204,21,0.1); color: #facc15; }
+.sbadge.b { background: rgba(248,113,113,0.1); color: #f87171; }
+
+/* Word badge */
+.wbadge { font-size: 12px; font-weight: 600; }
+.wbadge.ok { color: #4ade80; }
+.wbadge.low { color: #f87171; }
+.wbadge.high { color: #facc15; }
+
+/* Mystery word */
+.mword { font-size: 12px; font-weight: 500; color: #D4AF37; background: rgba(212,175,55,0.08); padding: 2px 8px; border-radius: 5px; display: inline-block; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mword.missing { color: #f87171; background: rgba(248,113,113,0.08); }
+
+/* Issue chips */
+.ichip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; padding: 2px 7px; border-radius: 5px; }
+.ichip.err { background: rgba(248,113,113,0.1); color: #f87171; }
+.ichip.warn { background: rgba(250,204,21,0.08); color: #facc15; }
+.ichip.ok { background: rgba(74,222,128,0.08); color: #4ade80; }
+
+/* ── Score ring ── */
+.ring-wrap { position: relative; width: 100px; height: 100px; }
+.ring-wrap svg { width: 100px; height: 100px; }
+.ring-bg { fill: none; stroke: rgba(212,175,55,0.08); stroke-width: 7; }
+.ring-fill { fill: none; stroke-width: 7; stroke-linecap: round; stroke-dasharray: 251; transform: rotate(-90deg); transform-origin: center; }
+.ring-num { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 24px; font-weight: 800; color: #f0e8cc; }
+.ring-num small { font-size: 11px; color: rgba(221,213,187,0.35); font-weight: 500; }
+
+/* ── Rec item ── */
+.rec-item { display: flex; gap: 12px; padding: 14px 20px; border-bottom: 1px solid rgba(212,175,55,0.05); align-items: flex-start; }
+.rec-item:last-child { border-bottom: none; }
+.rec-prio { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+.rec-prio.p1 { background: rgba(248,113,113,0.12); color: #f87171; }
+.rec-prio.p2 { background: rgba(250,204,21,0.1); color: #facc15; }
+.rec-prio.p3 { background: rgba(74,222,128,0.08); color: #4ade80; }
+.rec-body { flex: 1; min-width: 0; }
+.rec-title { font-size: 13px; font-weight: 600; color: #ddd5bb; margin-bottom: 4px; }
+.rec-desc { font-size: 12px; color: rgba(221,213,187,0.4); line-height: 1.55; }
+.rec-action { font-size: 11px; font-weight: 600; color: #D4AF37; cursor: pointer; margin-top: 6px; display: inline-block; }
+
+/* ── Bar chart ── */
+.bar-chart { display: flex; flex-direction: column; gap: 10px; }
+.bar-row { display: flex; align-items: center; gap: 10px; }
+.bar-label { width: 90px; font-size: 11px; color: rgba(221,213,187,0.45); text-align: right; flex-shrink: 0; }
+.bar-track { flex: 1; height: 6px; background: rgba(212,175,55,0.07); border-radius: 3px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+.bar-val { width: 36px; font-size: 11px; font-weight: 600; color: rgba(221,213,187,0.5); }
+
+/* ── Mots mystères chips grid ── */
+.mystery-grid { display: flex; flex-wrap: wrap; gap: 10px; padding: 20px; }
+.mystery-chip {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border-radius: 10px;
+  border: 1px solid rgba(212,175,55,0.14);
+  background: rgba(212,175,55,0.05); cursor: pointer;
+  transition: all 0.15s;
+}
+.mystery-chip:hover { border-color: rgba(212,175,55,0.35); background: rgba(212,175,55,0.09); }
+.mystery-chip .mc-word { font-size: 13px; font-weight: 600; color: #D4AF37; }
+.mystery-chip .mc-count { font-size: 11px; color: rgba(221,213,187,0.35); }
+.mystery-chip .mc-bar { width: 40px; height: 3px; background: rgba(212,175,55,0.12); border-radius: 2px; }
+.mystery-chip .mc-bar-fill { height: 100%; background: #D4AF37; border-radius: 2px; }
+.mystery-chip.missing-chip { border-color: rgba(248,113,113,0.2); background: rgba(248,113,113,0.04); }
+.mystery-chip.missing-chip .mc-word { color: #f87171; }
+
+/* ── Agent analytics ── */
+.analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.conversation-list { display: flex; flex-direction: column; gap: 0; }
+.conv-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 20px; border-bottom: 1px solid rgba(212,175,55,0.04);
+  cursor: pointer; transition: background 0.12s;
+}
+.conv-item:hover { background: rgba(212,175,55,0.04); }
+.conv-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(212,175,55,0.1); display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.conv-meta { flex: 1; min-width: 0; }
+.conv-query { font-size: 13px; font-weight: 500; color: #ddd5bb; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.conv-sub { font-size: 11px; color: rgba(221,213,187,0.35); }
+.conv-cta { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 5px; flex-shrink: 0; }
+.conv-cta.converted { background: rgba(74,222,128,0.1); color: #4ade80; }
+.conv-cta.browsing { background: rgba(221,213,187,0.06); color: rgba(221,213,187,0.4); }
+
+/* ── Profil donut ── */
+.donut-legend { display: flex; flex-direction: column; gap: 8px; }
+.dl-item { display: flex; align-items: center; gap: 8px; }
+.dl-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dl-label { font-size: 12px; color: rgba(221,213,187,0.55); flex: 1; }
+.dl-val { font-size: 12px; font-weight: 600; color: #ddd5bb; }
+
+/* ══ CONFIG PAGE ══ */
+.config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.config-card { background: #0e0e1c; border: 1px solid rgba(212,175,55,0.09); border-radius: 14px; padding: 20px; }
+.config-card-title { font-size: 13px; font-weight: 700; color: #ddd5bb; margin-bottom: 4px; }
+.config-card-sub { font-size: 11px; color: rgba(221,213,187,0.35); margin-bottom: 16px; }
+
+.config-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.config-row:last-child { margin-bottom: 0; }
+.config-label { font-size: 12px; color: rgba(221,213,187,0.5); }
+.config-val { font-size: 12px; font-weight: 600; color: #ddd5bb; }
+.config-val.gold { color: #D4AF37; }
+
+.code-snippet {
+  background: #060610; border: 1px solid rgba(212,175,55,0.12);
+  border-radius: 10px; overflow: hidden;
+}
+.cs-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 14px; background: rgba(212,175,55,0.03); border-bottom: 1px solid rgba(212,175,55,0.08); }
+.cs-lang { font-size: 10px; font-weight: 600; color: rgba(221,213,187,0.3); text-transform: uppercase; letter-spacing: 0.1em; }
+.cs-copy { font-size: 11px; font-weight: 600; color: #D4AF37; cursor: pointer; background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.2); padding: 3px 9px; border-radius: 5px; }
+.cs-body { padding: 14px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.7; color: rgba(221,213,187,0.55); overflow-x: auto; }
+.cs-gold { color: #D4AF37; }
+.cs-blue { color: #7dd3fc; }
+.cs-green { color: #86efac; }
+
+.toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(212,175,55,0.06); }
+.toggle-row:last-child { border-bottom: none; }
+.toggle-info .tl { font-size: 13px; font-weight: 500; color: #ddd5bb; }
+.toggle-info .ts { font-size: 11px; color: rgba(221,213,187,0.35); margin-top: 2px; }
+.toggle { width: 38px; height: 20px; background: #D4AF37; border-radius: 10px; position: relative; cursor: pointer; flex-shrink: 0; }
+.toggle::after { content: ''; position: absolute; left: 20px; top: 3px; width: 14px; height: 14px; background: #fff; border-radius: 50%; transition: left 0.2s; }
+.toggle.off { background: rgba(221,213,187,0.1); }
+.toggle.off::after { left: 3px; }
+
+/* ── Suggestions IA page ── */
+.sug-page-grid { display: grid; grid-template-columns: 300px 1fr; gap: 14px; align-items: start; }
+.sug-page-list { display: flex; flex-direction: column; gap: 0; }
+.sug-page-item {
+  padding: 12px 16px; cursor: pointer;
+  border-bottom: 1px solid rgba(212,175,55,0.05);
+  transition: background 0.12s; border-left: 2px solid transparent;
+}
+.sug-page-item:hover { background: rgba(212,175,55,0.04); }
+.sug-page-item.active { background: rgba(212,175,55,0.07); border-left-color: #D4AF37; }
+.sug-page-name { font-size: 12px; font-weight: 600; color: #ddd5bb; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sug-page-meta { display: flex; gap: 8px; align-items: center; }
+.sug-page-score { font-size: 11px; font-weight: 700; }
+.sug-page-issues { font-size: 10px; color: rgba(221,213,187,0.3); }
+
+.sug-detail { background: #0e0e1c; border: 1px solid rgba(212,175,55,0.09); border-radius: 14px; overflow: hidden; }
+.sug-detail-header { padding: 20px; border-bottom: 1px solid rgba(212,175,55,0.07); }
+.sug-detail-title { font-size: 15px; font-weight: 700; color: #f0e8cc; margin-bottom: 4px; }
+.sug-detail-url { font-size: 11px; color: rgba(221,213,187,0.3); }
+.sug-scores { display: flex; gap: 20px; padding: 16px 20px; border-bottom: 1px solid rgba(212,175,55,0.07); }
+.sug-score-item { text-align: center; }
+.sug-score-val { font-size: 22px; font-weight: 800; margin-bottom: 2px; }
+.sug-score-lbl { font-size: 10px; color: rgba(221,213,187,0.35); }
+
+.ai-block { padding: 20px; }
+.ai-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(221,213,187,0.25); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.ai-label::after { content: ''; flex: 1; height: 1px; background: rgba(212,175,55,0.06); }
+.ai-suggestion-box {
+  background: #07070f; border: 1px solid rgba(212,175,55,0.1);
+  border-radius: 10px; padding: 14px 16px; margin-bottom: 10px;
+}
+.ai-sug-type { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+.ai-sug-type.content { color: #D4AF37; }
+.ai-sug-type.eeat { color: #7dd3fc; }
+.ai-sug-type.structure { color: #c4b5fd; }
+.ai-sug-text { font-size: 13px; color: rgba(221,213,187,0.7); line-height: 1.6; }
+.ai-sug-text strong { color: #ddd5bb; }
+.ai-sug-actions { display: flex; gap: 8px; margin-top: 10px; }
+.ai-sug-apply { font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 6px; background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2); color: #D4AF37; cursor: pointer; }
+.ai-sug-skip { font-size: 11px; color: rgba(221,213,187,0.25); cursor: pointer; padding: 5px 8px; }
+
+/* ── Onboarding status ── */
+.onb-steps { display: flex; flex-direction: column; gap: 0; }
+.onb-step {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 16px 20px; border-bottom: 1px solid rgba(212,175,55,0.05);
+}
+.onb-step:last-child { border-bottom: none; }
+.onb-step-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; }
+.onb-step-num.done { background: rgba(74,222,128,0.1); color: #4ade80; }
+.onb-step-num.active { background: #D4AF37; color: #0a0a0a; }
+.onb-step-num.pending { background: rgba(221,213,187,0.06); color: rgba(221,213,187,0.3); border: 1px solid rgba(221,213,187,0.1); }
+.onb-step-body { flex: 1; }
+.onb-step-title { font-size: 13px; font-weight: 600; color: #ddd5bb; margin-bottom: 2px; }
+.onb-step-desc { font-size: 12px; color: rgba(221,213,187,0.35); }
+.onb-step-done { font-size: 11px; color: #4ade80; }
+
+/* Scrollbar */
+.main::-webkit-scrollbar { width: 4px; }
+.main::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.1); border-radius: 2px; }
+
+/* ── mini sparkline ── */
+.sparkline { height: 40px; display: flex; align-items: flex-end; gap: 3px; }
+.spark-bar { flex: 1; border-radius: 3px 3px 0 0; transition: height 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- ════════ SIDEBAR ════════ -->
+<div class="sidebar">
+  <div class="sb-logo">SEEKR<span>.</span><sub>Dashboard pre-prod</sub></div>
+
+  <div class="sb-site">
+    <div class="sb-site-dot"></div>
+    <div class="sb-site-name">maison-lefevre.fr</div>
+    <div class="sb-site-change">▾</div>
+  </div>
+
+  <div class="sb-section">Analyse</div>
+  <div class="sb-item active" onclick="nav('overview')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+    Vue globale
+  </div>
+  <div class="sb-item" onclick="nav('audit')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    Audit SEO
+    <span class="sb-badge">6</span>
+  </div>
+  <div class="sb-item" onclick="nav('mystery')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M11 8v3l2 2"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    Mots mystères
+    <span class="sb-badge warn">3</span>
+  </div>
+  <div class="sb-item" onclick="nav('suggestions')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L9.19 8.63L2 9.24L7 13.47L5.82 20.37L12 16.9L18.18 20.37L17 13.47L22 9.24L14.81 8.63L12 2Z"/></svg>
+    Suggestions IA
+    <span class="sb-badge warn">11</span>
+  </div>
+
+  <div class="sb-section">Agent</div>
+  <div class="sb-item" onclick="nav('analytics')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    Analytics Agent
+    <span class="sb-badge ok">↑</span>
+  </div>
+  <div class="sb-item" onclick="nav('analytics')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    Conversions
+  </div>
+
+  <div class="sb-section">Paramètres</div>
+  <div class="sb-item" onclick="nav('config')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    Configuration
+  </div>
+
+  <div class="sb-bottom">
+    <div class="sb-plan"><span class="sb-plan-badge">PME</span> Plan actif · 28j restants</div>
+    <div class="sb-avatar-row">
+      <div class="sb-avatar">ML</div>
+      <div class="sb-user-name">Maison Lefèvre</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PAGES ════════ -->
+<div class="main">
+
+  <!-- ── VUE GLOBALE ── -->
+  <div class="page active" id="page-overview">
+    <div class="topbar">
+      <div class="topbar-left">
+        <h1>Vue globale</h1>
+        <p>maison-lefevre.fr · Dernier audit il y a 2h · 24 pages indexées</p>
+      </div>
+      <div class="topbar-actions">
+        <div class="btn-ghost" onclick="nav('audit')">↗ Voir l'audit</div>
+        <div class="btn-primary">⟳ Relancer</div>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <div class="stat-icon" style="background:rgba(212,175,55,0.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <span class="stat-delta delta-up">+4</span>
+        </div>
+        <div class="stat-value">74</div>
+        <div class="stat-label">Score SEO global /100</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <div class="stat-icon" style="background:rgba(248,113,113,0.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <span class="stat-delta delta-down">-2</span>
+        </div>
+        <div class="stat-value" style="color:#f87171;">6</div>
+        <div class="stat-label">Problèmes critiques</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <div class="stat-icon" style="background:rgba(74,222,128,0.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <span class="stat-delta delta-up">+12%</span>
+        </div>
+        <div class="stat-value" style="color:#4ade80;">247</div>
+        <div class="stat-label">Conversations agent / 7j</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <div class="stat-icon" style="background:rgba(196,181,253,0.1);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <span class="stat-delta delta-up">+3.2%</span>
+        </div>
+        <div class="stat-value" style="color:#c4b5fd;">18.4%</div>
+        <div class="stat-label">Taux de clic CTA</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+      <!-- Répartition scores -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Répartition des scores de pages</div>
+          <div class="panel-action" onclick="nav('audit')">Voir tout →</div>
+        </div>
+        <div style="padding:20px;">
+          <div class="bar-chart">
+            <div class="bar-row">
+              <div class="bar-label">Excellent 80+</div>
+              <div class="bar-track"><div class="bar-fill" style="width:29%;background:#4ade80;"></div></div>
+              <div class="bar-val" style="color:#4ade80;">7</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label">Bon 60–79</div>
+              <div class="bar-track"><div class="bar-fill" style="width:46%;background:#D4AF37;"></div></div>
+              <div class="bar-val" style="color:#D4AF37;">11</div>
+            </div>
+            <div class="bar-row">
+              <div class="bar-label">À améliorer &lt;60</div>
+              <div class="bar-track"><div class="bar-fill" style="width:25%;background:#f87171;"></div></div>
+              <div class="bar-val" style="color:#f87171;">6</div>
+            </div>
+          </div>
+          <div style="margin-top:20px;">
+            <div class="bar-chart">
+              <div class="bar-row">
+                <div class="bar-label">550–600 mots ✓</div>
+                <div class="bar-track"><div class="bar-fill" style="width:54%;background:rgba(212,175,55,0.4);"></div></div>
+                <div class="bar-val">13</div>
+              </div>
+              <div class="bar-row">
+                <div class="bar-label">Hors cible</div>
+                <div class="bar-track"><div class="bar-fill" style="width:46%;background:rgba(248,113,113,0.4);"></div></div>
+                <div class="bar-val">11</div>
+              </div>
+              <div class="bar-row">
+                <div class="bar-label">Mot mystère ✓</div>
+                <div class="bar-track"><div class="bar-fill" style="width:63%;background:rgba(196,181,253,0.5);"></div></div>
+                <div class="bar-val">15</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top recommandations -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Priorités immédiates</div>
+          <div class="panel-action" onclick="nav('suggestions')">Voir les suggestions IA →</div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-prio p1">1</div>
+          <div class="rec-body">
+            <div class="rec-title">3 pages sous 300 mots — hors cible critique</div>
+            <div class="rec-desc">/realisations, /contact, /faq. Elles pénalisent le score global.</div>
+            <span class="rec-action" onclick="nav('suggestions')">Voir les suggestions IA →</span>
+          </div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-prio p1">1</div>
+          <div class="rec-body">
+            <div class="rec-title">Mot mystère absent des 300 premiers mots — 4 pages</div>
+            <div class="rec-desc">Le keyword principal n'apparaît pas dans la zone prioritaire.</div>
+            <span class="rec-action" onclick="nav('mystery')">Voir les mots mystères →</span>
+          </div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-prio p2">2</div>
+          <div class="rec-body">
+            <div class="rec-title">E-E-A-T faible sur les pages produits</div>
+            <div class="rec-desc">Ajouter signaux d'expertise (certifications, années d'expérience).</div>
+          </div>
+        </div>
+        <div class="rec-item">
+          <div class="rec-prio p3">3</div>
+          <div class="rec-body">
+            <div class="rec-title">3 pages orphelines sans liens internes</div>
+            <div class="rec-desc">/cgv, /plan-du-site, /mentions-legales — à relier au footer.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agent sparkline -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">Activité de l'agent — 7 derniers jours</div>
+        <div class="panel-action" onclick="nav('analytics')">Détail analytics →</div>
+      </div>
+      <div style="padding:20px;display:grid;grid-template-columns:repeat(7,1fr);gap:12px;text-align:center;">
+        <div>
+          <div class="sparkline" style="height:60px;margin-bottom:6px;">
+            <div class="spark-bar" style="height:45%;background:rgba(212,175,55,0.2);"></div>
+            <div class="spark-bar" style="height:60%;background:rgba(212,175,55,0.3);"></div>
+            <div class="spark-bar" style="height:40%;background:rgba(212,175,55,0.2);"></div>
+          </div>
+          <div style="font-size:11px;color:rgba(221,213,187,0.3);">Lun</div>
+          <div style="font-size:13px;font-weight:700;color:#ddd5bb;">28</div>
+        </div>
+        <div>
+          <div class="sparkline" style="height:60px;margin-bottom:6px;">
+            <div class="spark-bar" style="height:55%;background:rgba(212,175,55,0.3);"></div>
+            <div class="spark-bar" style="height:70%;background:rgba(212,175,55,0.4);"></div>
+            <div class="spark-bar" style="height:50%;background:rgba(212,175,55,0.3);"></div>
+          </div>
+          <div style="font-size:11px;color:rgba(221,213,187,0.3);">Mar</div>
+          <div style="font-size:13px;font-weight:700;color:#ddd5bb;">35</div>
+        </div>
+        <div>
+          <div class="sparkline" style="height:60px;margin-bottom:6px;">
+            <div class="spark-bar" style="height:65%;background:rgba(212,175,55,0.35);"></div>
+            <div class="spark-bar" style="height:80%;background:rgba(212,175,55,0.5);"></div>
+            <div class="spark-bar" style="height:60%;background:rgba(212,175,55,0.35);"></div>
+          </div>
+          <div style="font-size:11px;color:rgba(221,213,187,0.3);">Mer</div>
+          <div style="font-size:13px;font-weight:700;color:#ddd5bb;">42</div>
+        </div>
+        <div>
+          <div class="sparkline" style="height:60px;margin-bottom:6px;">
+            <div class="spark-bar" style="height:50%;background:rgba(212,175,55,0.3);"></div>
+            <div class="spark-bar" style="height:65%;background:rgba(212,175,55,0.35);"></div>
+            <div class="spark-bar" style="height:45%;background:rgba(212,175,55,0.25);"></div>
+          </div>
+          <div style="font-size:11px;color:rgba(221,213,187,0.3);">Jeu</div>
+          <div style="font-size:13px;font-weight:700;color:#ddd5bb;">31</div>
+        </div>
+        <div>
+          <div class="sparkline" style="height:60px;margin-bottom:6px;">
+            <div class="spark-bar" style="height:80%;background:rgba(212,175,55,0.5);"></div>
+            <div class="spark-bar" style="height:95%;background:rgba(212,175,55,0.65);"></div>
+            <div class="spark-bar" style="height:75%;background:rgba(212,175,55,0.45);"></div>
+          </div>
+          <div style="font-size:11px;color:rgba(221,213,187,0.3);">Ven</div>
+          <div style="font-size:13px;font-weight:700;color:#D4AF37;">58</div>
+        </div>
+        <div>
+          <div class="sparkline" style="height:60px;margin-bottom:6px;">
+            <div class="spark-bar" style="height:60%;background:rgba(212,175,55,0.35);"></div>
+            <div class="spark-bar" style="height:75%;background:rgba(212,175,55,0.45);"></div>
+            <div class="spark-bar" style="height:55%;background:rgba(212,175,55,0.3);"></div>
+          </div>
+          <div style="font-size:11px;color:rgba(221,213,187,0.3);">Sam</div>
+          <div style="font-size:13px;font-weight:700;color:#ddd5bb;">38</div>
+        </div>
+        <div>
+          <div class="sparkline" style="height:60px;margin-bottom:6px;">
+            <div class="spark-bar" style="height:35%;background:rgba(212,175,55,0.2);"></div>
+            <div class="spark-bar" style="height:45%;background:rgba(212,175,55,0.25);"></div>
+            <div class="spark-bar" style="height:30%;background:rgba(212,175,55,0.18);"></div>
+          </div>
+          <div style="font-size:11px;color:rgba(221,213,187,0.3);">Dim</div>
+          <div style="font-size:13px;font-weight:700;color:#ddd5bb;">15</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── AUDIT SEO ── -->
+  <div class="page" id="page-audit">
+    <div class="topbar">
+      <div class="topbar-left"><h1>Audit SEO</h1><p>24 pages · Score moyen 74/100 · Cible 550–600 mots · Mot mystère dans les 300 premiers</p></div>
+      <div class="topbar-actions">
+        <div class="btn-ghost">↓ Exporter PDF</div>
+        <div class="btn-primary">⟳ Relancer l'audit</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:14px;align-items:start;">
+      <div>
+        <div class="panel">
+          <div class="table-head" style="grid-template-columns:2fr 70px 120px 110px 130px 90px;">
+            <span>Page</span><span>Score</span><span>Mot mystère</span><span>Mots</span><span>Problèmes</span><span>Action</span>
+          </div>
+          <div class="table-row" style="grid-template-columns:2fr 70px 120px 110px 130px 90px;" onclick="selectPage(this,'Fenêtres aluminium',62)">
+            <div><div style="font-size:13px;font-weight:600;color:#ddd5bb;">Fenêtres aluminium</div><div style="font-size:11px;color:rgba(221,213,187,0.3);">/fenetres-aluminium</div></div>
+            <div><span class="sbadge w">62</span></div>
+            <div><span class="mword">fenêtre</span></div>
+            <div><span class="wbadge low">312 ⚠</span></div>
+            <div style="display:flex;gap:4px;flex-wrap:wrap;"><span class="ichip err">2 critiques</span></div>
+            <div><span class="btn-ghost" style="font-size:11px;padding:5px 10px;" onclick="nav('suggestions')">Suggestions IA</span></div>
+          </div>
+          <div class="table-row" style="grid-template-columns:2fr 70px 120px 110px 130px 90px;">
+            <div><div style="font-size:13px;font-weight:600;color:#ddd5bb;">Accueil</div><div style="font-size:11px;color:rgba(221,213,187,0.3);">/</div></div>
+            <div><span class="sbadge g">88</span></div>
+            <div><span class="mword">menuiserie</span></div>
+            <div><span class="wbadge ok">574 ✓</span></div>
+            <div><span class="ichip ok">0 problème</span></div>
+            <div><span class="btn-ghost" style="font-size:11px;padding:5px 10px;">Voir</span></div>
+          </div>
+          <div class="table-row" style="grid-template-columns:2fr 70px 120px 110px 130px 90px;" onclick="selectPage(this,'Portes d\'entrée',71)">
+            <div><div style="font-size:13px;font-weight:600;color:#ddd5bb;">Portes d'entrée</div><div style="font-size:11px;color:rgba(221,213,187,0.3);">/portes-entree</div></div>
+            <div><span class="sbadge w">71</span></div>
+            <div><span class="mword">porte entrée</span></div>
+            <div><span class="wbadge high">648 ↑</span></div>
+            <div><span class="ichip warn">1 warning</span></div>
+            <div><span class="btn-ghost" style="font-size:11px;padding:5px 10px;" onclick="nav('suggestions')">Suggestions IA</span></div>
+          </div>
+          <div class="table-row" style="grid-template-columns:2fr 70px 120px 110px 130px 90px;" onclick="selectPage(this,'Nos réalisations',41)">
+            <div><div style="font-size:13px;font-weight:600;color:#ddd5bb;">Nos réalisations</div><div style="font-size:11px;color:rgba(221,213,187,0.3);">/realisations</div></div>
+            <div><span class="sbadge b">41</span></div>
+            <div><span class="mword missing">Non défini ✗</span></div>
+            <div><span class="wbadge low">189 ⚠</span></div>
+            <div style="display:flex;gap:4px;"><span class="ichip err">3 critiques</span></div>
+            <div><span class="btn-ghost" style="font-size:11px;padding:5px 10px;" onclick="nav('suggestions')">Suggestions IA</span></div>
+          </div>
+          <div class="table-row" style="grid-template-columns:2fr 70px 120px 110px 130px 90px;">
+            <div><div style="font-size:13px;font-weight:600;color:#ddd5bb;">Escaliers sur mesure</div><div style="font-size:11px;color:rgba(221,213,187,0.3);">/escaliers</div></div>
+            <div><span class="sbadge g">83</span></div>
+            <div><span class="mword">escalier</span></div>
+            <div><span class="wbadge ok">561 ✓</span></div>
+            <div><span class="ichip warn">1 warning</span></div>
+            <div><span class="btn-ghost" style="font-size:11px;padding:5px 10px;">Voir</span></div>
+          </div>
+          <div class="table-row" style="grid-template-columns:2fr 70px 120px 110px 130px 90px;" onclick="selectPage(this,'Contact / Devis',67)">
+            <div><div style="font-size:13px;font-weight:600;color:#ddd5bb;">Contact — Devis</div><div style="font-size:11px;color:rgba(221,213,187,0.3);">/contact</div></div>
+            <div><span class="sbadge w">67</span></div>
+            <div><span class="mword">devis menuiserie</span></div>
+            <div><span class="wbadge low">208 ⚠</span></div>
+            <div><span class="ichip err">2 critiques</span></div>
+            <div><span class="btn-ghost" style="font-size:11px;padding:5px 10px;" onclick="nav('suggestions')">Suggestions IA</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panneau détail -->
+      <div id="audit-detail" class="panel" style="position:sticky;top:0;">
+        <div style="padding:20px;border-bottom:1px solid rgba(212,175,55,0.07);">
+          <div style="font-size:11px;color:rgba(221,213,187,0.3);margin-bottom:6px;">Page sélectionnée</div>
+          <div id="detail-name" style="font-size:14px;font-weight:700;color:#f0e8cc;">Fenêtres aluminium</div>
+          <div style="font-size:11px;color:rgba(221,213,187,0.25);margin-top:2px;">/fenetres-aluminium</div>
+        </div>
+        <div style="padding:16px 20px;display:flex;align-items:center;gap:16px;border-bottom:1px solid rgba(212,175,55,0.07);">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 100 100"><circle class="ring-bg" cx="50" cy="50" r="40"/><circle id="detail-ring" class="ring-fill" cx="50" cy="50" r="40" stroke="#facc15" stroke-dashoffset="97"/></svg>
+            <div class="ring-num"><span id="detail-score">62</span><small>/100</small></div>
+          </div>
+          <div class="bar-chart" style="flex:1;">
+            <div class="bar-row"><div class="bar-label">Structure</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:#facc15;"></div></div></div>
+            <div class="bar-row"><div class="bar-label">Contenu</div><div class="bar-track"><div class="bar-fill" style="width:40%;background:#f87171;"></div></div></div>
+            <div class="bar-row"><div class="bar-label">E-E-A-T</div><div class="bar-track"><div class="bar-fill" style="width:55%;background:#facc15;"></div></div></div>
+          </div>
+        </div>
+        <div class="rec-item"><div class="rec-prio p1">1</div><div class="rec-body"><div class="rec-title">312 mots — cible 550–600</div><div class="rec-desc">Ajouter une section FAQ ou cas d'usage.</div><span class="rec-action" onclick="nav('suggestions')">Suggestions IA →</span></div></div>
+        <div class="rec-item"><div class="rec-prio p1">1</div><div class="rec-body"><div class="rec-title">"fenêtre" absent des 300 premiers mots</div><div class="rec-desc">Apparaît au mot #347. Reformuler l'intro.</div></div></div>
+        <div class="rec-item"><div class="rec-prio p2">2</div><div class="rec-body"><div class="rec-title">E-E-A-T insuffisant</div><div class="rec-desc">Ajouter certifications ou années d'expérience.</div></div></div>
+        <div style="padding:16px 20px;border-top:1px solid rgba(212,175,55,0.07);">
+          <div class="btn-primary" style="justify-content:center;" onclick="nav('suggestions')">✨ Générer suggestions IA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MOTS MYSTÈRES ── -->
+  <div class="page" id="page-mystery">
+    <div class="topbar">
+      <div class="topbar-left"><h1>Mots mystères</h1><p>Keyword principal de chaque page — doit apparaître dans les 300 premiers mots</p></div>
+      <div class="topbar-actions"><div class="btn-primary" onclick="nav('suggestions')">✨ Optimiser avec l'IA</div></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div class="panel">
+        <div class="panel-header"><div class="panel-title" style="color:#4ade80;">✓ Mots mystères bien positionnés (15)</div></div>
+        <div class="mystery-grid">
+          <div class="mystery-chip" title="Présent au mot #28 · densité 1.2%"><span class="mc-word">menuiserie</span><span class="mc-count">Accueil · #28</span></div>
+          <div class="mystery-chip"><span class="mc-word">escalier</span><span class="mc-count">/escaliers · #44</span></div>
+          <div class="mystery-chip"><span class="mc-word">bois massif</span><span class="mc-count">/bois · #67</span></div>
+          <div class="mystery-chip"><span class="mc-word">rénovation</span><span class="mc-count">/renovation · #52</span></div>
+          <div class="mystery-chip"><span class="mc-word">devis gratuit</span><span class="mc-count">/tarifs · #18</span></div>
+          <div class="mystery-chip"><span class="mc-word">sur mesure</span><span class="mc-count">/sur-mesure · #23</span></div>
+          <div class="mystery-chip"><span class="mc-word">Var</span><span class="mc-count">/zone · #31</span></div>
+          <div class="mystery-chip"><span class="mc-word">artisan</span><span class="mc-count">/about · #15</span></div>
+          <div class="mystery-chip"><span class="mc-word">double vitrage</span><span class="mc-count">/vitrage · #41</span></div>
+          <div class="mystery-chip"><span class="mc-word">volet roulant</span><span class="mc-count">/volets · #37</span></div>
+          <div class="mystery-chip"><span class="mc-word">pose incluse</span><span class="mc-count">/services · #55</span></div>
+          <div class="mystery-chip"><span class="mc-word">certifié RGE</span><span class="mc-count">/certifications · #22</span></div>
+          <div class="mystery-chip"><span class="mc-word">isolation</span><span class="mc-count">/isolation · #19</span></div>
+          <div class="mystery-chip"><span class="mc-word">pergola</span><span class="mc-count">/pergola · #33</span></div>
+          <div class="mystery-chip"><span class="mc-word">parquet</span><span class="mc-count">/sol · #48</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="panel" style="margin-bottom:14px;">
+          <div class="panel-header"><div class="panel-title" style="color:#f87171;">✗ Mot mystère absent ou hors zone (4)</div></div>
+          <div class="mystery-grid">
+            <div class="mystery-chip missing-chip" onclick="nav('suggestions')">
+              <div><div class="mc-word">fenêtre</div><div class="mc-count">/fenetres · apparaît au #347 ⚠</div></div>
+            </div>
+            <div class="mystery-chip missing-chip" onclick="nav('suggestions')">
+              <div><div class="mc-word">réalisation</div><div class="mc-count">/realisations · non détecté ✗</div></div>
+            </div>
+            <div class="mystery-chip missing-chip" onclick="nav('suggestions')">
+              <div><div class="mc-word">devis menuiserie</div><div class="mc-count">/contact · apparaît au #412 ⚠</div></div>
+            </div>
+            <div class="mystery-chip missing-chip" onclick="nav('suggestions')">
+              <div><div class="mc-word">porte entrée</div><div class="mc-count">/portes · apparaît au #289 ⚠</div></div>
+            </div>
+          </div>
+          <div style="padding:14px 20px;border-top:1px solid rgba(212,175,55,0.06);">
+            <div class="btn-primary" style="justify-content:center;" onclick="nav('suggestions')">✨ Corriger ces 4 pages avec l'IA</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header"><div class="panel-title">Densité des mots mystères</div><div style="font-size:11px;color:rgba(221,213,187,0.3);">Cible : 0.8%–1.5%</div></div>
+          <div style="padding:16px 20px;">
+            <div class="bar-chart">
+              <div class="bar-row"><div class="bar-label">menuiserie</div><div class="bar-track"><div class="bar-fill" style="width:80%;background:#4ade80;"></div></div><div class="bar-val" style="color:#4ade80;">1.2%</div></div>
+              <div class="bar-row"><div class="bar-label">escalier</div><div class="bar-track"><div class="bar-fill" style="width:73%;background:#4ade80;"></div></div><div class="bar-val" style="color:#4ade80;">1.1%</div></div>
+              <div class="bar-row"><div class="bar-label">fenêtre</div><div class="bar-track"><div class="bar-fill" style="width:40%;background:#f87171;"></div></div><div class="bar-val" style="color:#f87171;">0.6%</div></div>
+              <div class="bar-row"><div class="bar-label">porte entrée</div><div class="bar-track"><div class="bar-fill" style="width:120%;background:#facc15;"></div></div><div class="bar-val" style="color:#facc15;">1.8%</div></div>
+              <div class="bar-row"><div class="bar-label">bois massif</div><div class="bar-track"><div class="bar-fill" style="width:67%;background:#4ade80;"></div></div><div class="bar-val" style="color:#4ade80;">1.0%</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SUGGESTIONS IA ── -->
+  <div class="page" id="page-suggestions">
+    <div class="topbar">
+      <div class="topbar-left"><h1>Suggestions IA</h1><p>Recommandations générées par Claude · À valider avant implémentation</p></div>
+      <div class="topbar-actions">
+        <div class="btn-ghost">Tout exporter</div>
+        <div class="btn-primary">✨ Regénérer</div>
+      </div>
+    </div>
+
+    <div class="sug-page-grid">
+      <div class="panel sug-page-list">
+        <div class="panel-header"><div class="panel-title">Pages à optimiser</div></div>
+        <div class="sug-page-item active">
+          <div class="sug-page-name">Fenêtres aluminium</div>
+          <div class="sug-page-meta"><span class="sug-page-score" style="color:#facc15;">62</span><span class="sug-page-issues">2 critiques · 1 warning</span></div>
+        </div>
+        <div class="sug-page-item">
+          <div class="sug-page-name">Nos réalisations</div>
+          <div class="sug-page-meta"><span class="sug-page-score" style="color:#f87171;">41</span><span class="sug-page-issues">3 critiques</span></div>
+        </div>
+        <div class="sug-page-item">
+          <div class="sug-page-name">Contact — Devis</div>
+          <div class="sug-page-meta"><span class="sug-page-score" style="color:#f87171;">67</span><span class="sug-page-issues">2 critiques</span></div>
+        </div>
+        <div class="sug-page-item">
+          <div class="sug-page-name">Portes d'entrée</div>
+          <div class="sug-page-meta"><span class="sug-page-score" style="color:#facc15;">71</span><span class="sug-page-issues">1 warning</span></div>
+        </div>
+      </div>
+
+      <div class="sug-detail">
+        <div class="sug-detail-header">
+          <div class="sug-detail-title">Fenêtres aluminium double vitrage</div>
+          <div class="sug-detail-url">/fenetres-aluminium · 312 mots actuels → cible 550–600</div>
+        </div>
+        <div class="sug-scores">
+          <div class="sug-score-item"><div class="sug-score-val" style="color:#facc15;">62</div><div class="sug-score-lbl">Score actuel</div></div>
+          <div style="width:1px;background:rgba(212,175,55,0.08);"></div>
+          <div class="sug-score-item"><div class="sug-score-val" style="color:#4ade80;">87</div><div class="sug-score-lbl">Score estimé après</div></div>
+          <div style="width:1px;background:rgba(212,175,55,0.08);"></div>
+          <div class="sug-score-item"><div class="sug-score-val" style="color:#c4b5fd;">+238</div><div class="sug-score-lbl">Mots à ajouter</div></div>
+          <div style="width:1px;background:rgba(212,175,55,0.08);"></div>
+          <div class="sug-score-item"><div class="sug-score-val" style="color:#D4AF37;">fenêtre</div><div class="sug-score-lbl">Mot mystère</div></div>
+        </div>
+
+        <div class="ai-block">
+          <div class="ai-label">Suggestion 1 — Réécriture de l'introduction</div>
+          <div class="ai-suggestion-box">
+            <div class="ai-sug-type content">Contenu · Mot mystère</div>
+            <div class="ai-sug-text">
+              Amener le mot mystère <strong>"fenêtre"</strong> dans les 50 premiers mots. Introduction proposée :<br><br>
+              <em style="color:rgba(221,213,187,0.5);font-style:italic;">"Choisir une <strong style="color:#D4AF37;">fenêtre</strong> en aluminium, c'est investir dans le confort de votre maison sur le long terme. Isolation thermique, résistance aux intempéries, entretien zéro — nos modèles sont pensés pour le climat du Var et installés par nos artisans certifiés."</em>
+            </div>
+            <div class="ai-sug-actions">
+              <div class="ai-sug-apply">✓ Utiliser cette intro</div>
+              <div class="ai-sug-apply" style="background:rgba(196,181,253,0.08);border-color:rgba(196,181,253,0.2);color:#c4b5fd;">↻ Regénérer</div>
+              <div class="ai-sug-skip">Ignorer</div>
+            </div>
+          </div>
+
+          <div class="ai-label">Suggestion 2 — Section FAQ à ajouter</div>
+          <div class="ai-suggestion-box">
+            <div class="ai-sug-type content">Contenu · Longueur (+180 mots)</div>
+            <div class="ai-sug-text">
+              Ajouter une section FAQ en bas de page pour atteindre les 550–600 mots :<br><br>
+              <strong>Questions fréquentes sur nos fenêtres aluminium</strong><br>
+              • Quel délai de pose ? → 3 semaines en moyenne<br>
+              • Proposez-vous des fenêtres sur mesure ? → Oui, toutes nos dimensions<br>
+              • Y a-t-il une garantie ? → 10 ans pièces et main d'œuvre<br>
+              • Intervenez-vous dans tout le Var ? → Oui, dans un rayon de 80km
+            </div>
+            <div class="ai-sug-actions">
+              <div class="ai-sug-apply">✓ Ajouter cette FAQ</div>
+              <div class="ai-sug-apply" style="background:rgba(196,181,253,0.08);border-color:rgba(196,181,253,0.2);color:#c4b5fd;">↻ Regénérer</div>
+              <div class="ai-sug-skip">Ignorer</div>
+            </div>
+          </div>
+
+          <div class="ai-label">Suggestion 3 — Signaux E-E-A-T manquants</div>
+          <div class="ai-suggestion-box">
+            <div class="ai-sug-type eeat">E-E-A-T · Confiance & Expertise</div>
+            <div class="ai-sug-text">
+              Ajouter dans le contenu ces signaux d'autorité absents :<br><br>
+              • <strong>Certification RGE</strong> — mentionner pour la déductibilité fiscale<br>
+              • <strong>Nombre d'années d'expérience</strong> — "35 ans de métier"<br>
+              • <strong>Nombre de réalisations</strong> — "plus de 800 fenêtres posées dans le Var"<br>
+              • <strong>Témoignage client</strong> — 1 avis vérifié avec prénom, ville et date
+            </div>
+            <div class="ai-sug-actions">
+              <div class="ai-sug-apply">✓ Copier ces suggestions</div>
+              <div class="ai-sug-skip">Ignorer</div>
+            </div>
+          </div>
+
+          <div class="ai-label">Suggestion 4 — Angle différenciant</div>
+          <div class="ai-suggestion-box">
+            <div class="ai-sug-type structure">Différenciation · Univers de marque</div>
+            <div class="ai-sug-text">
+              Les concurrents sur "fenêtre aluminium Var" parlent tous de prix et de délais. Votre angle différenciant :<br><br>
+              <strong>→ L'artisan qui écoute d'abord, qui mesure ensuite.</strong><br><br>
+              Suggestion : ajouter 1 paragraphe sur votre processus en 3 étapes (visite, mesure, pose) avec un vocabulaire humain et local, pas catalogue. C'est votre "univers de marque" vs les généralistes.
+            </div>
+            <div class="ai-sug-actions">
+              <div class="ai-sug-apply">✓ Rédiger ce paragraphe</div>
+              <div class="ai-sug-apply" style="background:rgba(196,181,253,0.08);border-color:rgba(196,181,253,0.2);color:#c4b5fd;">↻ Regénérer</div>
+              <div class="ai-sug-skip">Ignorer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ANALYTICS AGENT ── -->
+  <div class="page" id="page-analytics">
+    <div class="topbar">
+      <div class="topbar-left"><h1>Analytics Agent</h1><p>Performance de l'agent conversationnel · 7 derniers jours</p></div>
+      <div class="topbar-actions"><div class="btn-ghost">Exporter</div></div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-card-top"><div class="stat-icon" style="background:rgba(212,175,55,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span class="stat-delta delta-up">+12%</span></div>
+        <div class="stat-value">247</div><div class="stat-label">Conversations initiées</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-top"><div class="stat-icon" style="background:rgba(74,222,128,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg></div><span class="stat-delta delta-up">+3.2%</span></div>
+        <div class="stat-value" style="color:#4ade80;">18.4%</div><div class="stat-label">Taux clic CTA</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-top"><div class="stat-icon" style="background:rgba(196,181,253,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><span class="stat-delta delta-neutral">stable</span></div>
+        <div class="stat-value" style="color:#c4b5fd;">1m 42s</div><div class="stat-label">Durée moy. conversation</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-top"><div class="stat-icon" style="background:rgba(248,113,113,0.1);"><svg viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div><span class="stat-delta delta-down">-2</span></div>
+        <div class="stat-value" style="color:#f87171;">8</div><div class="stat-label">Conversations sans réponse</div>
+      </div>
+    </div>
+
+    <div class="analytics-grid">
+      <div class="panel">
+        <div class="panel-header"><div class="panel-title">Profils utilisateurs détectés</div></div>
+        <div style="padding:20px;display:flex;gap:24px;align-items:center;">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#D4AF37" stroke-width="16" stroke-dasharray="100 151" stroke-dashoffset="0"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#7dd3fc" stroke-width="16" stroke-dasharray="60 191" stroke-dashoffset="-100"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#c4b5fd" stroke-width="16" stroke-dasharray="42 209" stroke-dashoffset="-160"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#4ade80" stroke-width="16" stroke-dasharray="27 224" stroke-dashoffset="-202"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#f87171" stroke-width="16" stroke-dasharray="22 229" stroke-dashoffset="-229"/>
+          </svg>
+          <div class="donut-legend">
+            <div class="dl-item"><div class="dl-dot" style="background:#D4AF37;"></div><div class="dl-label">Acheteur</div><div class="dl-val">40%</div></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#7dd3fc;"></div><div class="dl-label">Chercheur</div><div class="dl-val">24%</div></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#c4b5fd;"></div><div class="dl-label">Expert</div><div class="dl-val">17%</div></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#4ade80;"></div><div class="dl-label">Curieux</div><div class="dl-val">11%</div></div>
+            <div class="dl-item"><div class="dl-dot" style="background:#f87171;"></div><div class="dl-label">Urgent</div><div class="dl-val">8%</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header"><div class="panel-title">Top requêtes</div></div>
+        <div style="padding:16px 20px;">
+          <div class="bar-chart">
+            <div class="bar-row"><div class="bar-label">prix fenêtres</div><div class="bar-track"><div class="bar-fill" style="width:85%;background:rgba(212,175,55,0.5);"></div></div><div class="bar-val">38</div></div>
+            <div class="bar-row"><div class="bar-label">devis gratuit</div><div class="bar-track"><div class="bar-fill" style="width:72%;background:rgba(212,175,55,0.4);"></div></div><div class="bar-val">32</div></div>
+            <div class="bar-row"><div class="bar-label">délai de pose</div><div class="bar-track"><div class="bar-fill" style="width:58%;background:rgba(212,175,55,0.35);"></div></div><div class="bar-val">26</div></div>
+            <div class="bar-row"><div class="bar-label">escalier sur mesure</div><div class="bar-track"><div class="bar-fill" style="width:45%;background:rgba(212,175,55,0.28);"></div></div><div class="bar-val">20</div></div>
+            <div class="bar-row"><div class="bar-label">zone intervention</div><div class="bar-track"><div class="bar-fill" style="width:35%;background:rgba(212,175,55,0.2);"></div></div><div class="bar-val">16</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><div class="panel-title">Dernières conversations</div><div class="panel-action">Voir tout</div></div>
+      <div class="conversation-list">
+        <div class="conv-item"><div class="conv-avatar">🏠</div><div class="conv-meta"><div class="conv-query">je cherche des fenêtres pas trop chères pour isoler</div><div class="conv-sub">Profil : Acheteur · Il y a 12 min · Page /fenetres-aluminium</div></div><span class="conv-cta converted">CTA cliqué</span></div>
+        <div class="conv-item"><div class="conv-avatar">🪵</div><div class="conv-meta"><div class="conv-query">vous faites des escaliers en chêne massif hélicoïdaux ?</div><div class="conv-sub">Profil : Expert · Il y a 28 min · Page /escaliers</div></div><span class="conv-cta converted">CTA cliqué</span></div>
+        <div class="conv-item"><div class="conv-avatar">❓</div><div class="conv-meta"><div class="conv-query">quel est votre délai de pose pour une porte d'entrée</div><div class="conv-sub">Profil : Chercheur · Il y a 1h · Page /portes-entree</div></div><span class="conv-cta browsing">Navigation</span></div>
+        <div class="conv-item"><div class="conv-avatar">⚡</div><div class="conv-meta"><div class="conv-query">ma fenêtre est cassée j'ai besoin d'une intervention rapide</div><div class="conv-sub">Profil : Urgent · Il y a 2h · Page /contact</div></div><span class="conv-cta converted">CTA cliqué</span></div>
+        <div class="conv-item"><div class="conv-avatar">🔍</div><div class="conv-meta"><div class="conv-query">différence entre fenêtre PVC et aluminium</div><div class="conv-sub">Profil : Chercheur · Il y a 3h · Page /</div></div><span class="conv-cta browsing">Navigation</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONFIGURATION ── -->
+  <div class="page" id="page-config">
+    <div class="topbar">
+      <div class="topbar-left"><h1>Configuration</h1><p>Snippet, widget, onboarding et paramètres de votre site</p></div>
+    </div>
+
+    <!-- Infos site -->
+    <div class="section-title">Mon site</div>
+    <div class="config-grid" style="margin-bottom:28px;">
+      <div class="config-card">
+        <div class="config-card-title">Informations du site</div>
+        <div class="config-card-sub">Détails de votre installation SEEKR</div>
+        <div class="config-row"><div class="config-label">Domaine</div><div class="config-val gold">maison-lefevre.fr</div></div>
+        <div class="config-row"><div class="config-label">Plan</div><div class="config-val">PME · 200 pages max</div></div>
+        <div class="config-row"><div class="config-label">Pages indexées</div><div class="config-val">24 / 200</div></div>
+        <div class="config-row"><div class="config-label">Dernier crawl</div><div class="config-val">Aujourd'hui 14h02</div></div>
+        <div class="config-row"><div class="config-label">Statut agent</div><div class="config-val" style="color:#4ade80;">● Actif</div></div>
+        <div class="config-row"><div class="config-label">Widget détecté</div><div class="config-val" style="color:#4ade80;">● Oui (confirmé)</div></div>
+      </div>
+      <div class="config-card">
+        <div class="config-card-title">Clé API</div>
+        <div class="config-card-sub">À ne jamais partager — intégrée dans le snippet</div>
+        <div style="background:#060610;border:1px solid rgba(212,175,55,0.12);border-radius:8px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(221,213,187,0.5);margin-bottom:12px;">
+          sk_seekr_live_a7b3c8d2e1f4g5h6i7j8k9l0m1n2o3p4q5
+        </div>
+        <div style="display:flex;gap:8px;">
+          <div class="btn-ghost" style="font-size:12px;">📋 Copier</div>
+          <div class="btn-ghost" style="font-size:12px;color:#f87171;border-color:rgba(248,113,113,0.2);">⟳ Régénérer</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Snippet -->
+    <div class="section-title">Snippet d'intégration</div>
+    <div class="panel" style="margin-bottom:28px;">
+      <div class="panel-header">
+        <div class="panel-title">Script tag — méthode universelle</div>
+        <div style="display:flex;gap:8px;">
+          <div class="btn-ghost" style="font-size:11px;">Mode search</div>
+          <div class="btn-primary" style="font-size:11px;">Mode agent ✓</div>
+        </div>
+      </div>
+      <div style="padding:20px;">
+        <div class="code-snippet">
+          <div class="cs-header"><div class="cs-lang">HTML · À coller avant &lt;/body&gt;</div><div class="cs-copy">📋 Copier</div></div>
+          <div class="cs-body">
+            <span style="color:rgba(221,213,187,0.25);">&lt;!-- SEEKR Agent Widget --&gt;</span><br>
+            <span class="cs-blue">&lt;script</span><br>
+            &nbsp;&nbsp;<span class="cs-green">src</span>=<span class="cs-gold">"https://api.seekr-search.fr/widget/seekr-agent-widget.js"</span><br>
+            &nbsp;&nbsp;<span class="cs-green">data-key</span>=<span class="cs-gold">"sk_seekr_live_a7b3c8d2e1f4..."</span><br>
+            &nbsp;&nbsp;<span class="cs-green">data-mode</span>=<span class="cs-gold">"agent"</span><br>
+            &nbsp;&nbsp;<span class="cs-green">data-theme</span>=<span class="cs-gold">"dark-gold"</span><br>
+            &nbsp;&nbsp;<span class="cs-green">data-placeholder</span>=<span class="cs-gold">"Comment puis-je vous aider ?"</span><br>
+            &nbsp;&nbsp;<span class="cs-green">async</span> <span class="cs-green">defer</span><br>
+            <span class="cs-blue">&gt;&lt;/script&gt;</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;">
+          <div style="background:#060610;border:1px solid rgba(212,175,55,0.1);border-radius:8px;padding:12px;">
+            <div style="font-size:10px;font-weight:700;color:rgba(221,213,187,0.3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">WordPress</div>
+            <div style="font-size:12px;color:rgba(221,213,187,0.5);">Appearance → Theme Editor → footer.php</div>
+          </div>
+          <div style="background:#060610;border:1px solid rgba(212,175,55,0.1);border-radius:8px;padding:12px;">
+            <div style="font-size:10px;font-weight:700;color:rgba(221,213,187,0.3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Shopify</div>
+            <div style="font-size:12px;color:rgba(221,213,187,0.5);">Online Store → Themes → Edit code → theme.liquid</div>
+          </div>
+          <div style="background:#060610;border:1px solid rgba(212,175,55,0.1);border-radius:8px;padding:12px;">
+            <div style="font-size:10px;font-weight:700;color:rgba(221,213,187,0.3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Cloudflare Worker</div>
+            <div style="font-size:12px;color:rgba(221,213,187,0.5);">wrangler deploy seekr-edge-worker.js</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Options widget -->
+    <div class="section-title">Apparence & comportement du widget</div>
+    <div class="config-grid" style="margin-bottom:28px;">
+      <div class="config-card">
+        <div class="config-card-title">Personnalisation</div>
+        <div class="config-card-sub">Apparence du widget sur votre site</div>
+        <div class="config-row"><div class="config-label">Thème</div><div class="config-val gold">dark-gold</div></div>
+        <div class="config-row"><div class="config-label">Position</div><div class="config-val">Bas droite</div></div>
+        <div class="config-row"><div class="config-label">Message accueil</div><div class="config-val" style="font-size:11px;">Personnalisé (IA)</div></div>
+        <div class="config-row"><div class="config-label">Placeholder</div><div class="config-val" style="font-size:11px;">"Comment puis-je vous aider ?"</div></div>
+        <div class="config-row"><div class="config-label">Couleur accent</div><div class="config-val"><span style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#D4AF37;vertical-align:middle;margin-right:6px;"></span>#D4AF37</div></div>
+      </div>
+      <div class="config-card">
+        <div class="config-card-title">Fonctionnalités actives</div>
+        <div class="config-card-sub">Activer/désactiver les modules</div>
+        <div class="toggle-row"><div class="toggle-info"><div class="tl">Mode agent IA</div><div class="ts">Conversation + suggestions personnalisées</div></div><div class="toggle"></div></div>
+        <div class="toggle-row"><div class="toggle-info"><div class="tl">Summary cards</div><div class="ts">Affiche la page recommandée avec CTA</div></div><div class="toggle"></div></div>
+        <div class="toggle-row"><div class="toggle-info"><div class="tl">Suggestions rapides</div><div class="ts">Chips de démarrage de conversation</div></div><div class="toggle"></div></div>
+        <div class="toggle-row"><div class="toggle-info"><div class="tl">Tracking conversions</div><div class="ts">Enregistre les clics CTA</div></div><div class="toggle"></div></div>
+        <div class="toggle-row"><div class="toggle-info"><div class="tl">RGPD gate</div><div class="ts">Masquer jusqu'au consentement</div></div><div class="toggle off"></div></div>
+      </div>
+    </div>
+
+    <!-- Onboarding status -->
+    <div class="section-title">Statut d'installation</div>
+    <div class="panel">
+      <div class="onb-steps">
+        <div class="onb-step"><div class="onb-step-num done">✓</div><div class="onb-step-body"><div class="onb-step-title">Compte créé</div><div class="onb-step-desc">Plan PME · Actif depuis le 12 mai 2026</div></div><div class="onb-step-done">Fait</div></div>
+        <div class="onb-step"><div class="onb-step-num done">✓</div><div class="onb-step-body"><div class="onb-step-title">Site analysé — premier crawl</div><div class="onb-step-desc">24 pages indexées · Audit SEO généré</div></div><div class="onb-step-done">Fait</div></div>
+        <div class="onb-step"><div class="onb-step-num done">✓</div><div class="onb-step-body"><div class="onb-step-title">Widget installé et détecté</div><div class="onb-step-desc">Snippet confirmé sur maison-lefevre.fr le 14 mai</div></div><div class="onb-step-done">Fait</div></div>
+        <div class="onb-step"><div class="onb-step-num done">✓</div><div class="onb-step-body"><div class="onb-step-title">Voix de marque extraite</div><div class="onb-step-desc">Ton : artisanal & chaleureux · Vocabulaire spécifique identifié</div></div><div class="onb-step-done">Fait</div></div>
+        <div class="onb-step"><div class="onb-step-num active">5</div><div class="onb-step-body"><div class="onb-step-title">Appliquer les suggestions IA</div><div class="onb-step-desc">11 recommandations en attente · Priorité : /fenetres-aluminium</div></div><div class="btn-primary" style="font-size:12px;padding:6px 14px;" onclick="nav('suggestions')">Voir →</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function nav(section) {
+  // Masquer toutes les pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+
+  // Afficher la page cible
+  const target = document.getElementById('page-' + section);
+  if (target) target.classList.add('active');
+
+  // Highlight sidebar
+  const items = document.querySelectorAll('.sb-item');
+  const map = { overview: 0, audit: 1, mystery: 2, suggestions: 3, analytics: 4, config: 6 };
+  if (map[section] !== undefined) items[map[section]]?.classList.add('active');
+
+  // Scroll haut
+  document.querySelector('.main').scrollTop = 0;
+}
+
+function selectPage(row, name, score) {
+  document.querySelectorAll('.table-row').forEach(r => r.classList.remove('selected'));
+  row.classList.add('selected');
+  document.getElementById('detail-name').textContent = name;
+  document.getElementById('detail-score').textContent = score;
+  const offset = 251 - (251 * score / 100);
+  document.getElementById('detail-ring').setAttribute('stroke-dashoffset', offset);
+  const color = score >= 80 ? '#4ade80' : score >= 60 ? '#facc15' : '#f87171';
+  document.getElementById('detail-ring').setAttribute('stroke', color);
+}
+</script>
+</body>
+</html>
