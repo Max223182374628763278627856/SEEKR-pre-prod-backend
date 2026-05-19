@@ -256,10 +256,24 @@ footer { background: var(--black); border-top: 1px solid rgba(255,255,255,0.05);
 const h=document.getElementById('navHamburger'),m=document.getElementById('navMobile');
 if(h){h.addEventListener('click',()=>m.classList.toggle('open'));document.addEventListener('click',e=>{if(!h.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');});}
 </script>
-<!-- SEEKR Agent — Widget IA conversationnel -->
-<script
-  src="https://api.seekr-search.fr/widget/seekr-agent-widget.js"
+<!-- SEEKR Search Widget -->
+<div id="seekr-search" style="display:none"></div>
+<script async
+  src="https://api.seekr-search.fr/widget/seekr-widget.js"
   data-key="sk_seekr_live_e6635bb7969851954e15c6e1fa7edf7b0deb446546c216c1019aade4"
+  data-backend="https://api.seekr-search.fr"
+  data-theme="dark-gold"
+  data-placeholder="Rechercher sur seekr-search.fr..."
+  data-max-results="8"
+  data-gps="true"
+  data-target="seekr-search"
+></script>
+
+<!-- SEEKR Agent IA -->
+<script
+  src="https://max223182374628763278627856.github.io/SEEKR-pre-prod-backend/widget/seekr-agent-widget.js"
+  data-key="sk_seekr_live_e6635bb7969851954e15c6e1fa7edf7b0deb446546c216c1019aade4"
+  data-backend="https://api.seekr-search.fr"
   data-mode="agent"
   data-theme="dark-gold"
   data-placeholder="Comment puis-je vous aider ?"
