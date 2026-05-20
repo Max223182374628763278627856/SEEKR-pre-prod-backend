@@ -168,11 +168,13 @@ module.exports = function registerAgentRoutes(app, col, verifyApiKey, verifyJWT,
       // Async — ne bloque pas la réponse
       (async () => {
         try {
-          const report = auditSite(pages);
+          // Nouvelle API v2 : auditSite prend des URLs et crawle le HTML source
+          const urls   = pages.map(p => p.url).filter(Boolean);
+          const report = await auditSite(urls, { concurrency: 3 });
 
           // Extraction de la voix de marque si pas encore faite
-          let brandVoice = await col('sites').findOne({ id: siteId }, { projection: { brand_voice: 1 } });
-          if (!brandVoice?.brand_voice) {
+          let siteDoc = await col('sites').findOne({ id: siteId }, { projection: { brand_voice: 1 } });
+          if (!siteDoc?.brand_voice) {
             const voice = await extractBrandVoice(pages).catch(() => null);
             if (voice) {
               await col('sites').updateOne({ id: siteId }, { $set: { brand_voice: voice } });
@@ -187,10 +189,12 @@ module.exports = function registerAgentRoutes(app, col, verifyApiKey, verifyJWT,
               internal_linking: report.internalLinking,
               pages_audit: report.pages.map(p => ({
                 url: p.url, title: p.title, score: p.score,
-                wordCount: p.content.wordCount,
-                mysteryWord: p.content.mysteryWord,
-                issueCount: p.issues.length,
-                warningCount: p.warnings.length,
+                wordCount:     p.content?.wordCount,
+                mysteryWord:   p.content?.mysteryWord,
+                h1:            p.content?.h1,
+                breakdown:     p.breakdown,
+                issueCount:    p.issues.length,
+                warningCount:  p.warnings.length,
               })),
               ended_at: Date.now(),
             },
@@ -238,7 +242,8 @@ module.exports = function registerAgentRoutes(app, col, verifyApiKey, verifyJWT,
       const page = await col('pages').findOne({ site_id: siteId, url: pageUrl, active: true });
       if (!page) return res.status(404).json({ error: 'Page introuvable' });
 
-      const pageReport = auditPage(page);
+      // Audit v2 : crawl depuis le HTML source
+      const pageReport = await auditPage(pageUrl);
 
       const site = await col('sites').findOne({ id: siteId });
       const brandVoice = site?.brand_voice ? JSON.stringify(site.brand_voice) : null;
@@ -257,10 +262,9 @@ module.exports = function registerAgentRoutes(app, col, verifyApiKey, verifyJWT,
       const { url } = req.query;
       if (!url) return res.status(400).json({ error: 'url requis' });
 
-      const page = await col('pages').findOne({ site_id: siteId, url, active: true });
-      if (!page) return res.status(404).json({ error: 'Page non indexée' });
-
-      res.json(auditPage(page));
+      // Audit v2 : crawl depuis le HTML source (pas besoin que la page soit en base)
+      const report = await auditPage(url);
+      res.json(report);
     } catch (e) { res.status(500).json({ error: e.message }); }
   });
 
